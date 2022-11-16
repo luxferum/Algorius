@@ -21,6 +21,7 @@ rtd_keys = ["Ativo                         ", "Última                        ",
             "PTAX P4                       ", "PTAX Oficial                  ", "PTAX Fut. P1                  ", "PTAX Fut. P2                  ", "PTAX Fut. P3                  ", "PTAX Fut. P4                  ",
             "PTAX Fut. Oficial             "]
 
+# comentei e comitei para testar
 
 def string_to_float(s):
     try:
