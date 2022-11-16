@@ -3,9 +3,7 @@ import win32api
 import json
 from flask import Flask
 
-
 from rtd_preprocessing import create_clean_dict
-from Asset import Asset
 import calculo
 
 
@@ -28,8 +26,7 @@ def ByteConvert(dataInfo, ativo):
 
 app = Flask(__name__)
 
-arrInfo = []
-arrAsset = []
+array_info_dict = []
 
 
 @app.route("/", methods=["GET"])
@@ -39,26 +36,22 @@ def start_rtd():
             s.connect((HOST, PORT))
             print("Id da thread principal %d" %
                   (win32api.GetCurrentThreadId()))
-            global arrInfo
-            global arrAsset
+            global array_info_dict
             try:
                 for item in ATIVO:
                     s.sendall(ByteConvert(COTACAO, item))
-                    data = s.recv(1024)  # b'COT$S|PETR4#'
-                    info = data.decode().replace("COT!", "").split("|")  # data to info
-                    info_dict = create_clean_dict(info)  # info to dict
-                    asset = Asset(info_dict)  # dict to object
-                    info_simple = (
-                        asset.nome, asset.dict['ultima'], asset.dict['dias_uteis_ate_vencimento'])  # simple info
+                    # b'COT$S|PETR4#'
+                    data = s.recv(1024)
+                    info = data.decode().replace("COT!", "").split("|")
+                    info_dict = create_clean_dict(info)
+                    array_info_dict.append(info_dict)
 
-                    arrInfo.append(info_simple)
-                    arrAsset.append(asset)
                 # teste do fairprice usando os objetos
-                dolFut, frp0 = arrAsset[0], arrAsset[1]
+                dolFut, frp0 = array_info_dict[0], array_info_dict[1]
                 fair_price = calculo.fairPrice(frp0, dolFut)
                 print(f'fair_price = {fair_price}')
                 # retornar json
-                return json.dumps(arrInfo)
+                return json.dumps(array_info_dict)
 
             except Exception as ex:
                 print(ex)

@@ -12,10 +12,10 @@ BASE_LOG = JUROS_BR_LOG - JUROS_EUA_LOG
 
 def fairPrice(dolar_futuro, fpr0):
     '''Calcular preço do dolar futuro F = S*e^(r-rf)*(T-t)'''
-    s = dolar_futuro.dict['ultima'] - fpr0.dict['ultima']  # spot
+    s = dolar_futuro['ultima'] - fpr0['ultima']  # spot
     e = EULER
     diff_r_rf = BASE_LOG
-    diff_T_t = dolar_futuro.dict['dias_uteis_ate_vencimento'] / 360
+    diff_T_t = dolar_futuro['dias_uteis_ate_vencimento'] / 360
     F = s * e ** (diff_r_rf * diff_T_t)
     return F
 
