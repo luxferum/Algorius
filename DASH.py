@@ -6,6 +6,8 @@ import socket
 import win32api
 import json
 import pandas as pd
+import sys
+import os
 
 from pandas_datareader import data as web
 from datetime import datetime as dt
@@ -13,6 +15,11 @@ import plotly.express as px
 
 import daniel
 from calculos import calc
+
+# sys.path.append(os.path.abspath(os.path.join('..', 'ProfitDLL/Exemplo Python')))
+# print(sys.path)
+
+# import profitDLL
 
 
 def ByteConvert(dataInfo, ativo):
@@ -24,6 +31,8 @@ PORT = 8080
 # ATIVO = ['FRP0', 'DOLFUT']
 ATIVO = ['FRP0']
 COTACAO = 'COT$S|'
+
+# profitDLL.dllStart()
 
 # app = dash.Dash('Hello World')
 
