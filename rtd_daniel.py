@@ -44,22 +44,14 @@ def start_rtd():
             try:
                 for item in ATIVO:
                     s.sendall(ByteConvert(COTACAO, item))
-                    # b'COT$S|PETR4#'
-                    data = s.recv(1024)
-                    # data to info
-                    info = data.decode().replace("COT!", "").split("|")
-                    # info to dict
-                    info_dict = create_clean_dict(info)
-                    # dict to object
-                    asset = Asset(info_dict)
-                    # simple info
+                    data = s.recv(1024)  # b'COT$S|PETR4#'
+                    info = data.decode().replace("COT!", "").split("|")  # data to info
+                    info_dict = create_clean_dict(info)  # info to dict
+                    asset = Asset(info_dict)  # dict to object
                     info_simple = (
-                        asset.nome, asset.dict['ultima'], asset.dict['dias_uteis_ate_vencimento'])
-                    # print information
-                    # print(info_simple)
-                    # arrInfo simplificado para testar!
+                        asset.nome, asset.dict['ultima'], asset.dict['dias_uteis_ate_vencimento'])  # simple info
+
                     arrInfo.append(info_simple)
-                    # arrAsset simplificado para testar!
                     arrAsset.append(asset)
                 # teste do fairprice usando os objetos
                 dolFut, frp0 = arrAsset[0], arrAsset[1]
