@@ -1,10 +1,10 @@
-import socket
-import win32api
-import json
 from flask import Flask
+import win32api
+import socket
+import json
 
 from rtd_preprocessing import create_clean_dict
-import calculo
+from calculo import fairPrice
 
 
 # --- ESCOLHER OS ATIVOS -----------------#
@@ -47,10 +47,9 @@ def start_rtd():
                     array_info_dict.append(info_dict)
 
                 # teste do fairprice usando os objetos
-                dolFut, frp0 = array_info_dict[0], array_info_dict[1]
-                fair_price = calculo.fairPrice(frp0, dolFut)
-                print(f'fair_price = {fair_price}')
-                # retornar json
+                # dolFut, frp0 = array_info_dict[0], array_info_dict[1]
+                # fair_price = fairPrice(frp0, dolFut)
+                # print(f'fair_price = {fair_price}')
                 return json.dumps(array_info_dict)
 
             except Exception as ex:

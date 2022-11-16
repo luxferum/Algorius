@@ -1,37 +1,37 @@
 from dash.dependencies import Input, Output
 from dash import dcc
 from dash import html
-from flask import Flask
 import dash
-import win32api
 import socket
+import win32api
 import json
-from pandas_datareader import data as web
-from datetime import datetime as dt
-
-from rtd_preprocessing import create_clean_dict
+import sys
+import os
 from calculo import fairPrice
 
+from pandas_datareader import data as web
+from datetime import datetime as dt
+import plotly.express as px
 
-# --- ESCOLHER OS ATIVOS -----------------#
-# ========================================#
-ATIVO = ['FRP0', 'DOLFUT']
-COTACAO = 'COT$S|'
-# ========================================#
+from rtd_preprocessing import create_clean_dict
 
-# --- INFORMACOES DO SERVIDOR-------------#
-# ========================================#
-HOST = '192.168.0.15'  # ipv4 address
-PORT = 8080
+# sys.path.append(os.path.abspath(os.path.join('..', 'ProfitDLL/Exemplo Python')))
+# print(sys.path)
+
+# import profitDLL
 
 
-# ========================================#
 def ByteConvert(dataInfo, ativo):
     return str.encode(dataInfo + ativo + '#')
 
 
-app = Flask(__name__)
+HOST = '192.168.15.102'
+PORT = 8080
+# ATIVO = ['FRP0', 'DOLFUT']
+ATIVO = ['FRP0']
+COTACAO = 'COT$S|'
 
+# profitDLL.dllStart()
 
 # app = dash.Dash('Hello World')
 
@@ -77,23 +77,6 @@ app.layout = html.Div([
 ])
 
 
-@app.callback(Output('my-graph', 'figure'), [Input('my-dropdown', 'value')])
-def update_graph(selected_dropdown_value):
-    df = web.DataReader(
-        selected_dropdown_value,
-        'yahoo',
-        dt(2017, 1, 1),
-        dt.now()
-    )
-    return {
-        'data': [{
-            'x': df.index,
-            'y': df.Close
-        }],
-        'layout': {'margin': {'l': 40, 'r': 0, 't': 20, 'b': 30}}
-    }
-
-
 array_info_dict = []
 
 
@@ -127,5 +110,22 @@ def start_rtd():
         print('Não foi possivel conectar no servidor RTD. Erro: ', ex)
 
 
-if __name__ == "__main__":
-    app.run()
+@app.callback(Output('my-graph', 'figure'), [Input('my-dropdown', 'value')])
+def update_graph(selected_dropdown_value):
+    df = web.DataReader(
+        selected_dropdown_value,
+        'yahoo',
+        dt(2017, 1, 1),
+        dt.now()
+    )
+    return {
+        'data': [{
+            'x': df.index,
+            'y': df.Close
+        }],
+        'layout': {'margin': {'l': 40, 'r': 0, 't': 20, 'b': 30}}
+    }
+
+
+if __name__ == '__main__':
+    app.run_server()
