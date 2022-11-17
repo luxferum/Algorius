@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from dash.dependencies import Input, Output
 from dash import dcc
 from dash import html
@@ -12,27 +14,9 @@ from datetime import datetime as dt
 from rtd_preprocessing import create_clean_dict
 from calculo import fairPrice
 
-
-# --- ESCOLHER OS ATIVOS -----------------#
-# ========================================#
-ATIVO = ['FRP0', 'DOLFUT']
-COTACAO = 'COT$S|'
-# ========================================#
-
-# --- INFORMACOES DO SERVIDOR-------------#
-# ========================================#
-HOST = '192.168.0.15'  # ipv4 address
-PORT = 8080
-
-
-# ========================================#
-def ByteConvert(dataInfo, ativo):
-    return str.encode(dataInfo + ativo + '#')
-
+# ----------------------------------------------------------------
 
 app = Flask(__name__)
-
-
 # app = dash.Dash('Hello World')
 
 # app.layout = html.Div([
@@ -93,6 +77,30 @@ def update_graph(selected_dropdown_value):
         'layout': {'margin': {'l': 40, 'r': 0, 't': 20, 'b': 30}}
     }
 
+# --- ESCOLHER O ATIVO EXEMPLO -----------#
+# PETR4  - Petrobras#
+# VALE3  - Vale#
+# ITUB4  - Itau#
+# INDQ19 - Indice Bovespa#
+# WINQ19 - Mini Indice Bovespa#
+
+
+# --- ESCOLHER OS ATIVOS -----------------#
+# ========================================#
+ATIVO = ['FRP0', 'DOLFUT']
+COTACAO = 'COT$S|'
+# ========================================#
+
+# --- INFORMACOES DO SERVIDOR ------------#
+# ========================================#
+HOST = '192.168.0.5'  # ipv4 address
+PORT = 8080
+
+
+# ========================================#
+def ByteConvert(dataInfo, ativo):
+    return str.encode(dataInfo + ativo + '#')
+
 
 array_info_dict = []
 
@@ -102,8 +110,7 @@ def start_rtd():
     try:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             s.connect((HOST, PORT))
-            print("Id da thread principal %d" %
-                  (win32api.GetCurrentThreadId()))
+            print(f'\nId da thread principal: {win32api.GetCurrentThreadId()}')
             global array_info_dict
             try:
                 for item in ATIVO:
@@ -124,7 +131,7 @@ def start_rtd():
                 print(ex)
 
     except Exception as ex:
-        print('Não foi possivel conectar no servidor RTD. Erro: ', ex)
+        print(f'\nNão foi possivel conectar no servidor RTD. Erro:\n{ex}\n')
 
 
 if __name__ == "__main__":
