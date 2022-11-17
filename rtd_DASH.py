@@ -5,6 +5,9 @@ from dash import Dash, dcc, html
 import win32api
 import socket
 import json
+import sys
+import os
+
 
 from pandas_datareader import data as web
 from datetime import datetime as dt
@@ -13,6 +16,13 @@ from rtd_preprocessing import create_clean_dict
 from calculo import fairPrice
 
 # ------------------------------------------------------------------------------------------------
+
+# sys.path.append(os.path.abspath(os.path.join('..', 'ProfitDLL/Exemplo Python')))
+# print(sys.path)
+
+# import profitDLL
+
+# profitDLL.dllStart()
 
 app = Dash(
     __name__,
