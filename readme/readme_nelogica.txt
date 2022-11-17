@@ -1,0 +1,1 @@
+abrir DLL colocar as infos lá e tal.. fazer o mesmo passo a passo do readme_tryd
