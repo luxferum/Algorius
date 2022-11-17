@@ -7,9 +7,10 @@ import socket
 import json
 import sys
 import os
+from ctypes import *
 
 
-from pandas_datareader import data as web
+# from pandas_datareader import data as web
 from datetime import datetime as dt
 
 from rtd_preprocessing import create_clean_dict
@@ -17,12 +18,17 @@ from calculo import fairPrice
 
 # ------------------------------------------------------------------------------------------------
 
-# sys.path.append(os.path.abspath(os.path.join('..', 'ProfitDLL/Exemplo Python')))
-# print(sys.path)
+sys.path.append(os.path.abspath(os.path.join('..', 'ProfitDLL/Exemplo Python')))
+print(sys.path)
 
-# import profitDLL
+import profitDLL
 
-# profitDLL.dllStart()
+profitDLL.dllStart()
+
+# class TAssetID(Structure):
+#     _fields_ = [("ticker", c_wchar_p),
+#                 ("bolsa", c_wchar_p),
+#                 ("feed", c_int)]
 
 app = Dash(
     __name__,
@@ -83,7 +89,7 @@ COTACAO = 'COT$S|'
 # ========================================#
 
 # --- INFORMACOES DO SERVIDOR ------------#
-HOST = '192.168.0.5'  # ipv4
+HOST = '192.168.0.10'  # ipv4
 PORT = 8080
 # ========================================#
 
@@ -111,15 +117,23 @@ def start_rtd():
                     dict_assets = create_clean_dict(asset)
                     array_dict_assets.append(dict_assets)
 
-                dolar_fut, frp0 = array_dict_assets[0], array_dict_assets[1]
-                fair_price = fairPrice(dolar_fut, frp0)
-                return json.dumps(f"{array_dict_assets[0]['ativo']} -> fair price = {fair_price}")
+                dol_fut, frp0 = array_dict_assets[0], array_dict_assets[1]
+                fair_price = fairPrice(dol_fut, frp0)
+                return json.dumps(f"{array_dict_assets[0]['ativo']} -> fair price = {fair_price}", f"{array_dict_assets[1]}")
 
             except Exception as ex:
                 print(ex)
 
     except Exception as ex:
         print(f'\nNão foi possivel conectar no servidor RTD. Erro:\n{ex}\n')
+
+@app.server.route("/dll", methods=['GET'])
+def start_dll():
+    try:
+        result = profitDLL.subscribeTicker()
+        return json.dumps(result)
+    except Exception as ex:
+        print(ex)
 
 
 if __name__ == "__main__":
