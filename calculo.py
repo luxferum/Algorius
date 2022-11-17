@@ -17,6 +17,7 @@ def fairPrice(dolar_futuro, fpr0):
     diff_r_rf = BASE_LOG
     diff_T_t = dolar_futuro['dias_uteis_ate_vencimento'] / 360
     F = s * e ** (diff_r_rf * diff_T_t)
+    print(f'fair_price = {F}')
     return F
 
 # p/ dolar!
