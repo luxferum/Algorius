@@ -18,8 +18,7 @@ from calculo import fairPrice
 
 # ------------------------------------------------------------------------------------------------
 
-sys.path.append(os.path.abspath(os.path.join('..', 'ProfitDLL/Exemplo Python')))
-print(sys.path)
+sys.path.append(os.path.abspath(os.path.join('', 'ProfitDLL/Exemplo Python')))
 
 import profitDLL
 

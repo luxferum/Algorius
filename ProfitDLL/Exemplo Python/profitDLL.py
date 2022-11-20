@@ -7,7 +7,7 @@ import struct
 from datetime import*
 
 #Caminho para a DLL, python tem que ser 32bits
-profit_dll = WinDLL('ProfitDLL.dll')
+profit_dll = WinDLL('ProfitDLL/DLL e Executável/ProfitDLL.dll')
 profit_dll.argtypes  = None
 
 # Error Codes
