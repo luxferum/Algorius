@@ -129,8 +129,17 @@ def start_rtd():
 @app.server.route("/dll", methods=['GET'])
 def start_dll():
     try:
-        result = profitDLL.subscribeTickerNosso()
-        return json.dumps(result)
+        # activate ticker service 
+        profitDLL.subscribeTickerNosso('PETR4', 'B')        
+        # load info
+        profitDLL.newDailyCallback
+        # get info from global variable
+        objeto = profitDLL.newDaily
+        # convert to text to use in json.dumps
+        texto = f'{objeto.date} -> {objeto.sClose}'
+        
+        return json.dumps(texto)
+
     except Exception as ex:
         print(ex)
 
