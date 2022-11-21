@@ -383,6 +383,16 @@ def subscribeTicker():
     result = profit_dll.SubscribeTicker(c_wchar_p(asset), c_wchar_p(bolsa))
     print ("SubscribeTicker: " + str(result))
 
+def subscribeTickerNosso(asset=None, bolsa=None):
+    global profit_dll
+
+    asset = input('Asset: ') if asset == None else asset
+    bolsa = input('Bolsa: ') if bolsa == None else bolsa
+    
+    result = profit_dll.SubscribeTicker(c_wchar_p(asset), c_wchar_p(bolsa))
+    print ("SubscribeTicker: " + str(result))
+    return result
+    
 def unsubscribeTicker():
     global profit_dll
 

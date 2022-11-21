@@ -129,7 +129,7 @@ def start_rtd():
 @app.server.route("/dll", methods=['GET'])
 def start_dll():
     try:
-        result = profitDLL.subscribeTicker()
+        result = profitDLL.subscribeTickerNosso()
         return json.dumps(result)
     except Exception as ex:
         print(ex)
