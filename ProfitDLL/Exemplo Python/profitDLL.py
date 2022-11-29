@@ -77,7 +77,7 @@ class TNewDailyCallback(Structure):
                 ("nQtdSeller", c_int),
                 ("nNegBuyer", c_int),
                 ("nNegSeller", c_int)]
-
+    
 
 
 # @dataclass
@@ -236,12 +236,20 @@ def newTinyBookCallBack(assetId, price, qtd, side):
         
     return
 
+# global variable to get info from callback
+newDaily = TNewDailyCallback()
 
 @WINFUNCTYPE(None, TAssetID, c_wchar_p, c_double, c_double, c_double, c_double, c_double, c_double, c_double, c_double, c_double,
            c_double, c_int, c_int, c_int, c_int, c_int, c_int, c_int)
 def newDailyCallback(assetID, date, sOpen, sHigh, sLow, sClose, sVol, sAjuste, sMaxLimit, sMinLimit, sVolBuyer,
                      sVolSeller, nQtd, nNegocios, nContratosOpen, nQtdBuyer, nQtdSeller, nNegBuyer, nNegSeller):
-    print(assetID.ticker + ' | DailySignal | ' + date + ' Open: ' + str(sOpen) + ' High: ' + str(sHigh) + ' Low: ' + str(sLow) + ' Close: ' + str(sClose))
+    print('>>>>>>>>>>>>' + assetID.ticker + ' | DailySignal | ' + date + ' Open: ' + str(sOpen) + ' High: ' + str(sHigh) + ' Low: ' + str(sLow) + ' Close: ' + str(sClose))
+    global newDaily
+    # Coloca ordem no dicionário para consulta posterior
+    newDaily = TNewDailyCallback(assetID, date, sOpen, sHigh, sLow, sClose, 
+                                 sVol, sAjuste, sMaxLimit, sMinLimit, sVolBuyer, 
+                                 sVolSeller, nQtd, nNegocios, nContratosOpen, 
+                                 nQtdBuyer, nQtdSeller, nNegBuyer, nNegSeller)
     return
 
 price_array_sell = []
@@ -504,9 +512,13 @@ def printPosition():
 def dllStart():    
     try:
         global profit_dll
-        key = input("Chave de acesso: ")
-        user = input("Usuário: ") # preencher com usuário da conta (email ou documento)
-        password = input("Senha: ") # preencher com senha da conta
+        # key = input("Chave de acesso: ")
+        # user = input("Usuário: ") # preencher com usuário da conta (email ou documento)
+        # password = input("Senha: ") # preencher com senha da conta
+        
+        key = '1113485204908410'
+        user = '15557724710'
+        password = '99818954'
         
         bRoteamento = True
         
