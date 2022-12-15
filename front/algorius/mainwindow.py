@@ -1,24 +1,427 @@
-# This Python file uses the following encoding: utf-8
+from PySide6.QtWidgets import (
+    QApplication, QDialog, QProgressBar, QSizePolicy, QWidget, QFileDialog)
+from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont, QFontDatabase, QGradient,
+                           QIcon, QImage, QKeySequence, QLinearGradient, QPainter, QPalette, QPixmap, QRadialGradient, QTransform)
+from PySide6.QtWidgets import (QAbstractItemView, QApplication, QCheckBox, QComboBox, QDateEdit, QDoubleSpinBox, QFrame, QGraphicsView, QGridLayout, QGroupBox, QHeaderView,
+                               QLCDNumber, QLabel, QLineEdit, QMainWindow, QMenu, QMenuBar, QPushButton, QSizePolicy, QSlider, QTabWidget, QTableWidget, QTableWidgetItem, QToolButton, QWidget)
+from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient, QCursor, QFont, QFontDatabase, QGradient,
+                           QIcon, QImage, QKeySequence, QLinearGradient, QPainter, QPalette, QPixmap, QRadialGradient, QTransform)
+from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+                            QMetaObject, QObject, QPoint, QRect, QSize, QTime, QUrl, Qt, QThread)
+from pathlib import Path
+from ui_login1 import Ui_login_window
+from ui_load1 import Ui_Loading_window
+from ui_form import Ui_mainWithTabs
+from ui_register import Ui_register_window
+import os
+import time
+from PySide6.QtCore import *
+import PySide6.QtWidgets
+import PySide6.QtGui
+from PySide6 import QtCore
+import PySide6
+from PyQt6.QtCore import Qt
+from PyQt6.QtCore import QObject, QThread, pyqtSignal
+import hashlib
 import sys
+import rsc_rc
+from time import sleep
 
-from PySide6.QtWidgets import QApplication, QMainWindow
+sys.path.append(os.path.abspath(os.path.join('')))
+from rtd_preprocessing import * 
+from calculo import *
+from ctypes import *
+import win32api
+import socket
 
-# Important:
-# You need to run the following command to generate the ui_form.py file
-#     pyside6-uic form.ui -o ui_form.py, or
-#     pyside2-uic form.ui -o ui_form.py
-from ui_form import Ui_MainWindow
+
+class Worker(QObject):
+    progress = pyqtSignal(int)
+
+    # --- ESCOLHER OS ATIVOS -----------------#
+    ATIVO = ['FRP0', 'DOLFUT']
+    COTACAO = 'COT$S|'
+    # ========================================#
+
+    # --- INFORMACOES DO SERVIDOR ------------#
+    HOST = '192.168.0.5'  # ipv4
+    PORT = 8080
+    # ========================================#
+
+    def run(self):
+        while True:
+            test = self.start_rtd
+            sleep(1)
+            self.progress.emit(test)
+
+    def ByteConvert(self, dataInfo, ativo):
+        return str.encode(dataInfo + ativo + '#')
+
+    array_dict_assets = []
+
+    def start_rtd(self):
+        try:
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                s.connect((self.HOST, self.PORT))
+                print(f'\nId da thread principal: {win32api.GetCurrentThreadId()}')
+                global array_dict_assets
+                try:
+                    for item in self.ATIVO:
+                        s.sendall(self.ByteConvert(self.COTACAO, item))
+                        # b'COT$S|PETR4#'
+                        data = s.recv(1024)
+                        asset = data.decode().replace("COT!", "").split("|")
+                        dict_assets = create_clean_dict(asset)
+                        array_dict_assets.append(dict_assets)
+
+                    dol_fut, frp0 = array_dict_assets[0], array_dict_assets[1]
+                    fair_price = fairPrice(dol_fut, frp0)
+                    return fair_price
+
+                except Exception as ex:
+                    print(ex)
+
+        except Exception as ex:
+            print(f'\nNão foi possivel conectar no servidor RTD. Erro:\n{ex}\n')
 
 
-class MainWindow(QMainWindow):
+
+class login_window(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.ui = Ui_MainWindow()
+        self.ui = Ui_login_window()
+        self.ui.setupUi(self)        
+        self.ui.bt_login.clicked.connect(lambda:self.loginParaLoading())
+        self.ui.bt_login_2.clicked.connect(lambda:self.loginParaRegistro())
+        self.ui.bt_exit.clicked.connect(lambda:self.sair())
+        
+    def loginParaLoading(self):        
+        self.janelaLoading = Loading_window()        
+        self.janelaLoading.show()
+        self.close()
+        # if self.ui.linha_login.text()=="lux" and self.ui.linha_senha.text()=="99818954":
+
+    def loginParaRegistro(self):
+        self.close()
+        self.janelaRegistro=register_window()
+        self.janelaRegistro.show()        
+        self.janelaRegistro.ui.bt_back.clicked.connect(lambda:self.registroParaLogin())
+        self.janelaRegistro.ui.bt_done.clicked.connect(lambda:self.registroParaLogin())        
+    def registroParaLogin(self):        
+        self.janelaLogin=login_window()        
+        self.janelaLogin.show()
+        self.janelaRegistro.close()
+    def sair(self):
+        self.ui.bt_exit.clicked.connect(QApplication.instance().quit())
+
+
+class register_window(QDialog):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.ui = Ui_register_window()
         self.ui.setupUi(self)
 
+class Loading_window(QDialog):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.ui = Ui_Loading_window()
+        self.ui.setupUi(self)
+        self.ui.Loading_window_progressBar.setValue(0)
+        while self.ui.Loading_window_progressBar.value() != 100:
+            self.ui.Loading_window_progressBar.setValue(
+                self.ui.Loading_window_progressBar.value()+1)
+        self.loadingParaForm()
 
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    widget = MainWindow()
-    widget.show()
-    sys.exit(app.exec())
+    def loadingParaForm(self):
+        self.janelaForm = mainWithTabs()
+        self.ui.pushButton_endLoad.clicked.connect(lambda:self.close())
+        self.ui.pushButton_endLoad.clicked.connect(lambda:self.janelaForm.show())
+
+class mainWithTabs(QMainWindow):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.ui = Ui_mainWithTabs()
+        self.ui.setupUi(self)
+        self.incializarSemTabs()
+        self.sair2()
+        self.irTabUser()
+        self.irTabDashboard()
+        self.irTabLab()
+        self.irTabPrecification()
+        self.irTabProbability()
+        self.irTabSheet()
+        self.irTabChart()
+        self.irTabLayout()
+        self.irTabNewProfile()
+        self.irTabNewIndicator()
+        self.irTabSynthAsset()
+        self.irTabPythonEditor()
+        self.irTabLoadIndicator()
+        self.irTabConfiguration()
+        self.irTabPreferences()
+        self.irTabAbout()
+        self.fecharTab()
+        self.dials()
+        self.userProfile()
+        # self.fairPrice()
+        self.rtd_worker()
+
+    def rtd_worker(self):
+        # Step 2: Create a QThread object
+        self.thread = QThread()
+        # Step 3: Create a worker object
+        self.worker = Worker()
+        # Step 4: Move worker to the thread
+        self.worker.moveToThread(self.thread)
+        # Step 5: Connect signals and slots
+        self.thread.started.connect(self.worker.run)
+        self.worker.progress.connect(self.fairPrice)
+        self.thread.start()
+        
+    def fairPrice(self, n):      
+        self.ui.lcdNumberFuturo.display(self.ui.lcdNumberSpot.value() + self.ui.lcdNumberFrp.value()) #aqui vai o RTD do preço DOLFUT
+        self.ui.lcdNumberFrp.display(20) #aqui vai o RTD do preço FRP0
+        self.ui.lcdNumberSpot.display(self.ui.lcdNumberFuturo.value() - self.ui.lcdNumberFrp.value()) #aqui vai o RTD do preço spot(DOLFUT-FRP0) 
+        self.ui.lcdNumberJusto.display(5365)#aqui vai o calculo do preço justo
+        self.ui.lcdNumberCurva.display(5365)#aqui vai o calculo da curva
+        
+    def userProfile(self):
+        self.ui.comboBox_nome.setSizeAdjustPolicy(
+            self.ui.comboBox_nome.SizeAdjustPolicy.AdjustToContents)
+        self.ui.comboBox_nome.activated.connect(
+            lambda: self.mudaDadosUsuario())
+    def mudaDadosUsuario(self):
+        if self.ui.comboBox_nome.currentIndex()==1:
+            self.ui.label_20.setText("Gabriel Bastos de Freitas")
+            self.ui.label_21.setText("gabrielbastosdev@gmail.com")
+            self.ui.label_22.setText("180.002.457-60")
+        elif self.ui.comboBox_nome.currentIndex() == 0:
+            self.ui.label_20.setText("Eduardo Martins Lana Filho")
+            self.ui.label_21.setText("eduardomlf97@gmail.com")
+            self.ui.label_22.setText("155.577.247-10")
+        elif self.ui.comboBox_nome.currentIndex() == 2:
+            self.ui.label_20.setText("Daniel de Almeida Duque")
+            self.ui.label_21.setText("daniel.duk7@gmail.com")
+            self.ui.label_22.setText("158.212.527-92")
+    def dials(self):
+        self.ui.dialJurosEua.valueChanged.connect(
+            lambda: self.ui.doubleSpinBox_jurosEUA.setValue(self.ui.dialJurosEua.value()))
+        self.ui.dialJurosBr.valueChanged.connect(
+            lambda: self.ui.doubleSpinBox_jurosBR.setValue(self.ui.dialJurosBr.value()))
+    def irTabUser(self):
+        
+        if self.ui.Welcome.isVisible() == True:
+            self.ui.actionUserProfile.triggered.connect(
+                lambda: self.ui.Welcome.setCurrentIndex(0))
+        elif self.ui.Welcome.isVisible() == False:
+            self.ui.actionUserProfile.triggered.connect(
+                lambda: self.ui.Welcome.setTabVisible(0, True))
+            self.ui.actionUserProfile.triggered.connect(
+                lambda: self.ui.Welcome.setCurrentIndex(0))
+    def irTabDashboard(self):
+        if self.ui.Welcome.isVisible() == True:
+            self.ui.actionDashboard.triggered.connect(
+                lambda: self.ui.Welcome.setCurrentIndex(1))
+        elif self.ui.Welcome.isVisible() == False:
+            self.ui.actionDashboard.triggered.connect(
+                lambda: self.ui.Welcome.setTabVisible(1, True))
+            self.ui.actionDashboard.triggered.connect(
+                lambda: self.ui.Welcome.setCurrentIndex(1))
+    def irTabLab(self):
+        if self.ui.Welcome.isVisible() == True:
+            self.ui.actionLab.triggered.connect(
+                lambda: self.ui.Welcome.setCurrentIndex(2))
+        elif self.ui.Welcome.isVisible() == False:
+            self.ui.actionLab.triggered.connect(
+                lambda: self.ui.Welcome.setTabVisible(2, True))
+            self.ui.actionLab.triggered.connect(
+                lambda: self.ui.Welcome.setCurrentIndex(2))
+    def irTabPrecification(self):
+        if self.ui.Welcome.isVisible() == True:
+            self.ui.actionDefault_Asset.triggered.connect(
+                lambda: self.ui.Welcome.setCurrentIndex(3))
+        elif self.ui.Welcome.isVisible() == False:
+            self.ui.actionDefault_Asset.triggered.connect(
+                lambda: self.ui.Welcome.setTabVisible(3, True))
+            self.ui.actionDefault_Asset.triggered.connect(
+                lambda: self.ui.Welcome.setCurrentIndex(3))
+    def irTabProbability(self):
+        if self.ui.Welcome.isVisible() == True:
+            self.ui.actionProbability.triggered.connect(
+                lambda: self.ui.Welcome.setCurrentIndex(4))
+        elif self.ui.Welcome.isVisible() == False:
+            self.ui.actionProbability.triggered.connect(
+                lambda: self.ui.Welcome.setTabVisible(4, True))
+            self.ui.actionProbability.triggered.connect(
+                lambda: self.ui.Welcome.setCurrentIndex(4))
+    def irTabSheet(self):
+        if self.ui.Welcome.isVisible() == True:
+            self.ui.actionImport_Sheet.triggered.connect(
+                lambda: self.ui.Welcome.setCurrentIndex(5))
+        elif self.ui.Welcome.isVisible() == False:
+            self.ui.actionImport_Sheet.triggered.connect(
+                lambda: self.ui.Welcome.setTabVisible(5, True))
+            self.ui.actionImport_Sheet.triggered.connect(
+                lambda: self.ui.Welcome.setCurrentIndex(5))
+        self.ui.pushButton_BrowseFile.clicked.connect(
+            lambda: self.fileBrowser())
+        self.ui.label_19.setText("Ok!")
+
+    def irTabChart(self):
+        if self.ui.Welcome.isVisible() == True:
+            self.ui.actionChart.triggered.connect(
+                lambda: self.ui.Welcome.setCurrentIndex(6))
+        elif self.ui.Welcome.isVisible() == False:
+            self.ui.actionChart.triggered.connect(
+                lambda: self.ui.Welcome.setTabVisible(6, True))
+            self.ui.actionChart.triggered.connect(
+                lambda: self.ui.Welcome.setCurrentIndex(6))
+    def irTabLayout(self):
+        if self.ui.Welcome.isVisible() == True:
+            self.ui.actionLayout.triggered.connect(
+                lambda: self.ui.Welcome.setCurrentIndex(7))
+        elif self.ui.Welcome.isVisible() == False:
+            self.ui.actionLayout.triggered.connect(
+                lambda: self.ui.Welcome.setTabVisible(7, True))
+            self.ui.actionLayout.triggered.connect(
+                lambda: self.ui.Welcome.setCurrentIndex(7))
+    def irTabNewProfile(self):
+        if self.ui.Welcome.isVisible() == True:
+            self.ui.actionProfile_2.triggered.connect(
+                lambda: self.ui.Welcome.setCurrentIndex(8))
+        elif self.ui.Welcome.isVisible() == False:
+            self.ui.actionProfile_2.triggered.connect(
+                lambda: self.ui.Welcome.setTabVisible(8, True))
+            self.ui.actionProfile_2.triggered.connect(
+                lambda: self.ui.Welcome.setCurrentIndex(8))
+    def irTabNewIndicator(self):
+        if self.ui.Welcome.isVisible() == True:
+            self.ui.actionIndicator.triggered.connect(
+                lambda: self.ui.Welcome.setCurrentIndex(9))
+        elif self.ui.Welcome.isVisible() == False:
+            self.ui.actionIndicator.triggered.connect(
+                lambda: self.ui.Welcome.setTabVisible(9, True))
+            self.ui.actionIndicator.triggered.connect(
+                lambda: self.ui.Welcome.setCurrentIndex(9))
+    def irTabSynthAsset(self):
+        if self.ui.Welcome.isVisible() == True:
+            self.ui.actionSynthetic_Asset.triggered.connect(
+                lambda: self.ui.Welcome.setCurrentIndex(10))
+        elif self.ui.Welcome.isVisible() == False:
+            self.ui.actionSynthetic_Asset.triggered.connect(
+                lambda: self.ui.Welcome.setTabVisible(10, True))
+            self.ui.actionSynthetic_Asset.triggered.connect(
+                lambda: self.ui.Welcome.setCurrentIndex(10))
+    def irTabPythonEditor(self):
+        if self.ui.Welcome.isVisible() == True:
+            self.ui.actionOpen_Python_Editor.triggered.connect(
+                lambda: self.ui.Welcome.setCurrentIndex(11))
+        elif self.ui.Welcome.isVisible() == False:
+            self.ui.actionOpen_Python_Editor.triggered.connect(
+                lambda: self.ui.Welcome.setTabVisible(11, True))
+            self.ui.actionOpen_Python_Editor.triggered.connect(
+                lambda: self.ui.Welcome.setCurrentIndex(11))
+    def irTabLoadIndicator(self):
+        if self.ui.Welcome.isVisible() == True:
+            self.ui.actionOpen_Indicator.triggered.connect(
+                lambda: self.ui.Welcome.setCurrentIndex(12))
+        elif self.ui.Welcome.isVisible() == False:
+            self.ui.actionOpen_Indicator.triggered.connect(
+                lambda: self.ui.Welcome.setTabVisible(12, True))
+            self.ui.actionOpen_Indicator.triggered.connect(
+                lambda: self.ui.Welcome.setCurrentIndex(12))
+    def irTabConfiguration(self):
+        if self.ui.Welcome.isVisible() == True:
+            self.ui.actionConfiguration.triggered.connect(
+                lambda: self.ui.Welcome.setCurrentIndex(13))
+        elif self.ui.Welcome.isVisible() == False:
+            self.ui.actionConfiguration.triggered.connect(
+                lambda: self.ui.Welcome.setTabVisible(13, True))
+            self.ui.actionConfiguration.triggered.connect(
+                lambda: self.ui.Welcome.setCurrentIndex(13))
+    def irTabPreferences(self):
+        if self.ui.Welcome.isVisible() == True:
+            self.ui.actionPreferences.triggered.connect(
+                lambda: self.ui.Welcome.setCurrentIndex(14))
+        elif self.ui.Welcome.isVisible() == False:
+            self.ui.actionPreferences.triggered.connect(
+                lambda: self.ui.Welcome.setTabVisible(14, True))
+            self.ui.actionPreferences.triggered.connect(
+                lambda: self.ui.Welcome.setCurrentIndex(14))
+
+    def irTabAbout(self):
+        if self.ui.Welcome.isVisible() == True:
+            self.ui.actionAbout.triggered.connect(
+                lambda: self.ui.Welcome.setCurrentIndex(15))
+        elif self.ui.Welcome.isVisible() == False:
+            self.ui.actionAbout.triggered.connect(
+                lambda: self.ui.Welcome.setTabVisible(15, True))
+            self.ui.actionAbout.triggered.connect(
+                lambda: self.ui.Welcome.setCurrentIndex(15))
+    def sair2(self):
+        self.ui.actionQuit.triggered.connect(
+            QApplication.instance().quit)
+
+    def fileBrowser(self):
+        QFileDialog.getOpenFileName(
+            self,
+            "Open File",
+            "",
+            "All Files (*);; Excel Files (*.xls);; Excel Files (*.xlsm)",
+        )
+
+    def incializarSemTabs(self):
+        i = 0
+        while i <= 15:
+            self.ui.Welcome.setTabVisible(i, False)
+            i = i+1
+
+    def fecharTab(self):
+        self.ui.pushButtonCloseWelcome.clicked.connect(
+            lambda: self.ui.Welcome.setTabVisible(self.ui.Welcome.currentIndex(), False))
+        self.ui.pushButtonCloseWelcome_2.clicked.connect(
+            lambda: self.ui.Welcome.setTabVisible(self.ui.Welcome.currentIndex(), False))
+        self.ui.pushButtonCloseWelcome_3.clicked.connect(
+            lambda: self.ui.Welcome.setTabVisible(self.ui.Welcome.currentIndex(), False))
+        self.ui.pushButtonCloseWelcome_4.clicked.connect(
+            lambda: self.ui.Welcome.setTabVisible(self.ui.Welcome.currentIndex(), False))
+        self.ui.pushButtonCloseWelcome_5.clicked.connect(
+            lambda: self.ui.Welcome.setTabVisible(self.ui.Welcome.currentIndex(), False))
+        self.ui.pushButtonCloseWelcome_6.clicked.connect(
+            lambda: self.ui.Welcome.setTabVisible(self.ui.Welcome.currentIndex(), False))
+        self.ui.pushButtonCloseWelcome_7.clicked.connect(
+            lambda: self.ui.Welcome.setTabVisible(self.ui.Welcome.currentIndex(), False))
+        self.ui.pushButtonCloseWelcome_8.clicked.connect(
+            lambda: self.ui.Welcome.setTabVisible(self.ui.Welcome.currentIndex(), False))
+        self.ui.pushButtonCloseWelcome_9.clicked.connect(
+            lambda: self.ui.Welcome.setTabVisible(self.ui.Welcome.currentIndex(), False))
+        self.ui.pushButtonCloseWelcome_10.clicked.connect(
+            lambda: self.ui.Welcome.setTabVisible(self.ui.Welcome.currentIndex(), False))
+        self.ui.pushButtonCloseWelcome_11.clicked.connect(
+            lambda: self.ui.Welcome.setTabVisible(self.ui.Welcome.currentIndex(), False))
+        self.ui.pushButtonCloseWelcome_12.clicked.connect(
+            lambda: self.ui.Welcome.setTabVisible(self.ui.Welcome.currentIndex(), False))
+        self.ui.pushButtonCloseWelcome_13.clicked.connect(
+            lambda: self.ui.Welcome.setTabVisible(self.ui.Welcome.currentIndex(), False))
+        self.ui.pushButtonCloseWelcome_14.clicked.connect(
+            lambda: self.ui.Welcome.setTabVisible(self.ui.Welcome.currentIndex(), False))
+        self.ui.pushButtonCloseWelcome_15.clicked.connect(
+            lambda: self.ui.Welcome.setTabVisible(self.ui.Welcome.currentIndex(), False))
+
+class AThread(QThread):
+    def run(self):
+        count = 0 
+        while count < 5:
+            time.sleep(1)
+            print("A Increasing")
+            count += 1
+
+###########################################################################################
+# MAIN###########################################################################################
+app = QApplication(sys.argv)
+
+start = login_window()
+start.show()
+
+sys.exit(app.exec())
+# MAIN###########################################################################################

@@ -20,9 +20,9 @@ from calculo import fairPrice
 
 sys.path.append(os.path.abspath(os.path.join('', 'ProfitDLL/Exemplo Python')))
 
-import profitDLL
+# import profitDLL
 
-profitDLL.dllStart()
+# profitDLL.dllStart()
 
 # class TAssetID(Structure):
 #     _fields_ = [("ticker", c_wchar_p),
@@ -82,67 +82,7 @@ app.layout = html.Div([
 
 # ------------------------------------------------------------------------------------------------
 
-# --- ESCOLHER OS ATIVOS -----------------#
-ATIVO = ['FRP0', 'DOLFUT']
-COTACAO = 'COT$S|'
-# ========================================#
-
-# --- INFORMACOES DO SERVIDOR ------------#
-HOST = '192.168.0.10'  # ipv4
-PORT = 8080
-# ========================================#
-
-
-def ByteConvert(dataInfo, ativo):
-    return str.encode(dataInfo + ativo + '#')
-
-
-array_dict_assets = []
-
-
-@app.server.route("/rtd", methods=['GET'])
-def start_rtd():
-    try:
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            s.connect((HOST, PORT))
-            print(f'\nId da thread principal: {win32api.GetCurrentThreadId()}')
-            global array_dict_assets
-            try:
-                for item in ATIVO:
-                    s.sendall(ByteConvert(COTACAO, item))
-                    # b'COT$S|PETR4#'
-                    data = s.recv(1024)
-                    asset = data.decode().replace("COT!", "").split("|")
-                    dict_assets = create_clean_dict(asset)
-                    array_dict_assets.append(dict_assets)
-
-                dol_fut, frp0 = array_dict_assets[0], array_dict_assets[1]
-                fair_price = fairPrice(dol_fut, frp0)
-                return json.dumps(f"{array_dict_assets[0]['ativo']} -> fair price = {fair_price}", f"{array_dict_assets[1]}")
-
-            except Exception as ex:
-                print(ex)
-
-    except Exception as ex:
-        print(f'\nNão foi possivel conectar no servidor RTD. Erro:\n{ex}\n')
-
-@app.server.route("/dll", methods=['GET'])
-def start_dll():
-    try:
-        # activate ticker service 
-        profitDLL.subscribeTickerNosso('PETR4', 'B')        
-        # load info
-        profitDLL.newDailyCallback
-        # get info from global variable
-        objeto = profitDLL.newDaily
-        # convert to text to use in json.dumps
-        texto = f'{objeto.date} -> {objeto.sClose}'
-        
-        return json.dumps(texto)
-
-    except Exception as ex:
-        print(ex)
-
+#FUNÇÃO DO RTD ENVIADA PARA O MAINWINDOW.PY#
 
 if __name__ == "__main__":
     app.run()
