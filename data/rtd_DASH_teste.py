@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from dash.dependencies import Input, Output
 from dash import Dash, dcc, html
 import win32api
 import socket
 import json
-import sys
-import os
 from ctypes import *
 
 
@@ -14,14 +11,9 @@ from ctypes import *
 from datetime import datetime as dt
 
 from rtd_preprocessing import create_clean_dict
-from calculo import fairPrice
+from rtd import Ativo
 
 # ------------------------------------------------------------------------------------------------
-
-# class TAssetID(Structure):
-#     _fields_ = [("ticker", c_wchar_p),
-#                 ("bolsa", c_wchar_p),
-#                 ("feed", c_int)]
 
 app = Dash(
     __name__,
@@ -57,23 +49,6 @@ app.layout = html.Div([
 ], style={'width': '500'})
 
 
-# # aqui tem exception, mas funciona quando escolhe Apple no dropdown
-# @app.callback(Output('my-graph', 'figure'), [Input('my-dropdown', 'value')])
-# def update_graph(selected_dropdown_value):
-#     df = web.DataReader(
-#         selected_dropdown_value,
-#         'yahoo',
-#         dt(2017, 1, 1),
-#         dt.now()
-#     )
-#     return {
-#         'data': [{
-#             'x': df.index,
-#             'y': df.Close
-#         }],
-#         'layout': {'margin': {'l': 40, 'r': 0, 't': 20, 'b': 30}}
-#     }
-
 # ------------------------------------------------------------------------------------------------
 
 # --- ESCOLHER OS ATIVOS -----------------#
@@ -108,10 +83,13 @@ def start_rtd():
                     data = s.recv(1024)
                     asset = data.decode().replace("COT!", "").split("|")
                     dict_assets = create_clean_dict(asset)
+                    ativo1 = Ativo(dict_assets)
+                    print(ativo1)
                     array_dict_assets.append(dict_assets)
 
                 dol_fut, frp0 = array_dict_assets[0], array_dict_assets[1]
                 fair_price = fairPrice(dol_fut, frp0)
+
                 return json.dumps(f"{array_dict_assets[0]['ativo']} -> fair price = {fair_price}", f"{array_dict_assets[1]}")
 
             except Exception as ex:
@@ -119,24 +97,6 @@ def start_rtd():
 
     except Exception as ex:
         print(f'\nNão foi possivel conectar no servidor RTD. Erro:\n{ex}\n')
-
-
-@app.server.route("/dll", methods=['GET'])
-def start_dll():
-    try:
-        # activate ticker service
-        profitDLL.subscribeTickerNosso('PETR4', 'B')
-        # load info
-        profitDLL.newDailyCallback
-        # get info from global variable
-        objeto = profitDLL.newDaily
-        # convert to text to use in json.dumps
-        texto = f'{objeto.date} -> {objeto.sClose}'
-
-        return json.dumps(texto)
-
-    except Exception as ex:
-        print(ex)
 
 
 if __name__ == "__main__":
