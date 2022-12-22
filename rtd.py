@@ -1,8 +1,3 @@
-from rtd_preprocessing import clean_rtd_keys
-from numpy import log, exp
-import numpy as np
-
-
 def print_highlighter(s):
     '''Print text highlighted with dashes'''
 
@@ -47,13 +42,15 @@ class RTD():
         return f'----------------------------'
 
 
+'''
 a1 = Asset('ATIVO')
-# print(a1)
+print(a1)
 
 r1 = RTD({'ativo': 'ATIVO', 'preco': 10, 'nada': 'LALA'})
-a1.insert_rtd(r1)
-r2 = RTD({'ativo': 'ATIVO', 'preco': 15, 'nada': '222'})
-a1.insert_rtd(r2)
-r3 = RTD({'ativo': 'ATIVO', 'preco': 14, 'nada': 'LA22LA'})
-a1.insert_rtd(r3)
+print(r1)
+
+a1.insert_rtd(RTD({'ativo': 'ATIVO', 'preco': 10, 'nada': 'LALA'}))
+a1.insert_rtd(RTD({'ativo': 'ATIVO', 'preco': 15, 'nada': '222'}))
+a1.insert_rtd(RTD({'ativo': 'ATIVO', 'preco': 14, 'nada': 'LA22LA'}))
 print(a1)
+'''

@@ -9,7 +9,7 @@ rtd_di = RTD()  # get frp0 rtd
 
 def fair_price(di1fut_user_choice1, juroseua_user_choice2):
     '''
-    Return fair price.
+    Calculate fair price.
 
         Parameters:
                 a (int): A decimal integer
@@ -31,7 +31,7 @@ def fair_price(di1fut_user_choice1, juroseua_user_choice2):
 
 def fair_price_ptax(di1fut_user_choice):
     '''
-    Return fair price using ptax style.
+    Calculate fair price using ptax style.
 
         Parameters:
                 a (int): A decimal integer

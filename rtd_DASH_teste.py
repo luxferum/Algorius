@@ -4,14 +4,9 @@ from dash import Dash, dcc, html
 import win32api
 import socket
 import json
-from ctypes import *
 
-
-# from pandas_datareader import data as web
-from datetime import datetime as dt
-
-from rtd_preprocessing import create_clean_dict
-from rtd import Ativo
+from rtd_preprocessing import clean_rtd_as_dict
+from rtd import RTD
 
 # ------------------------------------------------------------------------------------------------
 
@@ -63,10 +58,8 @@ PORT = 8080
 
 
 def ByteConvert(dataInfo, ativo):
+    # dataInfo example >> b'COT$S|PETR4#'
     return str.encode(dataInfo + ativo + '#')
-
-
-array_dict_assets = []
 
 
 @app.server.route("/rtd", methods=['GET'])
@@ -75,22 +68,20 @@ def start_rtd():
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             s.connect((HOST, PORT))
             print(f'\nId da thread principal: {win32api.GetCurrentThreadId()}')
-            global array_dict_assets
             try:
                 for item in ATIVO:
+                    # data in string
                     s.sendall(ByteConvert(COTACAO, item))
-                    # b'COT$S|PETR4#'
-                    data = s.recv(1024)
-                    asset = data.decode().replace("COT!", "").split("|")
-                    dict_assets = create_clean_dict(asset)
-                    ativo1 = Ativo(dict_assets)
-                    print(ativo1)
-                    array_dict_assets.append(dict_assets)
+                    data = s.recv(1024).decode().replace("COT!", "").split("|")
+                    # data in dictionary
+                    data_dict = clean_rtd_as_dict(data)
+                    # data in RTD object
+                    data_rtd = RTD(data_dict)
+                    # print RTD object
+                    print(data_rtd)
 
-                dol_fut, frp0 = array_dict_assets[0], array_dict_assets[1]
-                fair_price = fairPrice(dol_fut, frp0)
-
-                return json.dumps(f"{array_dict_assets[0]['ativo']} -> fair price = {fair_price}", f"{array_dict_assets[1]}")
+                str_to_json = json.dumps(data_rtd)
+                return str_to_json
 
             except Exception as ex:
                 print(ex)

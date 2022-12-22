@@ -21,8 +21,8 @@ rtd_keys = ["Ativo                         ", "Última                        ",
 def clean_rtd_keys():
     '''Return a list of rtd keys cleaned up'''
     def clean_key(s):
-        s = s.strip()
         s = unidecode(s)
+        s = s.strip()
         s = s.lower()
         s = s.replace(' ', '_').replace('-', '_')
         s = s.replace('.', '').replace('(', '').replace(')', '')
@@ -42,8 +42,7 @@ def clean_rtd_values(values):
                 return s
 
         value = value.replace('.', '').replace(',', '.')
-        value = string_to_float(value)
-        return value
+        return string_to_float(value)
 
     return [clean_value(i) for i in values]
 
