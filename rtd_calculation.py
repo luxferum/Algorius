@@ -1,5 +1,7 @@
 from numpy import exp
-from rtd import RTD
+from rtd_RTD import RTD
+
+'''RTD calculation used to calculate specific values'''
 
 rtd_dolfut = RTD()  # get dolfut rtd
 rtd_frp0 = RTD()  # get frp0 rtd

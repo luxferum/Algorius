@@ -1,56 +1,94 @@
-def print_highlighter(s):
-    '''Print text highlighted with dashes'''
+# -*- coding: utf-8 -*-
 
-    def highlight():
-        print('--------------------------------')
-        print(f'{s}')
-        print('--------------------------------')
+from dash import Dash, dcc, html
+import win32api
+import socket
+import json
 
-    return highlight()
+from rtd_preprocessing import clean_rtd_as_dict
+from rtd_RTD import RTD
+
+# ------------------------------------------------------------------------------------------------
+
+app = Dash(
+    __name__,
+    assets_external_path='https://codepen.io/chriddyp/pen/bWLwgP.css'
+)
+
+app.layout = html.Div([
+    html.Div(
+        className="app-header",
+        children=[
+            html.Div('Plotly Dash', className="app-header--title")
+        ]
+    ),
+    html.Div(
+        children=html.Div([
+            html.H5('Overview'),
+            html.Div('''
+                This is an example of a simple Dash app with
+                local, customized CSS.
+            ''')
+        ])
+    ),
+    dcc.Dropdown(
+        id='my-dropdown',
+        options=[
+            {'label': 'line', 'value': 'line'},
+            {'label': 'bar', 'value': 'bar'},
+            {'label': 'Apple', 'value': 'AAPL'}
+        ],
+        value='line'
+    ),
+    dcc.Graph(id='my-graph')
+], style={'width': '500'})
 
 
-class Asset():
-    '''Asset class -> Asset with several RTD objects'''
+# ------------------------------------------------------------------------------------------------
 
-    def __init__(self, asset):
-        self.asset = asset
-        self.rtd_list = []
+# --- ESCOLHER OS ATIVOS -----------------#
+ATIVO = ['FRP0', 'DOLFUT']
+COTACAO = 'COT$S|'
+# ========================================#
 
-    def insert_rtd(self, rtd):
-        if self.asset == rtd.ativo:
-            self.rtd_list.append(rtd)
-        else:
-            print(f"Cannot insert rtd: '{rtd.ativo}' in asset: '{self.asset}'")
-
-    def __str__(self):
-        print_highlighter(self.asset)
-        for r in self.rtd_list:
-            print(f'\t{r}')
-        return f'--------------------------------\n'
+# --- INFORMACOES DO SERVIDOR ------------#
+HOST = '192.168.0.10'  # ipv4
+PORT = 8080
+# ========================================#
 
 
-class RTD():
-    '''Real Time Data class -> RTD with values cleaned up'''
-
-    def __init__(self, rtd_dict):
-        for k, v in rtd_dict.items():
-            setattr(self, k, v)
-
-    def __str__(self):
-        for k, v in self.__dict__.items():
-            print(f'\t{k} = {v}')
-        return f'----------------------------'
+def ByteConvert(dataInfo, ativo):
+    # dataInfo example >> b'COT$S|PETR4#'
+    return str.encode(dataInfo + ativo + '#')
 
 
-'''
-a1 = Asset('ATIVO')
-print(a1)
+@app.server.route("/rtd", methods=['GET'])
+def start_rtd():
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.connect((HOST, PORT))
+            print(f'\nId da thread principal: {win32api.GetCurrentThreadId()}')
+            try:
+                for item in ATIVO:
+                    # data in string
+                    s.sendall(ByteConvert(COTACAO, item))
+                    data = s.recv(1024).decode().replace("COT!", "").split("|")
+                    # data in dictionary
+                    data_dict = clean_rtd_as_dict(data)
+                    # data in RTD object
+                    data_rtd = RTD(data_dict)
+                    # print RTD object
+                    print(data_rtd)
 
-r1 = RTD({'ativo': 'ATIVO', 'preco': 10, 'nada': 'LALA'})
-print(r1)
+                str_to_json = json.dumps(data_rtd)
+                return str_to_json
 
-a1.insert_rtd(RTD({'ativo': 'ATIVO', 'preco': 10, 'nada': 'LALA'}))
-a1.insert_rtd(RTD({'ativo': 'ATIVO', 'preco': 15, 'nada': '222'}))
-a1.insert_rtd(RTD({'ativo': 'ATIVO', 'preco': 14, 'nada': 'LA22LA'}))
-print(a1)
-'''
+            except Exception as ex:
+                print(ex)
+
+    except Exception as ex:
+        print(f'\nNão foi possivel conectar no servidor RTD. Erro:\n{ex}\n')
+
+
+if __name__ == "__main__":
+    app.run()
