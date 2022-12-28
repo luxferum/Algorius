@@ -1,5 +1,5 @@
 from numpy import exp
-from rtd_RTD import RTD
+from rtd import RTD
 
 '''RTD calculation used to calculate specific values'''
 

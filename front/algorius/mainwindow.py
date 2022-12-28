@@ -27,8 +27,8 @@ import sys
 import rsc_rc
 from time import sleep
 
-from rtd_preprocessing import *
-from rtd_calculation import *
+from preprocessing import *
+from calculation import *
 from ctypes import *
 import win32api
 import socket
