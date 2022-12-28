@@ -87,4 +87,7 @@ rtd_keys = ["Ativo                         ",  # describe each one
             "PTAX Fut. P2                  ",
             "PTAX Fut. P3                  ",
             "PTAX Fut. P4                  ",
-            "PTAX Fut. Oficial             "]
+            "PTAX Fut. Oficial             ",
+            # "MAIS1",
+            # "MAIS2",
+            ]

@@ -1,15 +1,10 @@
 from numpy import exp
-from rtd import RTD
+from asset import Asset
 
 '''RTD calculation used to calculate specific values'''
 
-rtd_dolfut = RTD()  # get dolfut rtd
-rtd_frp0 = RTD()  # get frp0 rtd
-rtd_frcfut = RTD()  # get frp0 rtd
-rtd_di = RTD()  # get frp0 rtd
 
-
-def fair_price(di1fut_user_choice1, juroseua_user_choice2):
+def fair_price(rtd_dolfut, rtd_frp0, di1fut_user_choice1, juroseua_user_choice2):
     '''
     Calculate fair price.
 
@@ -31,7 +26,7 @@ def fair_price(di1fut_user_choice1, juroseua_user_choice2):
     print(f)
 
 
-def fair_price_ptax(di1fut_user_choice):
+def fair_price_ptax(rtd_dolfut, rtd_frp0, rtd_frcfut, rtd_di, rtd_di1fut_user_choice):
     '''
     Calculate fair price using ptax style.
 

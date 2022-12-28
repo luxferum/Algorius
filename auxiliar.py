@@ -1,3 +1,48 @@
+from unidecode import unidecode
+from rtd_keys import rtd_keys
+from numpy import NaN
+
+
+def clean_rtd_keys():
+    '''Return a list of rtd keys cleaned up'''
+    def clean_key(s):
+        s = unidecode(s)
+        s = s.strip()
+        s = s.lower()
+        s = s.replace(' ', '_').replace('-', '_')
+        s = s.replace('.', '').replace('(', '').replace(')', '')
+        s = s.replace('%', 'porcentagem')
+        return s
+
+    return [clean_key(k) for k in rtd_keys]
+
+
+def clean_rtd_values(values):
+    '''Given raw rtd. Return a list of rtd values cleaned up'''
+    def clean_value(value):
+        def string_to_float(s):
+            try:
+                s = float(s)
+                return s
+            except:
+                return s
+
+        value = value.replace('.', '').replace(',', '.')
+        return string_to_float(value)
+
+    return [clean_value(i) for i in values]
+
+
+def clean_rtd_as_dict(raw_data):
+    '''Given raw rtd. Return a dict of rtd cleaned up'''
+    return {k: v for k, v in zip(clean_rtd_keys(), clean_rtd_values(raw_data))}
+
+
+def byte_convert(data_info, ativo):
+    '''Convert bytes to a string'''
+    # data_info example = b'COT$S|PETR4#'
+    return str.encode(data_info + ativo + '#')
+
 
 def print_highlighter(s):
     '''Print text highlighted with dashes'''
@@ -8,18 +53,3 @@ def print_highlighter(s):
         print('--------------------------------')
 
     return highlight()
-
-
-print_highlighter('TEM COISA AQUI')
-
-
-# a1 = Asset('ATIVO')
-# print(a1)
-
-# r1 = RTD({'ativo': 'ATIVO', 'preco': 10, 'nada': 'LALA'})
-# print(r1)
-
-# a1.insert_rtd(RTD({'ativo': 'ATIVO', 'preco': 10, 'nada': 'LALA'}))
-# a1.insert_rtd(RTD({'ativo': 'ATIVO', 'preco': 15, 'nada': '222'}))
-# a1.insert_rtd(RTD({'ativo': 'ATIVO', 'preco': 14, 'nada': 'LA22LA'}))
-# print(a1)

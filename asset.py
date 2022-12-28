@@ -1,23 +1,20 @@
-from auxiliar import print_highlighter
-
-'''Asset class used to store several rtd informations in different instant of time'''
+from auxiliar import clean_rtd_as_dict
 
 
 class Asset():
-    '''Asset class -> Asset with several RTD objects'''
+    def __init__(self, rtd_raw):
+        '''Create an asset object with rtd cleaned up'''
+        rtd_dict = clean_rtd_as_dict(rtd_raw)
+        for k, v in rtd_dict.items():
+            setattr(self, k, v)
 
-    def __init__(self, asset):
-        self.asset = asset
-        self.rtd_list = []
-
-    def insert_rtd(self, rtd):
-        if self.asset == rtd.ativo:
-            self.rtd_list.append(rtd)
-        else:
-            print(f"Cannot insert rtd: '{rtd.ativo}' in asset: '{self.asset}'")
-
-    def __str__(self):
-        print_highlighter(self.asset)
-        for r in self.rtd_list:
-            print(f'\t{r}')
-        return f'--------------------------------\n'
+    def __str__(self, MAX_PRINT=100):
+        '''Return a string representation of the asset object'''
+        count = 0
+        print(f'----------------------------')
+        for k, v in self.__dict__.items():
+            print(f'\t{k} = {v}')
+            count += 1
+            if count == MAX_PRINT:
+                break
+        return f'----------------------------'
