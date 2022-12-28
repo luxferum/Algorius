@@ -56,6 +56,14 @@ HOST = '192.168.0.5'  # ipv4
 PORT = 8080
 # ========================================#
 
+'''
+AUTOMATIZADOR = 'AUT$S|'
+LIVRO_DE_OFERTAS = 'LVL2$S|'
+NEGOCIO = 'NEG$S|'
+NEGOCIO_COMPLETO = 'NEGS$S|'
+INTERVALO_GRAFICO = 'GRF$S|'
+'''
+
 
 def ByteConvert(dataInfo, ativo):
     # dataInfo example >> b'COT$S|PETR4#'
