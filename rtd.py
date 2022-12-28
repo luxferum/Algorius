@@ -1,3 +1,4 @@
+from asset import Asset
 from auxiliar import byte_convert
 import win32api
 import socket
@@ -25,7 +26,7 @@ class RTD():
     INTERVALO_GRAFICO = 'GRF$S|'
 
     # ==== INFORMACOES DO SERVIDOR ============ #
-    HOST = '192.168.0.5'  # ipv4
+    HOST = socket.gethostbyname(socket.gethostname())
     PORT = 8080
 
     def __init__(self, host=None, port=None):
@@ -39,6 +40,10 @@ class RTD():
             print(f'\nNão foi possivel conectar ao servidor RTD.')
             print(f'\nErro:\n{ex}\n')
 
+    def close_socket(self):
+        '''Close Tryd socket'''
+        self.s.close()
+
     def get_raw_rtd(self, ativo):
         '''Use socket to get raw rtd from an asset'''
         try:
@@ -48,6 +53,5 @@ class RTD():
         except Exception as ex:
             print(ex)
 
-    def close_socket(self):
-        '''Close Tryd socket'''
-        self.s.close()
+    def get_asset_rtd(self, ativo):
+        return Asset(self.rtd.get_raw_rtd(ativo))
