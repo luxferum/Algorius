@@ -1,4 +1,4 @@
-from auxiliar import print_highlighter, clean_rtd_as_dict, clean_rtd_keys, clean_rtd_values
+from rtd_auxiliar import print_highlighter, clean_rtd_as_dict, clean_rtd_keys, clean_rtd_values
 import pandas as pd
 
 
@@ -34,14 +34,5 @@ class Asset():
         print(df)
         return df
 
-class Asset():
-    def __init__(self, rtd):
-        rtd = clean_rtd_as_dict(rtd)
-        for k, v in rtd.items():
-            setattr(self, k, v)
 
-    def __str__(self):
-        for k, v in self.__dict__.items():
-            print(f'\t{k} = {v}')
-            break
-        return f'----------------------------'
+

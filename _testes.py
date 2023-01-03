@@ -1,4 +1,4 @@
-from rtd import RTD
+from rtd_classes import RTD
 
 
 if __name__ == "__main__":
