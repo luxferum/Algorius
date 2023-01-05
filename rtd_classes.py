@@ -1,22 +1,17 @@
-from rtd_auxiliar import clean_rtd_as_dict, byte_convert
+from collections import defaultdict
+from PyQt6.QtCore import QObject, pyqtSignal
+from numpy import exp
+import pandas as pd
 import win32api
 import socket
+import time
+from rtd_auxiliar import rtd_clean_dict, rtd_clean_keys
 
 
-class RTD():
-    '''
-    RTD Class -> Create connection with server socket to get raw RTD
+class TrydSocket():
+    '''TrydSocket class manage connection with tryd to get raw real time data'''
 
-    Attributes
-    ----------
-        Description
-
-    Methods
-    -------
-        Description
-    '''
-
-    # ==== ESCOLHER TIPO DE DADOS ============= #
+    # Datatypes for real time data
     COTACAO = 'COT$S|'
     AUTOMATIZADOR = 'AUT$S|'
     LIVRO_DE_OFERTAS = 'LVL2$S|'
@@ -24,52 +19,153 @@ class RTD():
     NEGOCIO_COMPLETO = 'NEGS$S|'
     INTERVALO_GRAFICO = 'GRF$S|'
 
-    # ==== INFORMACOES DO SERVIDOR ============ #
-    HOST = socket.gethostbyname(socket.gethostname())
-    PORT = 8080
+    # Connection information
+    host = socket.gethostbyname(socket.gethostname())
+    port = 8080
 
-    def __init__(self, host=None, port=None):
-        '''Connect to Tryd socket to get rtd'''
-        try:
-            self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            self.s.connect((host, port))
-            print(f'\nId da thread principal: {win32api.GetCurrentThreadId()}')
+    def __init__(self):
+        '''Create socket to access tryd to get real time data'''
+        self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-        except Exception as ex:
-            print(f'\nNão foi possivel conectar ao servidor RTD.')
-            print(f'\nErro:\n{ex}\n')
+    def connect_socket(self, port=None):
+        '''Connect to tryd socket given a port'''
+        self.s.connect((TrydSocket.host, port))
 
     def close_socket(self):
-        '''Close Tryd socket'''
+        '''Close connection to tryd socket'''
+        # releases the resource associated with a connection but does not
+        # necessarily close the connection immediately
         self.s.close()
 
-    def get_raw_rtd(self, ativo):
-        '''Use socket to get raw rtd from an asset'''
-        try:
-            self.s.sendall(byte_convert(self.COTACAO, ativo))
-            return self.s.recv(1024).decode().replace("COT!", "").split("|")
+    def print_socket(self):
+        '''Print socket'''
+        print(f'Socket = {self.s}\n')
 
-        except Exception as ex:
-            print(ex)
+    def print_id_thread(self):
+        '''Print ID thread'''
+        print(f'\nId da thread principal: {win32api.GetCurrentThreadId()}')
 
-    def get_asset_rtd(self, ativo):
-        return Asset(self.get_raw_rtd(ativo))
+    def get_raw_rtd(self, asset_name):
+        '''Use socket to return raw real time data given an asset_name'''
+        # flush socket before getting real time data
+        info = b''
+        self.s.sendall(info)
+        # b'COT$S|PETR4#'
+        info = str.encode(TrydSocket.COTACAO + asset_name + '#')
+        self.s.sendall(info)
+        # return a list of raw real time data
+        return self.s.recv(1024).decode().replace("COT!", "").split("|")
 
 
-class Asset():
-    def __init__(self, rtd_raw):
-        '''Create an asset object with rtd cleaned up'''
-        rtd_dict = clean_rtd_as_dict(rtd_raw)
-        for k, v in rtd_dict.items():
+class RTD:
+    '''RTD class is a real time data object with cleaned rtd values as attributes'''
+    rtd_dict = defaultdict(None)
+    # rtd_df = pd.DataFrame()
+
+    # @classmethod
+    # def return_rtd_df(cls):
+    #     return pd.DataFrame(RTD.rtd_dict, index=rtd_clean_keys())
+
+    @classmethod
+    def fair_price(cls, di1fut_user_choice, juros_eua_user_choice):
+        '''Calculate fair price with frp0 and dolfut'''
+        # real time data
+        frp0 = RTD.rtd_dict['FRP0']
+        dolfut = RTD.rtd_dict['DOLFUT']
+
+        # info used to calculate
+        spot = dolfut.fechamento - frp0.fechamento
+        delta_dias = dolfut.dias_uteis_ate_vencimento / 252
+        delta_j = di1fut_user_choice - juros_eua_user_choice
+
+        # intermediate results
+        numerador = exp(delta_j*delta_dias)
+
+        # final result
+        f = round(spot * numerador, 2)
+
+        # print
+        print(f'fair price = {f} - spot = {spot}')
+
+    @classmethod
+    def fair_price_ptax(cls, di1fut_user_choice):
+        '''Calculate fair price using ptax style with frp0, dolfut and frcfut'''
+        # real time data
+        frp0 = RTD.rtd_dict['FRP0']
+        dolfut = RTD.rtd_dict['DOLFUT']
+        frcfut = RTD.rtd_dict['FRCFUT']
+        di = RTD.rtd_dict['FRP0']  # NAO ACHEI O CODIGO DO DI
+
+        # info used to calculate
+        spot = dolfut.fechamento - frp0.fechamento
+        frcfut_fech = frcfut.fechamento
+        frcfut_dias = frcfut.dias_uteis_ate_vencimento / 252
+        di_dias = di.dias_uteis_ate_vencimento / 252
+
+        # intermediate results
+        numerador = ((1+di1fut_user_choice) ** di_dias)
+        denominador = 1 + frcfut_fech * frcfut_dias
+
+        # final result
+        f = round(spot * numerador / denominador, 2)
+
+        # print
+        print(f'fair price ptax = {f} - spot = {spot}')
+
+    # @classmethod
+    # def std_dev_on_scale():
+    #     pass
+
+    # @classmethod
+    # def std_dev_off_scale():
+    #     pass
+
+    # @classmethod
+    # def avg_speed():
+    #     pass
+
+    # @classmethod
+    # def simple_harmonic_oscilator():
+    #     pass
+
+    # @classmethod
+    # def vwap_ZScore():
+    #     pass
+
+    def __init__(self, raw_data):
+        '''Create an RTD object with rtd cleaned up'''
+        for k, v in rtd_clean_dict(raw_data).items():
             setattr(self, k, v)
 
-    def __str__(self, MAX_PRINT=100):
-        '''Return a string representation of the asset object'''
-        count = 0
+    def __str__(self, qnt_attr=2):
+        '''Return a string representation of the RTD object'''
         print(f'----------------------------')
-        for k, v in self.__dict__.items():
-            print(f'\t{k} = {v}')
-            count += 1
-            if count == MAX_PRINT:
+        for i, (k, v) in enumerate(self.__dict__.items()):
+            if i < qnt_attr:
+                print(f'\t{k} = {v}')
+            else:
                 break
-        return f'----------------------------'
+        print(f'----------------------------')
+        return ''
+
+    def add_to_rtd_dict(self):
+        RTD.rtd_dict[self.ativo] = self
+
+
+class Worker(QObject):
+    '''Worker class that implements running tasks'''
+    progress = pyqtSignal(RTD)
+
+    def run(self, asset_name, sleep_seconds=1):
+        tryd = TrydSocket()
+        tryd.connect_socket(port=8080)
+
+        while True:
+            rtd_raw = tryd.get_raw_rtd(asset_name)
+            rtd_obj = RTD(rtd_raw)
+
+            print(rtd_obj)
+            time.sleep(sleep_seconds)
+
+            self.progress.emit(rtd_obj)
+            break

@@ -1,12 +1,112 @@
-from numpy import exp
 from unidecode import unidecode
-from rtd_keys import rtd_keys
 from numpy import NaN
+
+rtd_keys = ["Ativo                         ",  # describe each one
+            "Última                        ",
+            "Var.                          ",
+            "Qtd. Compra                   ",
+            "Compra                        ",
+            "Venda                         ",
+            "Qtd. Venda                    ",
+            "Abertura                      ",
+            "Máxima                        ",
+            "Mínima                        ",
+            "Fechamento                    ",
+            "Volume                        ",
+            "Hora                          ",
+            "Fech. Ajustado                ",
+            "Núm. de Negócios              ",
+            "Média                         ",
+            "Papéis Negociados             ",
+            "TODO IDENTIFICAR (01)         ",
+            "Estado                        ",
+            "Vencimento                    ",
+            "Lote Mínimo                   ",
+            "Dias até Vencimento           ",
+            "Dias Úteis até Vencimento     ",
+            "Var. %                        ",
+            "Var. (Var. %)                 ",
+            "Data                          ",
+            "Data/Hora                     ",
+            "Descrição                     ",
+            "Exercício                     ",
+            "Var. Simb.                    ",
+            "Semanal (Var. %)              ",
+            "Mensal (Var. %)               ",
+            "Anual (Var. %)                ",
+            "30 Dias (Var. %)              ",
+            "12 Meses (Var. %)             ",
+            "52 Semanas (Var. %)           ",
+            "2 Anos (Var. %)               ",
+            "Ajuste PU                     ",
+            "Ajuste PU Anterior            ",
+            "Preço Teórico                 ",
+            "Quantidade Teórica            ",
+            "Fim do Leilão                 ",
+            "Contratos em Aberto           ",
+            "Fech. Ajustado Anterior       ",
+            "MCap                          ",
+            "Ações no Mercado              ",
+            "Agr. Cmp.                     ",
+            "Agr. Cmp. (Direto)            ",
+            "Agr. Cmp. (Não-direto)        ",
+            "Agr. Vnd.                     ",
+            "Agr. Vnd. (Direto)            ",
+            "Agr. Vnd. (Não-direto)        ",
+            "Saldo Agr.                    ",
+            "Saldo Agr. (Direto)           ",
+            "Saldo Agr. (Não-direto)       ",
+            "Agr. Cmp. %                   ",
+            "Agr. Cmp. % (Direto)          ",
+            "Agr. Cmp. % (Não-direto)      ",
+            "Agr. Vnd. %                   ",
+            "Agr. Vnd. % (Direto)          ",
+            "Agr. Vnd. % (Não-direto)      ",
+            "Qtd. Rest.                    ",
+            "Ind. Sald.                    ",
+            "Neg. Agr. Cmp.                ",
+            "Neg. Agr. Cmp. (Direto)       ",
+            "Neg. Agr. Cmp. (Não-direto)   ",
+            "Neg. Agr. Vnd.                ",
+            "Neg. Agr. Vnd. (Direto)       ",
+            "Neg. Agr. Vnd. (Não-direto)   ",
+            "Saldo Neg. Agr.               ",
+            "Saldo Neg. Agr. (Direto)      ",
+            "Saldo Neg. Agr. (Não-direto)  ",
+            "Neg. Agr. Cmp. %              ",
+            "Neg. Agr. Cmp. % (Direto)     ",
+            "Neg. Agr. Cmp. % (Não-direto) ",
+            "Neg. Agr. Vnd. %              ",
+            "Neg. Agr. Vnd. % (Direto)     ",
+            "Neg. Agr. Vnd. % (Não-direto) ",
+            "PTAX P1                       ",
+            "PTAX P2                       ",
+            "PTAX P3                       ",
+            "PTAX P4                       ",
+            "PTAX Oficial                  ",
+            "PTAX Fut. P1                  ",
+            "PTAX Fut. P2                  ",
+            "PTAX Fut. P3                  ",
+            "PTAX Fut. P4                  ",
+            "PTAX Fut. Oficial             ",
+            # "MAIS1",
+            # "MAIS2",
+            ]
+
+
+def exception_handler(func):
+    '''Decorator for exception'''
+    def inner_func(*args, **kwargs):
+        try:
+            func(*args, **kwargs)
+        except Exception as e:
+            print('Exception {e}')
+
+    return inner_func(func)
 
 
 def print_highlighter(s):
     '''Print text highlighted with dashes'''
-
     def highlight():
         print('--------------------------------')
         print(f'{s}')
@@ -15,7 +115,7 @@ def print_highlighter(s):
     return highlight()
 
 
-def clean_rtd_keys():
+def rtd_clean_keys():
     '''Return a list of rtd keys cleaned up'''
     def clean_key(s):
         s = unidecode(s)
@@ -29,7 +129,7 @@ def clean_rtd_keys():
     return [clean_key(k) for k in rtd_keys]
 
 
-def clean_rtd_values(values):
+def rtd_clean_values(values):
     '''Given raw rtd. Return a list of rtd values cleaned up'''
     def clean_value(value):
         def string_to_float(s):
@@ -45,81 +145,6 @@ def clean_rtd_values(values):
     return [clean_value(i) for i in values]
 
 
-def clean_rtd_as_dict(raw_data):
+def rtd_clean_dict(raw_data):
     '''Given raw rtd. Return a dict of rtd cleaned up'''
-    return {k: v for k, v in zip(clean_rtd_keys(), clean_rtd_values(raw_data))}
-
-
-def byte_convert(data_info, ativo):
-    '''Convert bytes to a string'''
-    # data_info example = b'COT$S|PETR4#'
-    return str.encode(data_info + ativo + '#')
-
-
-'''RTD calculation used to calculate specific values'''
-
-
-def fair_price(rtd_dolfut, rtd_frp0, di1fut_user_choice1, juroseua_user_choice2):
-    '''
-    Calculate fair price.
-
-        Parameters:
-                a (int): A decimal integer
-                b (int): Another decimal integer
-
-        Returns:
-                binary_sum (str): Binary string of the sum of a and b
-    '''
-    # DI1FUT E JUROS EUA (LINKADO AO UI -> USUÁRIO IRÁ ESCOLHER)
-    delta_j = di1fut_user_choice1 - juroseua_user_choice2
-    # DIAS ATÉ O VENCIMENTO/252 (PRECISA LINKAR COM O VENCIMENTO QUE VEM DO RTD, RESULTANDO EM -> DELTA_DIAS = DATA_DE_HOJE - VENCIMENTO/252).
-    delta_dias = rtd_dolfut['dias_uteis_ate_vencimento'] / 252
-    # DOLAR A VISTA (PRECISA VALOR DO FRP E DOLFUT QUE VEM DO RTD, RESULTANDO EM -> SPOT = DOLFUT - FRP0).
-    spot = rtd_dolfut['fechamento'] - rtd_frp0['fechamento']
-    # FORMULA (FÓRMULA FINAL DO PREÇO JUSTO)
-    f = spot * exp(delta_j*delta_dias)
-    print(f)
-
-
-def fair_price_ptax(rtd_dolfut, rtd_frp0, rtd_frcfut, rtd_di, rtd_di1fut_user_choice):
-    '''
-    Calculate fair price using ptax style.
-
-        Parameters:
-                a (int): A decimal integer
-                b (int): Another decimal integer
-
-        Returns:
-                binary_sum (str): Binary string of the sum of a and b
-    '''
-    # (PRECISA VALOR DO FRP E DOLFUT QUE VEM DO RTD, RESULTANDO EM -> SPOT=DOLFUT - FRP0).
-    spot = rtd_dolfut['fechamento'] - rtd_frp0['fechamento']
-    # (PRECISA DO VALOR DO FRCFUT QUE VEM DO RTD)
-    frcfut = rtd_frcfut['fechamento']
-    # (PRECISA DA DATA DE VENCIMENTO DO FRC, RESULTANDO EM -> HOJE - VENCIMENTO/252)
-    diasFRC = rtd_frcfut['dias_uteis_ate_vencimento']/252
-    # (PRECISA DA DATA DE VENCIMENTO DO DI, RESULTANDO EM -> HOJE - VENCIMENTO/252)
-    diasDI = rtd_di['dias_uteis_ate_vencimento']/252
-    # (FÓRMULA FINAL DO PREÇO JUSTO DO PTAX).
-    f = spot * ((1+rtd_di1fut_user_choice) ** diasDI)/(1+frcfut*diasFRC)
-    print(f)
-
-
-def std_dev_on_scale():
-    pass
-
-
-def std_dev_off_scale():
-    pass
-
-
-def avg_speed():
-    pass
-
-
-def simple_harmonic_oscilator():
-    pass
-
-
-def vwap_ZScore():
-    pass
+    return {k: v for k, v in zip(rtd_clean_keys(), rtd_clean_values(raw_data))}
