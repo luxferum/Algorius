@@ -15,8 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFrame, QLabel, QLineEdit,
-    QPushButton, QSizePolicy, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QLabel,
+    QLineEdit, QPushButton, QSizePolicy, QVBoxLayout,
+    QWidget)
 import rsc_rc
 import rsc_rc
 import rsc_rc
@@ -152,9 +153,10 @@ class Ui_register_window(object):
         register_window.setProperty("documentMode", True)
         register_window.setProperty("dockNestingEnabled", True)
         register_window.setProperty("unifiedTitleAndToolBarOnMac", True)
+        self.gridLayout = QGridLayout(register_window)
+        self.gridLayout.setObjectName(u"gridLayout")
         self.centralwidget = QWidget(register_window)
         self.centralwidget.setObjectName(u"centralwidget")
-        self.centralwidget.setGeometry(QRect(0, 0, 441, 641))
         palette1 = QPalette()
         brush12 = QBrush(QColor(255, 255, 255, 0))
         brush12.setStyle(Qt.SolidPattern)
@@ -1221,6 +1223,9 @@ class Ui_register_window(object):
         self.linha_cpf.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout.addWidget(self.linha_cpf)
+
+
+        self.gridLayout.addWidget(self.centralwidget, 0, 0, 1, 1)
 
 
         self.retranslateUi(register_window)

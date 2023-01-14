@@ -24,7 +24,9 @@ class Ui_Loading_window(object):
         if not Loading_window.objectName():
             Loading_window.setObjectName(u"Loading_window")
         Loading_window.setWindowModality(Qt.WindowModal)
-        Loading_window.resize(833, 245)
+        Loading_window.resize(763, 261)
+        Loading_window.setMinimumSize(QSize(763, 261))
+        Loading_window.setMaximumSize(QSize(763, 261))
         Loading_window.setAcceptDrops(True)
         icon = QIcon()
         icon.addFile(u":/rsc/icone-alguros-1.png", QSize(), QIcon.Normal, QIcon.Off)
@@ -36,7 +38,7 @@ class Ui_Loading_window(object):
         Loading_window.setModal(True)
         self.Loading_window_progressBar = QProgressBar(Loading_window)
         self.Loading_window_progressBar.setObjectName(u"Loading_window_progressBar")
-        self.Loading_window_progressBar.setGeometry(QRect(100, 90, 601, 61))
+        self.Loading_window_progressBar.setGeometry(QRect(20, 90, 721, 61))
         sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -319,7 +321,7 @@ class Ui_Loading_window(object):
         self.Loading_window_progressBar.setTextDirection(QProgressBar.TopToBottom)
         self.pushButton_endLoad = QPushButton(Loading_window)
         self.pushButton_endLoad.setObjectName(u"pushButton_endLoad")
-        self.pushButton_endLoad.setGeometry(QRect(330, 190, 151, 41))
+        self.pushButton_endLoad.setGeometry(QRect(280, 190, 201, 41))
         self.pushButton_endLoad.setStyleSheet(u"color: rgb(6, 208, 164);\n"
 "border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 208, 164, 255), stop:1 rgba(3, 102, 80, 255));\n"
 "selection-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(39, 39, 39, 255), stop:0.368715 rgba(57, 57, 57, 255), stop:0.675978 rgba(66, 66, 66, 255), stop:1 rgba(78, 78, 78, 255));\n"
