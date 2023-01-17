@@ -94,7 +94,7 @@ class RTD:
         frp0 = RTD.rtd_dict['FRP0']
         dolfut = RTD.rtd_dict['DOLFUT']
         frcfut = RTD.rtd_dict['FRCFUT']
-        di = RTD.rtd_dict['FRP0']  # NAO ACHEI O CODIGO DO DI
+        di = RTD.rtd_dict['DI1FUT']
 
         # info used to calculate
         spot = dolfut.fechamento - frp0.fechamento
@@ -135,7 +135,7 @@ class RTD:
     def __init__(self, raw_data):
         '''Create an RTD object with rtd cleaned up'''
         for k, v in rtd_clean_dict(raw_data).items():
-            setattr(self, k, v)
+            setattr(self, k, [v])
 
     def __str__(self, qnt_attr=2):
         '''Return a string representation of the RTD object'''
@@ -148,8 +148,20 @@ class RTD:
         print(f'----------------------------')
         return ''
 
-    def add_to_rtd_dict(self):
+    def insert_rtd_in_dict(self):
+        '''Insert a rtd object into the class attribute rtd_dict dictionary'''
         RTD.rtd_dict[self.ativo] = self
+
+    def append_information_to_rtd(self, raw_data):
+        '''Append information to the object'''
+        d = rtd_clean_dict(raw_data)
+        for k, v in self.__dict__.items():
+            v.append(d[k])
+
+    def return_rtd_as_df(self):
+        '''Return a rtd object as a dataframe'''
+        d = self.__dict__()
+        df = pd.DataFrame.from_dict(d)
 
 
 class Worker(QObject):
@@ -161,11 +173,9 @@ class Worker(QObject):
         tryd.connect_socket(port=8080)
 
         while True:
-            rtd_raw = tryd.get_raw_rtd(asset_name)
-            rtd_obj = RTD(rtd_raw)
+            rtd_obj = RTD(tryd.get_raw_rtd(asset_name))
 
             print(rtd_obj)
             time.sleep(sleep_seconds)
 
             self.progress.emit(rtd_obj)
-            break

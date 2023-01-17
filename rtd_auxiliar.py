@@ -148,3 +148,8 @@ def rtd_clean_values(values):
 def rtd_clean_dict(raw_data):
     '''Given raw rtd. Return a dict of rtd cleaned up'''
     return {k: v for k, v in zip(rtd_clean_keys(), rtd_clean_values(raw_data))}
+
+
+def csv_to_df():
+    '''Given a CSV file from the import directory return a dataframe created'''
+    pass
