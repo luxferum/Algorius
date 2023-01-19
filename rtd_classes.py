@@ -163,19 +163,16 @@ class RTD:
         d = self.__dict__()
         df = pd.DataFrame.from_dict(d)
 
-
 class Worker(QObject):
     '''Worker class that implements running tasks'''
-    progress = pyqtSignal(RTD)
-
-    def run(self, asset_name, sleep_seconds=1):
-        tryd = TrydSocket()
-        tryd.connect_socket(port=8080)
-
+    frp0_res = pyqtSignal(RTD)
+    dolfut_res = pyqtSignal(RTD)
+    
+    TRYD = TrydSocket()
+    TRYD.connect_socket(port=8080)
+ 
+    def run(self):
         while True:
-            rtd_obj = RTD(tryd.get_raw_rtd(asset_name))
-
-            print(rtd_obj)
-            time.sleep(sleep_seconds)
-
-            self.progress.emit(rtd_obj)
+            rtd_obj = RTD(self.TRYD.get_raw_rtd('FRP0'))
+            time.sleep(0.5)
+            self.frp0_res.emit(rtd_obj)
