@@ -34,7 +34,7 @@ class Ui_mainWithTabs(object):
             mainWithTabs.setObjectName(u"mainWithTabs")
         mainWithTabs.setWindowModality(Qt.NonModal)
         mainWithTabs.setEnabled(True)
-        mainWithTabs.resize(1109, 780)
+        mainWithTabs.resize(1060, 774)
         mainWithTabs.setMinimumSize(QSize(500, 500))
         mainWithTabs.setMaximumSize(QSize(2292, 16777215))
         mainWithTabs.setBaseSize(QSize(1920, 1080))
@@ -955,11 +955,7 @@ class Ui_mainWithTabs(object):
 "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(13, 13, 13, 255), stop:0.368715 rgba(26, 26, 26, 255), stop:0.675978 rgba(42, 42, 42, 255), stop:1 rgba(51, 51, 51, 255));\n"
 "selection-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 208, 164, 255), stop:1 rgba(3, 102, 80, 255));\n"
 "selection-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 208, 164, 255), stop:1 rgba(3, 102, 80, 255));\n"
-"border-top-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 208, 164, 255), stop:1 rgba(3, 102, 80, 255));\n"
-"bor"
-                        "der-right-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 208, 164, 255), stop:1 rgba(3, 102, 80, 255));\n"
-"border-bottom-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 208, 164, 255), stop:1 rgba(3, 102, 80, 255));\n"
-"border-left-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 208, 164, 255), stop:1 rgba(3, 102, 80, 255));")
+"")
         self.Welcome.setTabPosition(QTabWidget.South)
         self.Welcome.setTabShape(QTabWidget.Rounded)
         self.Welcome.setIconSize(QSize(30, 30))
@@ -1480,80 +1476,75 @@ class Ui_mainWithTabs(object):
         self.frame_4.setStyleSheet(u"color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 69, 208, 255), stop:0.517045 rgba(22, 154, 154, 255), stop:1 rgba(4, 131, 103, 255));\n"
 "selection-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 69, 208, 255), stop:0.517045 rgba(22, 154, 154, 255), stop:1 rgba(4, 131, 103, 255));\n"
 "gridline-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 69, 208, 255), stop:0.517045 rgba(22, 154, 154, 255), stop:1 rgba(4, 131, 103, 255));\n"
-"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 0));\n"
 "border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 69, 208, 255), stop:0.517045 rgba(22, 154, 154, 255), stop:1 rgba(4, 131, 103, 255));")
-        self.frame_4.setFrameShape(QFrame.Box)
+        self.frame_4.setFrameShape(QFrame.WinPanel)
         self.frame_4.setFrameShadow(QFrame.Raised)
         self.frame_4.setLineWidth(1)
         self.frame_4.setMidLineWidth(2)
+        self.gridLayout_10 = QGridLayout(self.frame_4)
+        self.gridLayout_10.setObjectName(u"gridLayout_10")
         self.webEngineView = QWebEngineView(self.frame_4)
         self.webEngineView.setObjectName(u"webEngineView")
-        self.webEngineView.setGeometry(QRect(20, 20, 501, 281))
         self.webEngineView.setUrl(QUrl(u"about:blank"))
-        self.pushButton = QPushButton(self.frame_4)
-        self.pushButton.setObjectName(u"pushButton")
-        self.pushButton.setGeometry(QRect(230, 110, 81, 81))
-        icon25 = QIcon()
-        icon25.addFile(u":/icones/icons8-adicionar-96.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.pushButton.setIcon(icon25)
-        self.pushButton.setIconSize(QSize(100, 100))
+
+        self.gridLayout_10.addWidget(self.webEngineView, 0, 0, 1, 1)
+
 
         self.gridLayout_17.addWidget(self.frame_4, 0, 0, 1, 1)
 
         self.frame_5 = QFrame(self.tabDash)
         self.frame_5.setObjectName(u"frame_5")
-        self.frame_5.setStyleSheet(u"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 0));")
-        self.frame_5.setFrameShape(QFrame.Box)
+        self.frame_5.setStyleSheet(u"border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 69, 208, 255), stop:0.517045 rgba(22, 154, 154, 255), stop:1 rgba(4, 131, 103, 255));\n"
+"color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 69, 208, 255), stop:0.517045 rgba(22, 154, 154, 255), stop:1 rgba(4, 131, 103, 255));")
+        self.frame_5.setFrameShape(QFrame.WinPanel)
         self.frame_5.setFrameShadow(QFrame.Raised)
         self.frame_5.setLineWidth(1)
         self.frame_5.setMidLineWidth(2)
+        self.gridLayout_9 = QGridLayout(self.frame_5)
+        self.gridLayout_9.setObjectName(u"gridLayout_9")
         self.webEngineView_2 = QWebEngineView(self.frame_5)
         self.webEngineView_2.setObjectName(u"webEngineView_2")
-        self.webEngineView_2.setGeometry(QRect(20, 20, 501, 281))
+        self.webEngineView_2.setStyleSheet(u"")
         self.webEngineView_2.setUrl(QUrl(u"about:blank"))
-        self.pushButton_2 = QPushButton(self.frame_5)
-        self.pushButton_2.setObjectName(u"pushButton_2")
-        self.pushButton_2.setGeometry(QRect(230, 110, 81, 81))
-        self.pushButton_2.setIcon(icon25)
-        self.pushButton_2.setIconSize(QSize(100, 100))
+
+        self.gridLayout_9.addWidget(self.webEngineView_2, 0, 0, 1, 1)
+
 
         self.gridLayout_17.addWidget(self.frame_5, 0, 1, 1, 1)
 
         self.frame_6 = QFrame(self.tabDash)
         self.frame_6.setObjectName(u"frame_6")
-        self.frame_6.setStyleSheet(u"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 0));")
-        self.frame_6.setFrameShape(QFrame.Box)
+        self.frame_6.setStyleSheet(u"")
+        self.frame_6.setFrameShape(QFrame.WinPanel)
         self.frame_6.setFrameShadow(QFrame.Raised)
         self.frame_6.setLineWidth(1)
         self.frame_6.setMidLineWidth(2)
+        self.gridLayout_11 = QGridLayout(self.frame_6)
+        self.gridLayout_11.setObjectName(u"gridLayout_11")
         self.webEngineView_4 = QWebEngineView(self.frame_6)
         self.webEngineView_4.setObjectName(u"webEngineView_4")
-        self.webEngineView_4.setGeometry(QRect(20, 20, 501, 281))
         self.webEngineView_4.setUrl(QUrl(u"about:blank"))
-        self.pushButton_3 = QPushButton(self.frame_6)
-        self.pushButton_3.setObjectName(u"pushButton_3")
-        self.pushButton_3.setGeometry(QRect(230, 110, 81, 81))
-        self.pushButton_3.setIcon(icon25)
-        self.pushButton_3.setIconSize(QSize(100, 100))
+
+        self.gridLayout_11.addWidget(self.webEngineView_4, 0, 0, 1, 1)
+
 
         self.gridLayout_17.addWidget(self.frame_6, 1, 1, 1, 1)
 
         self.frame_7 = QFrame(self.tabDash)
         self.frame_7.setObjectName(u"frame_7")
-        self.frame_7.setStyleSheet(u"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 0));")
-        self.frame_7.setFrameShape(QFrame.Box)
+        self.frame_7.setStyleSheet(u"")
+        self.frame_7.setFrameShape(QFrame.WinPanel)
         self.frame_7.setFrameShadow(QFrame.Raised)
         self.frame_7.setLineWidth(1)
         self.frame_7.setMidLineWidth(2)
+        self.gridLayout_12 = QGridLayout(self.frame_7)
+        self.gridLayout_12.setObjectName(u"gridLayout_12")
         self.webEngineView_3 = QWebEngineView(self.frame_7)
         self.webEngineView_3.setObjectName(u"webEngineView_3")
-        self.webEngineView_3.setGeometry(QRect(20, 20, 501, 281))
         self.webEngineView_3.setUrl(QUrl(u"about:blank"))
-        self.pushButton_4 = QPushButton(self.frame_7)
-        self.pushButton_4.setObjectName(u"pushButton_4")
-        self.pushButton_4.setGeometry(QRect(230, 110, 81, 81))
-        self.pushButton_4.setIcon(icon25)
-        self.pushButton_4.setIconSize(QSize(100, 100))
+
+        self.gridLayout_12.addWidget(self.webEngineView_3, 0, 0, 1, 1)
+
 
         self.gridLayout_17.addWidget(self.frame_7, 1, 0, 1, 1)
 
@@ -3205,6 +3196,22 @@ class Ui_mainWithTabs(object):
 
         self.verticalLayout.addWidget(self.comboBox_labInfo2)
 
+        self.frame_10 = QFrame(self.tabLab)
+        self.frame_10.setObjectName(u"frame_10")
+        self.frame_10.setFrameShape(QFrame.Box)
+        self.frame_10.setFrameShadow(QFrame.Sunken)
+        self.frame_10.setMidLineWidth(2)
+        self.gridLayout_24 = QGridLayout(self.frame_10)
+        self.gridLayout_24.setObjectName(u"gridLayout_24")
+        self.labChart = QWebEngineView(self.frame_10)
+        self.labChart.setObjectName(u"labChart")
+        self.labChart.setUrl(QUrl(u"about:blank"))
+
+        self.gridLayout_24.addWidget(self.labChart, 0, 0, 1, 1)
+
+
+        self.verticalLayout.addWidget(self.frame_10)
+
         self.checkBox_info4 = QCheckBox(self.tabLab)
         self.checkBox_info4.setObjectName(u"checkBox_info4")
         self.checkBox_info4.setMaximumSize(QSize(13, 13))
@@ -3437,12 +3444,6 @@ class Ui_mainWithTabs(object):
 
         self.verticalLayout.addWidget(self.checkBox_info4)
 
-        self.labChart = QWebEngineView(self.tabLab)
-        self.labChart.setObjectName(u"labChart")
-        self.labChart.setUrl(QUrl(u"about:blank"))
-
-        self.verticalLayout.addWidget(self.labChart)
-
         self.Welcome.addTab(self.tabLab, icon18, "")
         self.tabPrec = QWidget()
         self.tabPrec.setObjectName(u"tabPrec")
@@ -3517,7 +3518,10 @@ class Ui_mainWithTabs(object):
         self.gridLayout_3.setContentsMargins(0, -1, 0, -1)
         self.label_spot = QLabel(self.frame_3)
         self.label_spot.setObjectName(u"label_spot")
-        self.label_spot.setFont(font)
+        font10 = QFont()
+        font10.setFamilies([u"Anita  Semi-square"])
+        font10.setPointSize(19)
+        self.label_spot.setFont(font10)
         self.label_spot.setStyleSheet(u"color: rgb(6, 208, 164);\n"
 "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(13, 13, 13, 255), stop:0.368715 rgba(26, 26, 26, 255), stop:0.675978 rgba(42, 42, 42, 255), stop:1 rgba(51, 51, 51, 255));\n"
 "")
@@ -3526,17 +3530,20 @@ class Ui_mainWithTabs(object):
         self.label_spot.setLineWidth(0)
         self.label_spot.setMidLineWidth(2)
         self.label_spot.setTextFormat(Qt.AutoText)
-        self.label_spot.setScaledContents(False)
+        self.label_spot.setScaledContents(True)
         self.label_spot.setAlignment(Qt.AlignCenter)
+        self.label_spot.setWordWrap(True)
+        self.label_spot.setMargin(3)
 
         self.gridLayout_3.addWidget(self.label_spot, 0, 0, 1, 1)
 
         self.label_justo = QLabel(self.frame_3)
         self.label_justo.setObjectName(u"label_justo")
-        font10 = QFont()
-        font10.setFamilies([u"Anita  Semi-square"])
-        font10.setUnderline(True)
-        self.label_justo.setFont(font10)
+        font11 = QFont()
+        font11.setFamilies([u"Anita  Semi-square"])
+        font11.setPointSize(19)
+        font11.setUnderline(True)
+        self.label_justo.setFont(font11)
         self.label_justo.setStyleSheet(u"color: rgb(6, 208, 164);\n"
 "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(13, 13, 13, 255), stop:0.368715 rgba(26, 26, 26, 255), stop:0.675978 rgba(42, 42, 42, 255), stop:1 rgba(51, 51, 51, 255));\n"
 "")
@@ -3547,12 +3554,14 @@ class Ui_mainWithTabs(object):
         self.label_justo.setTextFormat(Qt.AutoText)
         self.label_justo.setScaledContents(False)
         self.label_justo.setAlignment(Qt.AlignCenter)
+        self.label_justo.setWordWrap(True)
+        self.label_justo.setMargin(3)
 
         self.gridLayout_3.addWidget(self.label_justo, 3, 0, 1, 1)
 
         self.label_futuro = QLabel(self.frame_3)
         self.label_futuro.setObjectName(u"label_futuro")
-        self.label_futuro.setFont(font)
+        self.label_futuro.setFont(font10)
         self.label_futuro.setStyleSheet(u"\n"
 "color: rgb(6, 208, 164);\n"
 "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(13, 13, 13, 255), stop:0.368715 rgba(26, 26, 26, 255), stop:0.675978 rgba(42, 42, 42, 255), stop:1 rgba(51, 51, 51, 255));\n"
@@ -3562,8 +3571,10 @@ class Ui_mainWithTabs(object):
         self.label_futuro.setLineWidth(0)
         self.label_futuro.setMidLineWidth(2)
         self.label_futuro.setTextFormat(Qt.AutoText)
-        self.label_futuro.setScaledContents(False)
+        self.label_futuro.setScaledContents(True)
         self.label_futuro.setAlignment(Qt.AlignCenter)
+        self.label_futuro.setWordWrap(True)
+        self.label_futuro.setMargin(3)
 
         self.gridLayout_3.addWidget(self.label_futuro, 1, 0, 1, 1)
 
@@ -3603,7 +3614,7 @@ class Ui_mainWithTabs(object):
 
         self.label_curva = QLabel(self.frame_3)
         self.label_curva.setObjectName(u"label_curva")
-        self.label_curva.setFont(font10)
+        self.label_curva.setFont(font11)
         self.label_curva.setStyleSheet(u"color: rgb(6, 208, 164);\n"
 "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(13, 13, 13, 255), stop:0.368715 rgba(26, 26, 26, 255), stop:0.675978 rgba(42, 42, 42, 255), stop:1 rgba(51, 51, 51, 255));\n"
 "")
@@ -3614,6 +3625,8 @@ class Ui_mainWithTabs(object):
         self.label_curva.setTextFormat(Qt.AutoText)
         self.label_curva.setScaledContents(False)
         self.label_curva.setAlignment(Qt.AlignCenter)
+        self.label_curva.setWordWrap(True)
+        self.label_curva.setMargin(3)
 
         self.gridLayout_3.addWidget(self.label_curva, 4, 0, 1, 1)
 
@@ -3639,7 +3652,7 @@ class Ui_mainWithTabs(object):
 
         self.label_justoPTAX = QLabel(self.frame_3)
         self.label_justoPTAX.setObjectName(u"label_justoPTAX")
-        self.label_justoPTAX.setFont(font10)
+        self.label_justoPTAX.setFont(font11)
         self.label_justoPTAX.setStyleSheet(u"color: rgb(6, 208, 164);\n"
 "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(13, 13, 13, 255), stop:0.368715 rgba(26, 26, 26, 255), stop:0.675978 rgba(42, 42, 42, 255), stop:1 rgba(51, 51, 51, 255));\n"
 "")
@@ -3650,6 +3663,8 @@ class Ui_mainWithTabs(object):
         self.label_justoPTAX.setTextFormat(Qt.AutoText)
         self.label_justoPTAX.setScaledContents(False)
         self.label_justoPTAX.setAlignment(Qt.AlignCenter)
+        self.label_justoPTAX.setWordWrap(True)
+        self.label_justoPTAX.setMargin(3)
 
         self.gridLayout_3.addWidget(self.label_justoPTAX, 5, 0, 1, 1)
 
@@ -3713,14 +3728,14 @@ class Ui_mainWithTabs(object):
         self.gridLayout_6.setContentsMargins(9, 9, -1, -1)
         self.label_dataB = QLabel(self.frame_2)
         self.label_dataB.setObjectName(u"label_dataB")
-        font11 = QFont()
-        font11.setFamilies([u"Anita  Semi-square"])
-        font11.setPointSize(10)
-        font11.setUnderline(True)
-        self.label_dataB.setFont(font11)
+        font12 = QFont()
+        font12.setFamilies([u"Anita  Semi-square"])
+        font12.setPointSize(10)
+        font12.setUnderline(True)
+        self.label_dataB.setFont(font12)
         self.label_dataB.setStyleSheet(u"color: rgb(6, 208, 164);\n"
 "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 0));")
-        self.label_dataB.setFrameShape(QFrame.Box)
+        self.label_dataB.setFrameShape(QFrame.NoFrame)
         self.label_dataB.setFrameShadow(QFrame.Raised)
         self.label_dataB.setLineWidth(0)
         self.label_dataB.setMidLineWidth(2)
@@ -3864,15 +3879,15 @@ class Ui_mainWithTabs(object):
 
         self.label_dataE = QLabel(self.frame_2)
         self.label_dataE.setObjectName(u"label_dataE")
-        font12 = QFont()
-        font12.setFamilies([u"Anita  Semi-square"])
-        font12.setPointSize(12)
-        font12.setUnderline(True)
-        self.label_dataE.setFont(font12)
+        font13 = QFont()
+        font13.setFamilies([u"Anita  Semi-square"])
+        font13.setPointSize(12)
+        font13.setUnderline(True)
+        self.label_dataE.setFont(font13)
         self.label_dataE.setStyleSheet(u"color: rgb(6, 208, 164);\n"
 "border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 208, 164, 255), stop:1 rgba(3, 102, 80, 255));\n"
 "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 0));")
-        self.label_dataE.setFrameShape(QFrame.Box)
+        self.label_dataE.setFrameShape(QFrame.NoFrame)
         self.label_dataE.setFrameShadow(QFrame.Raised)
         self.label_dataE.setLineWidth(0)
         self.label_dataE.setMidLineWidth(2)
@@ -4030,14 +4045,18 @@ class Ui_mainWithTabs(object):
         self.gridLayout_5.setObjectName(u"gridLayout_5")
         self.label_jurosEUA = QLabel(self.frame_8)
         self.label_jurosEUA.setObjectName(u"label_jurosEUA")
-        self.label_jurosEUA.setFont(font11)
+        self.label_jurosEUA.setFont(font12)
+        self.label_jurosEUA.setLayoutDirection(Qt.LeftToRight)
         self.label_jurosEUA.setStyleSheet(u"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 0));\n"
 "color: rgb(6, 208, 164);")
         self.label_jurosEUA.setFrameShape(QFrame.Box)
         self.label_jurosEUA.setFrameShadow(QFrame.Raised)
         self.label_jurosEUA.setLineWidth(0)
         self.label_jurosEUA.setMidLineWidth(2)
-        self.label_jurosEUA.setAlignment(Qt.AlignCenter)
+        self.label_jurosEUA.setTextFormat(Qt.RichText)
+        self.label_jurosEUA.setScaledContents(False)
+        self.label_jurosEUA.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.label_jurosEUA.setWordWrap(True)
 
         self.gridLayout_5.addWidget(self.label_jurosEUA, 2, 0, 2, 1)
 
@@ -4094,7 +4113,7 @@ class Ui_mainWithTabs(object):
 
         self.label_jurosBR = QLabel(self.frame_8)
         self.label_jurosBR.setObjectName(u"label_jurosBR")
-        self.label_jurosBR.setFont(font11)
+        self.label_jurosBR.setFont(font12)
         self.label_jurosBR.setStyleSheet(u"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 0));\n"
 "color: rgb(6, 208, 164);")
         self.label_jurosBR.setFrameShape(QFrame.Box)
@@ -4103,7 +4122,8 @@ class Ui_mainWithTabs(object):
         self.label_jurosBR.setMidLineWidth(2)
         self.label_jurosBR.setTextFormat(Qt.AutoText)
         self.label_jurosBR.setScaledContents(False)
-        self.label_jurosBR.setAlignment(Qt.AlignCenter)
+        self.label_jurosBR.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.label_jurosBR.setWordWrap(True)
 
         self.gridLayout_5.addWidget(self.label_jurosBR, 0, 0, 1, 1)
 
@@ -4119,9 +4139,9 @@ class Ui_mainWithTabs(object):
 
         self.gridLayout_8.addLayout(self.gridLayout_14, 0, 0, 1, 1)
 
-        icon26 = QIcon()
-        icon26.addFile(u":/icones/icons8-crescimento-de-estoques-96.ico", QSize(), QIcon.Normal, QIcon.Off)
-        self.Welcome.addTab(self.tabPrec, icon26, "")
+        icon25 = QIcon()
+        icon25.addFile(u":/icones/icons8-crescimento-de-estoques-96.ico", QSize(), QIcon.Normal, QIcon.Off)
+        self.Welcome.addTab(self.tabPrec, icon25, "")
         self.tabProb = QWidget()
         self.tabProb.setObjectName(u"tabProb")
         self.tabProb.setEnabled(True)
@@ -4129,25 +4149,16 @@ class Ui_mainWithTabs(object):
         self.tabProb.setStyleSheet(u"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(29, 29, 29, 255), stop:0.368715 rgba(31, 31, 31, 255), stop:0.675978 rgba(38, 38, 38, 255), stop:1 rgba(63, 63, 63, 255));")
         self.gridLayout_19 = QGridLayout(self.tabProb)
         self.gridLayout_19.setObjectName(u"gridLayout_19")
-        self.tableWidget_2 = QTableWidget(self.tabProb)
-        if (self.tableWidget_2.columnCount() < 5):
-            self.tableWidget_2.setColumnCount(5)
-        if (self.tableWidget_2.rowCount() < 20):
-            self.tableWidget_2.setRowCount(20)
-        self.tableWidget_2.setObjectName(u"tableWidget_2")
+        self.probChart1 = QWebEngineView(self.tabProb)
+        self.probChart1.setObjectName(u"probChart1")
         sizePolicy4 = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.MinimumExpanding)
         sizePolicy4.setHorizontalStretch(0)
         sizePolicy4.setVerticalStretch(0)
-        sizePolicy4.setHeightForWidth(self.tableWidget_2.sizePolicy().hasHeightForWidth())
-        self.tableWidget_2.setSizePolicy(sizePolicy4)
-        self.tableWidget_2.setFrameShape(QFrame.Box)
-        self.tableWidget_2.setFrameShadow(QFrame.Raised)
-        self.tableWidget_2.setLineWidth(0)
-        self.tableWidget_2.setMidLineWidth(2)
-        self.tableWidget_2.setRowCount(20)
-        self.tableWidget_2.setColumnCount(5)
+        sizePolicy4.setHeightForWidth(self.probChart1.sizePolicy().hasHeightForWidth())
+        self.probChart1.setSizePolicy(sizePolicy4)
+        self.probChart1.setUrl(QUrl(u"about:blank"))
 
-        self.gridLayout_19.addWidget(self.tableWidget_2, 0, 0, 2, 1)
+        self.gridLayout_19.addWidget(self.probChart1, 1, 1, 1, 1)
 
         self.probChart2 = QWebEngineView(self.tabProb)
         self.probChart2.setObjectName(u"probChart2")
@@ -4157,13 +4168,34 @@ class Ui_mainWithTabs(object):
 
         self.gridLayout_19.addWidget(self.probChart2, 0, 1, 1, 1)
 
-        self.probChart1 = QWebEngineView(self.tabProb)
-        self.probChart1.setObjectName(u"probChart1")
-        sizePolicy4.setHeightForWidth(self.probChart1.sizePolicy().hasHeightForWidth())
-        self.probChart1.setSizePolicy(sizePolicy4)
-        self.probChart1.setUrl(QUrl(u"about:blank"))
+        self.tableWidget_2 = QTableWidget(self.tabProb)
+        if (self.tableWidget_2.columnCount() < 5):
+            self.tableWidget_2.setColumnCount(5)
+        if (self.tableWidget_2.rowCount() < 20):
+            self.tableWidget_2.setRowCount(20)
+        self.tableWidget_2.setObjectName(u"tableWidget_2")
+        sizePolicy4.setHeightForWidth(self.tableWidget_2.sizePolicy().hasHeightForWidth())
+        self.tableWidget_2.setSizePolicy(sizePolicy4)
+        self.tableWidget_2.setStyleSheet(u"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(39, 39, 39, 255), stop:0.368715 rgba(57, 57, 57, 255), stop:0.675978 rgba(66, 66, 66, 255), stop:1 rgba(78, 78, 78, 255));\n"
+"alternate-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(77, 77, 77, 255), stop:0.368715 rgba(106, 106, 106, 255), stop:0.675978 rgba(95, 95, 95, 255), stop:1 rgba(117, 117, 117, 255));\n"
+"color: rgb(6, 208, 164);\n"
+"border-color: rgb(6, 208, 164);\n"
+"border-top-color: rgb(6, 208, 164);\n"
+"border-right-color: rgb(6, 208, 164);\n"
+"border-left-color: rgb(6, 208, 164);\n"
+"gridline-color: rgb(6, 208, 164);\n"
+"selection-color: rgb(0, 0, 0);\n"
+"selection-background-color: rgb(6, 208, 164);\n"
+"font: 9pt \"Anita  Semi-square\";\n"
+"border-bottom-color: rgb(6, 208, 164);")
+        self.tableWidget_2.setFrameShape(QFrame.Box)
+        self.tableWidget_2.setFrameShadow(QFrame.Raised)
+        self.tableWidget_2.setLineWidth(0)
+        self.tableWidget_2.setMidLineWidth(2)
+        self.tableWidget_2.setRowCount(20)
+        self.tableWidget_2.setColumnCount(5)
 
-        self.gridLayout_19.addWidget(self.probChart1, 1, 1, 1, 1)
+        self.gridLayout_19.addWidget(self.tableWidget_2, 0, 0, 2, 1)
 
         self.Welcome.addTab(self.tabProb, icon20, "")
         self.tab_sheet = QWidget()
@@ -4172,10 +4204,10 @@ class Ui_mainWithTabs(object):
         self.gridLayout.setObjectName(u"gridLayout")
         self.label_titleSheet = QLabel(self.tab_sheet)
         self.label_titleSheet.setObjectName(u"label_titleSheet")
-        font13 = QFont()
-        font13.setFamilies([u"Anita  Semi-square"])
-        font13.setPointSize(14)
-        self.label_titleSheet.setFont(font13)
+        font14 = QFont()
+        font14.setFamilies([u"Anita  Semi-square"])
+        font14.setPointSize(14)
+        self.label_titleSheet.setFont(font14)
         self.label_titleSheet.setStyleSheet(u"color: rgb(6, 208, 164);\n"
 "")
         self.label_titleSheet.setFrameShape(QFrame.Box)
@@ -4234,15 +4266,15 @@ class Ui_mainWithTabs(object):
         sizePolicy5.setVerticalStretch(0)
         sizePolicy5.setHeightForWidth(self.groupBox.sizePolicy().hasHeightForWidth())
         self.groupBox.setSizePolicy(sizePolicy5)
-        font14 = QFont()
-        font14.setFamilies([u"Anita  Semi-square"])
-        font14.setPointSize(12)
-        font14.setBold(False)
-        font14.setItalic(False)
-        font14.setUnderline(False)
-        font14.setStrikeOut(False)
-        font14.setStyleStrategy(QFont.PreferAntialias)
-        self.groupBox.setFont(font14)
+        font15 = QFont()
+        font15.setFamilies([u"Anita  Semi-square"])
+        font15.setPointSize(12)
+        font15.setBold(False)
+        font15.setItalic(False)
+        font15.setUnderline(False)
+        font15.setStrikeOut(False)
+        font15.setStyleStrategy(QFont.PreferAntialias)
+        self.groupBox.setFont(font15)
         self.groupBox.setAutoFillBackground(False)
         self.groupBox.setStyleSheet(u"selection-background-color: rgb(6, 208, 164);\n"
 "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(39, 39, 39, 255), stop:0.368715 rgba(57, 57, 57, 255), stop:0.675978 rgba(66, 66, 66, 255), stop:1 rgba(78, 78, 78, 255));\n"
@@ -4279,12 +4311,12 @@ class Ui_mainWithTabs(object):
         sizePolicy6.setHeightForWidth(self.pushButton_BrowseFile.sizePolicy().hasHeightForWidth())
         self.pushButton_BrowseFile.setSizePolicy(sizePolicy6)
         self.pushButton_BrowseFile.setMaximumSize(QSize(99, 99))
-        font15 = QFont()
-        font15.setFamilies([u"Anita  Semi-square"])
-        font15.setPointSize(9)
-        font15.setBold(False)
-        font15.setItalic(False)
-        self.pushButton_BrowseFile.setFont(font15)
+        font16 = QFont()
+        font16.setFamilies([u"Anita  Semi-square"])
+        font16.setPointSize(9)
+        font16.setBold(False)
+        font16.setItalic(False)
+        self.pushButton_BrowseFile.setFont(font16)
         self.pushButton_BrowseFile.setStyleSheet(u"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(39, 39, 39, 255), stop:0.368715 rgba(57, 57, 57, 255), stop:0.675978 rgba(66, 66, 66, 255), stop:1 rgba(78, 78, 78, 255));\n"
 "color: rgb(6, 208, 164);\n"
 "")
@@ -4306,12 +4338,12 @@ class Ui_mainWithTabs(object):
         self.pushButton_DoneBrowseFile = QPushButton(self.groupBox)
         self.pushButton_DoneBrowseFile.setObjectName(u"pushButton_DoneBrowseFile")
         self.pushButton_DoneBrowseFile.setMaximumSize(QSize(99, 99))
-        font16 = QFont()
-        font16.setFamilies([u"Anita  Semi-square"])
-        font16.setPointSize(12)
-        font16.setBold(False)
-        font16.setItalic(False)
-        self.pushButton_DoneBrowseFile.setFont(font16)
+        font17 = QFont()
+        font17.setFamilies([u"Anita  Semi-square"])
+        font17.setPointSize(12)
+        font17.setBold(False)
+        font17.setItalic(False)
+        self.pushButton_DoneBrowseFile.setFont(font17)
         self.pushButton_DoneBrowseFile.setStyleSheet(u"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(39, 39, 39, 255), stop:0.368715 rgba(57, 57, 57, 255), stop:0.675978 rgba(66, 66, 66, 255), stop:1 rgba(78, 78, 78, 255));\n"
 "color: rgb(6, 208, 164);\n"
 "")
@@ -4331,29 +4363,34 @@ class Ui_mainWithTabs(object):
         self.gridLayout_4.setSizeConstraint(QLayout.SetDefaultConstraint)
         self.gridLayout_4.setHorizontalSpacing(6)
         self.gridLayout_4.setContentsMargins(0, 0, -1, -1)
-        self.newChart = QWebEngineView(self.tab_chart)
+        self.frame_11 = QFrame(self.tab_chart)
+        self.frame_11.setObjectName(u"frame_11")
+        self.frame_11.setStyleSheet(u"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(1, 8, 26, 255), stop:0.517045 rgba(11, 78, 78, 255), stop:1 rgba(3, 84, 66, 255));")
+        self.frame_11.setFrameShape(QFrame.WinPanel)
+        self.frame_11.setFrameShadow(QFrame.Raised)
+        self.frame_11.setMidLineWidth(2)
+        self.gridLayout_25 = QGridLayout(self.frame_11)
+        self.gridLayout_25.setObjectName(u"gridLayout_25")
+        self.newChart = QWebEngineView(self.frame_11)
         self.newChart.setObjectName(u"newChart")
         sizePolicy1.setHeightForWidth(self.newChart.sizePolicy().hasHeightForWidth())
         self.newChart.setSizePolicy(sizePolicy1)
         self.newChart.setUrl(QUrl(u"about:blank"))
 
-        self.gridLayout_4.addWidget(self.newChart, 0, 0, 1, 1)
+        self.gridLayout_25.addWidget(self.newChart, 0, 0, 1, 1)
+
+
+        self.gridLayout_4.addWidget(self.frame_11, 0, 0, 1, 1)
 
 
         self.gridLayout_20.addLayout(self.gridLayout_4, 0, 0, 1, 1)
 
         self.Welcome.addTab(self.tab_chart, icon2, "")
-        self.tabNewLayout = QWidget()
-        self.tabNewLayout.setObjectName(u"tabNewLayout")
-        self.Welcome.addTab(self.tabNewLayout, icon4, "")
-        self.tabNewProfile = QWidget()
-        self.tabNewProfile.setObjectName(u"tabNewProfile")
-        self.Welcome.addTab(self.tabNewProfile, icon5, "")
         self.tabNewIndicator = QWidget()
         self.tabNewIndicator.setObjectName(u"tabNewIndicator")
-        icon27 = QIcon()
-        icon27.addFile(u":/icones/icons8-mapa-de-calor-96.ico", QSize(), QIcon.Normal, QIcon.Off)
-        self.Welcome.addTab(self.tabNewIndicator, icon27, "")
+        icon26 = QIcon()
+        icon26.addFile(u":/icones/icons8-mapa-de-calor-96.ico", QSize(), QIcon.Normal, QIcon.Off)
+        self.Welcome.addTab(self.tabNewIndicator, icon26, "")
         self.tabSynthAsset = QWidget()
         self.tabSynthAsset.setObjectName(u"tabSynthAsset")
         self.horizontalLayout_2 = QHBoxLayout(self.tabSynthAsset)
@@ -4366,10 +4403,10 @@ class Ui_mainWithTabs(object):
         self.lineEdit.setSizePolicy(sizePolicy4)
         self.lineEdit.setMinimumSize(QSize(34, 51))
         self.lineEdit.setMaximumSize(QSize(168, 60))
-        font17 = QFont()
-        font17.setFamilies([u"Anita  Semi-square"])
-        font17.setPointSize(12)
-        self.lineEdit.setFont(font17)
+        font18 = QFont()
+        font18.setFamilies([u"Anita  Semi-square"])
+        font18.setPointSize(12)
+        self.lineEdit.setFont(font18)
         self.lineEdit.setStyleSheet(u"color: rgb(6, 208, 164);")
         self.lineEdit.setAlignment(Qt.AlignCenter)
         self.lineEdit.setClearButtonEnabled(True)
@@ -4587,7 +4624,7 @@ class Ui_mainWithTabs(object):
         palette15.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush127)
 #endif
         self.comboBox_labInfo1_7.setPalette(palette15)
-        self.comboBox_labInfo1_7.setFont(font17)
+        self.comboBox_labInfo1_7.setFont(font18)
         self.comboBox_labInfo1_7.setStyleSheet(u"color: rgb(6, 208, 164);\n"
 "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(77, 77, 77, 255), stop:0.368715 rgba(106, 106, 106, 255), stop:0.675978 rgba(95, 95, 95, 255), stop:1 rgba(117, 117, 117, 255));\n"
 "selection-background-color: rgb(6, 208, 164);")
@@ -5011,7 +5048,7 @@ class Ui_mainWithTabs(object):
         palette17.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush127)
 #endif
         self.comboBox_labInfo1_4.setPalette(palette17)
-        self.comboBox_labInfo1_4.setFont(font17)
+        self.comboBox_labInfo1_4.setFont(font18)
         self.comboBox_labInfo1_4.setStyleSheet(u"color: rgb(6, 208, 164);\n"
 "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(77, 77, 77, 255), stop:0.368715 rgba(106, 106, 106, 255), stop:0.675978 rgba(95, 95, 95, 255), stop:1 rgba(117, 117, 117, 255));\n"
 "selection-background-color: rgb(6, 208, 164);")
@@ -5449,7 +5486,7 @@ class Ui_mainWithTabs(object):
         palette19.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush127)
 #endif
         self.comboBox_labInfo1_2.setPalette(palette19)
-        self.comboBox_labInfo1_2.setFont(font17)
+        self.comboBox_labInfo1_2.setFont(font18)
         self.comboBox_labInfo1_2.setStyleSheet(u"color: rgb(6, 208, 164);\n"
 "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(77, 77, 77, 255), stop:0.368715 rgba(106, 106, 106, 255), stop:0.675978 rgba(95, 95, 95, 255), stop:1 rgba(117, 117, 117, 255));\n"
 "selection-background-color: rgb(6, 208, 164);")
@@ -6104,7 +6141,7 @@ class Ui_mainWithTabs(object):
         palette22.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush127)
 #endif
         self.comboBox_labInfo1_5.setPalette(palette22)
-        self.comboBox_labInfo1_5.setFont(font17)
+        self.comboBox_labInfo1_5.setFont(font18)
         self.comboBox_labInfo1_5.setStyleSheet(u"color: rgb(6, 208, 164);\n"
 "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(77, 77, 77, 255), stop:0.368715 rgba(106, 106, 106, 255), stop:0.675978 rgba(95, 95, 95, 255), stop:1 rgba(117, 117, 117, 255));\n"
 "selection-background-color: rgb(6, 208, 164);")
@@ -6297,7 +6334,7 @@ class Ui_mainWithTabs(object):
         palette23.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush127)
 #endif
         self.comboBox_labInfo1_3.setPalette(palette23)
-        self.comboBox_labInfo1_3.setFont(font17)
+        self.comboBox_labInfo1_3.setFont(font18)
         self.comboBox_labInfo1_3.setStyleSheet(u"color: rgb(6, 208, 164);\n"
 "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(77, 77, 77, 255), stop:0.368715 rgba(106, 106, 106, 255), stop:0.675978 rgba(95, 95, 95, 255), stop:1 rgba(117, 117, 117, 255));\n"
 "selection-background-color: rgb(6, 208, 164);")
@@ -6952,7 +6989,7 @@ class Ui_mainWithTabs(object):
         palette26.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush127)
 #endif
         self.comboBox_labInfo1_6.setPalette(palette26)
-        self.comboBox_labInfo1_6.setFont(font17)
+        self.comboBox_labInfo1_6.setFont(font18)
         self.comboBox_labInfo1_6.setStyleSheet(u"color: rgb(6, 208, 164);\n"
 "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(77, 77, 77, 255), stop:0.368715 rgba(106, 106, 106, 255), stop:0.675978 rgba(95, 95, 95, 255), stop:1 rgba(117, 117, 117, 255));\n"
 "selection-background-color: rgb(6, 208, 164);")
@@ -7121,9 +7158,9 @@ class Ui_mainWithTabs(object):
 
         self.horizontalLayout_2.addLayout(self.gridLayout_22)
 
-        icon28 = QIcon()
-        icon28.addFile(u":/icones/icons8-f\u00f3rmula-fx-96.ico", QSize(), QIcon.Normal, QIcon.Off)
-        self.Welcome.addTab(self.tabSynthAsset, icon28, "")
+        icon27 = QIcon()
+        icon27.addFile(u":/icones/icons8-f\u00f3rmula-fx-96.ico", QSize(), QIcon.Normal, QIcon.Off)
+        self.Welcome.addTab(self.tabSynthAsset, icon27, "")
         self.tabSummarizer = QWidget()
         self.tabSummarizer.setObjectName(u"tabSummarizer")
         self.gridLayout_23 = QGridLayout(self.tabSummarizer)
@@ -7137,12 +7174,12 @@ class Ui_mainWithTabs(object):
         brush613.setStyle(Qt.NoBrush)
         brush614 = QBrush(QColor(0, 0, 0, 255))
         brush614.setStyle(Qt.NoBrush)
-        font18 = QFont()
-        font18.setPointSize(12)
-        font18.setUnderline(True)
+        font19 = QFont()
+        font19.setPointSize(12)
+        font19.setUnderline(True)
         __qtablewidgetitem = QTableWidgetItem()
         __qtablewidgetitem.setTextAlignment(Qt.AlignCenter);
-        __qtablewidgetitem.setFont(font18);
+        __qtablewidgetitem.setFont(font19);
         __qtablewidgetitem.setBackground(brush614);
         __qtablewidgetitem.setForeground(brush613);
         self.tableWidget_summarizer.setItem(0, 0, __qtablewidgetitem)
@@ -7155,7 +7192,7 @@ class Ui_mainWithTabs(object):
         brush615.setStyle(Qt.NoBrush)
         __qtablewidgetitem3 = QTableWidgetItem()
         __qtablewidgetitem3.setTextAlignment(Qt.AlignCenter);
-        __qtablewidgetitem3.setFont(font18);
+        __qtablewidgetitem3.setFont(font19);
         __qtablewidgetitem3.setForeground(brush615);
         self.tableWidget_summarizer.setItem(1, 0, __qtablewidgetitem3)
         __qtablewidgetitem4 = QTableWidgetItem()
@@ -7165,7 +7202,7 @@ class Ui_mainWithTabs(object):
         brush616.setStyle(Qt.NoBrush)
         __qtablewidgetitem5 = QTableWidgetItem()
         __qtablewidgetitem5.setTextAlignment(Qt.AlignCenter);
-        __qtablewidgetitem5.setFont(font18);
+        __qtablewidgetitem5.setFont(font19);
         __qtablewidgetitem5.setForeground(brush616);
         self.tableWidget_summarizer.setItem(2, 0, __qtablewidgetitem5)
         __qtablewidgetitem6 = QTableWidgetItem()
@@ -7175,7 +7212,7 @@ class Ui_mainWithTabs(object):
         brush617.setStyle(Qt.NoBrush)
         __qtablewidgetitem7 = QTableWidgetItem()
         __qtablewidgetitem7.setTextAlignment(Qt.AlignCenter);
-        __qtablewidgetitem7.setFont(font18);
+        __qtablewidgetitem7.setFont(font19);
         __qtablewidgetitem7.setForeground(brush617);
         self.tableWidget_summarizer.setItem(3, 0, __qtablewidgetitem7)
         __qtablewidgetitem8 = QTableWidgetItem()
@@ -7185,7 +7222,7 @@ class Ui_mainWithTabs(object):
         brush618.setStyle(Qt.NoBrush)
         __qtablewidgetitem9 = QTableWidgetItem()
         __qtablewidgetitem9.setTextAlignment(Qt.AlignCenter);
-        __qtablewidgetitem9.setFont(font18);
+        __qtablewidgetitem9.setFont(font19);
         __qtablewidgetitem9.setForeground(brush618);
         self.tableWidget_summarizer.setItem(4, 0, __qtablewidgetitem9)
         __qtablewidgetitem10 = QTableWidgetItem()
@@ -7195,7 +7232,7 @@ class Ui_mainWithTabs(object):
         brush619.setStyle(Qt.NoBrush)
         __qtablewidgetitem11 = QTableWidgetItem()
         __qtablewidgetitem11.setTextAlignment(Qt.AlignCenter);
-        __qtablewidgetitem11.setFont(font18);
+        __qtablewidgetitem11.setFont(font19);
         __qtablewidgetitem11.setForeground(brush619);
         self.tableWidget_summarizer.setItem(5, 0, __qtablewidgetitem11)
         __qtablewidgetitem12 = QTableWidgetItem()
@@ -7205,7 +7242,7 @@ class Ui_mainWithTabs(object):
         brush620.setStyle(Qt.NoBrush)
         __qtablewidgetitem13 = QTableWidgetItem()
         __qtablewidgetitem13.setTextAlignment(Qt.AlignCenter);
-        __qtablewidgetitem13.setFont(font18);
+        __qtablewidgetitem13.setFont(font19);
         __qtablewidgetitem13.setForeground(brush620);
         self.tableWidget_summarizer.setItem(6, 0, __qtablewidgetitem13)
         __qtablewidgetitem14 = QTableWidgetItem()
@@ -7216,10 +7253,10 @@ class Ui_mainWithTabs(object):
         self.tableWidget_summarizer.setSizePolicy(sizePolicy4)
         self.tableWidget_summarizer.setMinimumSize(QSize(0, 225))
         self.tableWidget_summarizer.setMaximumSize(QSize(830, 301))
-        font19 = QFont()
-        font19.setFamilies([u"Anita  Semi-square"])
-        font19.setPointSize(11)
-        self.tableWidget_summarizer.setFont(font19)
+        font20 = QFont()
+        font20.setFamilies([u"Anita  Semi-square"])
+        font20.setPointSize(11)
+        self.tableWidget_summarizer.setFont(font20)
         self.tableWidget_summarizer.setLayoutDirection(Qt.LeftToRight)
         self.tableWidget_summarizer.setStyleSheet(u"color: rgb(6, 208, 164);\n"
 "gridline-color: rgb(140, 140, 140);")
@@ -7253,11 +7290,11 @@ class Ui_mainWithTabs(object):
         sizePolicy5.setHeightForWidth(self.label_titleSummarizer.sizePolicy().hasHeightForWidth())
         self.label_titleSummarizer.setSizePolicy(sizePolicy5)
         self.label_titleSummarizer.setMaximumSize(QSize(200, 59))
-        font20 = QFont()
-        font20.setFamilies([u"Anita  Semi-square"])
-        font20.setPointSize(17)
-        font20.setUnderline(True)
-        self.label_titleSummarizer.setFont(font20)
+        font21 = QFont()
+        font21.setFamilies([u"Anita  Semi-square"])
+        font21.setPointSize(17)
+        font21.setUnderline(True)
+        self.label_titleSummarizer.setFont(font21)
         self.label_titleSummarizer.setStyleSheet(u"color: rgb(6, 208, 164);\n"
 "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(13, 13, 13, 255), stop:0.368715 rgba(26, 26, 26, 255), stop:0.675978 rgba(42, 42, 42, 255), stop:1 rgba(51, 51, 51, 255));\n"
 "")
@@ -7329,7 +7366,7 @@ class Ui_mainWithTabs(object):
         mainWithTabs.setCentralWidget(self.centralwidget)
         self.menuBar = QMenuBar(mainWithTabs)
         self.menuBar.setObjectName(u"menuBar")
-        self.menuBar.setGeometry(QRect(0, 0, 1109, 22))
+        self.menuBar.setGeometry(QRect(0, 0, 1060, 22))
         sizePolicy7 = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.MinimumExpanding)
         sizePolicy7.setHorizontalStretch(140)
         sizePolicy7.setVerticalStretch(140)
@@ -7337,11 +7374,11 @@ class Ui_mainWithTabs(object):
         self.menuBar.setSizePolicy(sizePolicy7)
         self.menuBar.setSizeIncrement(QSize(0, 0))
         self.menuBar.setBaseSize(QSize(0, 0))
-        font21 = QFont()
-        font21.setFamilies([u"Anita  Semi-square"])
-        font21.setPointSize(9)
-        font21.setStyleStrategy(QFont.PreferAntialias)
-        self.menuBar.setFont(font21)
+        font22 = QFont()
+        font22.setFamilies([u"Anita  Semi-square"])
+        font22.setPointSize(9)
+        font22.setStyleStrategy(QFont.PreferAntialias)
+        self.menuBar.setFont(font22)
         self.menuBar.setFocusPolicy(Qt.StrongFocus)
         self.menuBar.setContextMenuPolicy(Qt.DefaultContextMenu)
         self.menuBar.setToolTipDuration(-1)
@@ -7353,7 +7390,7 @@ class Ui_mainWithTabs(object):
         self.menuBar.setNativeMenuBar(True)
         self.menuMenu = QMenu(self.menuBar)
         self.menuMenu.setObjectName(u"menuMenu")
-        self.menuMenu.setGeometry(QRect(360, 288, 162, 100))
+        self.menuMenu.setGeometry(QRect(269, 127, 162, 100))
         sizePolicy8 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
         sizePolicy8.setHorizontalStretch(0)
         sizePolicy8.setVerticalStretch(0)
@@ -7377,7 +7414,7 @@ class Ui_mainWithTabs(object):
         self.menuMenu.setToolTipsVisible(True)
         self.menuNew = QMenu(self.menuMenu)
         self.menuNew.setObjectName(u"menuNew")
-        self.menuNew.setGeometry(QRect(521, 321, 136, 164))
+        self.menuNew.setGeometry(QRect(430, 160, 136, 118))
         sizePolicy8.setHeightForWidth(self.menuNew.sizePolicy().hasHeightForWidth())
         self.menuNew.setSizePolicy(sizePolicy8)
         self.menuNew.setToolTipDuration(1)
@@ -7388,9 +7425,9 @@ class Ui_mainWithTabs(object):
 "selection-background-color: rgb(6, 208, 164);\n"
 "selection-color: rgb(0, 0, 0);")
         self.menuNew.setTearOffEnabled(True)
-        icon29 = QIcon()
-        icon29.addFile(u":/icones/icons8-nova-janela-96.ico", QSize(), QIcon.Normal, QIcon.Off)
-        self.menuNew.setIcon(icon29)
+        icon28 = QIcon()
+        icon28.addFile(u":/icones/icons8-nova-janela-96.ico", QSize(), QIcon.Normal, QIcon.Off)
+        self.menuNew.setIcon(icon28)
         self.menuFerramentas = QMenu(self.menuBar)
         self.menuFerramentas.setObjectName(u"menuFerramentas")
         self.menuFerramentas.setMaximumSize(QSize(16777215, 16777215))
@@ -7405,13 +7442,13 @@ class Ui_mainWithTabs(object):
 "alternate-background-color: rgb(6, 208, 164);\n"
 "border-color: rgb(6, 208, 164);")
         self.menuFerramentas.setTearOffEnabled(True)
-        icon30 = QIcon()
-        icon30.addFile(u":/icones/icons8-gr\u00e1fico-combinado-96.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.menuFerramentas.setIcon(icon30)
+        icon29 = QIcon()
+        icon29.addFile(u":/icones/icons8-gr\u00e1fico-combinado-96.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.menuFerramentas.setIcon(icon29)
         self.menuFerramentas.setToolTipsVisible(True)
         self.menuFair_Price = QMenu(self.menuFerramentas)
         self.menuFair_Price.setObjectName(u"menuFair_Price")
-        self.menuFair_Price.setGeometry(QRect(-1407, 130, 179, 90))
+        self.menuFair_Price.setGeometry(QRect(513, 137, 179, 90))
         self.menuFair_Price.setFont(font)
         self.menuFair_Price.setAutoFillBackground(False)
         self.menuFair_Price.setStyleSheet(u"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(13, 13, 13, 255), stop:0.368715 rgba(26, 26, 26, 255), stop:0.675978 rgba(42, 42, 42, 255), stop:1 rgba(51, 51, 51, 255));\n"
@@ -7420,17 +7457,17 @@ class Ui_mainWithTabs(object):
 "selection-color: rgb(0, 0, 0);\n"
 "selection-background-color: rgb(6, 208, 164);\n"
 "")
-        icon31 = QIcon()
-        icon31.addFile(u":/icones/icons8-objetivo-96.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.menuFair_Price.setIcon(icon31)
+        icon30 = QIcon()
+        icon30.addFile(u":/icones/icons8-objetivo-96.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.menuFair_Price.setIcon(icon30)
         self.menuIndicator_Designer = QMenu(self.menuFerramentas)
         self.menuIndicator_Designer.setObjectName(u"menuIndicator_Designer")
         self.menuIndicator_Designer.setFont(font)
         self.menuIndicator_Designer.setAutoFillBackground(False)
         self.menuIndicator_Designer.setStyleSheet(u"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(13, 13, 13, 255), stop:0.368715 rgba(26, 26, 26, 255), stop:0.675978 rgba(42, 42, 42, 255), stop:1 rgba(51, 51, 51, 255));")
-        icon32 = QIcon()
-        icon32.addFile(u":/icones/icons8-intelig\u00eancia-artificial-96.ico", QSize(), QIcon.Normal, QIcon.Off)
-        self.menuIndicator_Designer.setIcon(icon32)
+        icon31 = QIcon()
+        icon31.addFile(u":/icones/icons8-intelig\u00eancia-artificial-96.ico", QSize(), QIcon.Normal, QIcon.Off)
+        self.menuIndicator_Designer.setIcon(icon31)
         self.menuOpt = QMenu(self.menuBar)
         self.menuOpt.setObjectName(u"menuOpt")
         self.menuOpt.setFont(font)
@@ -7443,9 +7480,9 @@ class Ui_mainWithTabs(object):
 "gridline-color: rgb(6, 208, 164);\n"
 "border-color: rgb(6, 208, 164);")
         self.menuOpt.setTearOffEnabled(True)
-        icon33 = QIcon()
-        icon33.addFile(u":/icones/icons8-mixer-de-configura\u00e7\u00f5es-vertical-96.ico", QSize(), QIcon.Normal, QIcon.Off)
-        self.menuOpt.setIcon(icon33)
+        icon32 = QIcon()
+        icon32.addFile(u":/icones/icons8-mixer-de-configura\u00e7\u00f5es-vertical-96.ico", QSize(), QIcon.Normal, QIcon.Off)
+        self.menuOpt.setIcon(icon32)
         self.menuQuit = QMenu(self.menuBar)
         self.menuQuit.setObjectName(u"menuQuit")
         self.menuQuit.setAutoFillBackground(False)
@@ -7468,8 +7505,6 @@ class Ui_mainWithTabs(object):
         self.menuMenu.addAction(self.menuNew.menuAction())
         self.menuNew.addAction(self.actionChart)
         self.menuNew.addSeparator()
-        self.menuNew.addAction(self.actionLayout)
-        self.menuNew.addAction(self.actionProfile_2)
         self.menuNew.addSeparator()
         self.menuNew.addAction(self.actionIndicator)
         self.menuFerramentas.addAction(self.menuFair_Price.menuAction())
@@ -7491,7 +7526,7 @@ class Ui_mainWithTabs(object):
 
         self.retranslateUi(mainWithTabs)
 
-        self.Welcome.setCurrentIndex(14)
+        self.Welcome.setCurrentIndex(1)
         self.comboBox_nome.setCurrentIndex(0)
 
 
@@ -7569,10 +7604,6 @@ class Ui_mainWithTabs(object):
 #if QT_CONFIG(tooltip)
         self.Welcome.setTabToolTip(self.Welcome.indexOf(self.tabWelc), QCoreApplication.translate("mainWithTabs", u"Welcome", None))
 #endif // QT_CONFIG(tooltip)
-        self.pushButton.setText("")
-        self.pushButton_2.setText("")
-        self.pushButton_3.setText("")
-        self.pushButton_4.setText("")
         self.Welcome.setTabText(self.Welcome.indexOf(self.tabDash), QCoreApplication.translate("mainWithTabs", u"Dashboard", None))
 #if QT_CONFIG(tooltip)
         self.Welcome.setTabToolTip(self.Welcome.indexOf(self.tabDash), QCoreApplication.translate("mainWithTabs", u"Dashboard", None))
@@ -7692,14 +7723,6 @@ class Ui_mainWithTabs(object):
         self.Welcome.setTabText(self.Welcome.indexOf(self.tab_chart), QCoreApplication.translate("mainWithTabs", u"Chart", None))
 #if QT_CONFIG(tooltip)
         self.Welcome.setTabToolTip(self.Welcome.indexOf(self.tab_chart), QCoreApplication.translate("mainWithTabs", u"Chart Window", None))
-#endif // QT_CONFIG(tooltip)
-        self.Welcome.setTabText(self.Welcome.indexOf(self.tabNewLayout), QCoreApplication.translate("mainWithTabs", u"New Layout", None))
-#if QT_CONFIG(tooltip)
-        self.Welcome.setTabToolTip(self.Welcome.indexOf(self.tabNewLayout), QCoreApplication.translate("mainWithTabs", u"Create Layout", None))
-#endif // QT_CONFIG(tooltip)
-        self.Welcome.setTabText(self.Welcome.indexOf(self.tabNewProfile), QCoreApplication.translate("mainWithTabs", u"New Profile", None))
-#if QT_CONFIG(tooltip)
-        self.Welcome.setTabToolTip(self.Welcome.indexOf(self.tabNewProfile), QCoreApplication.translate("mainWithTabs", u"Create Profile", None))
 #endif // QT_CONFIG(tooltip)
         self.Welcome.setTabText(self.Welcome.indexOf(self.tabNewIndicator), QCoreApplication.translate("mainWithTabs", u"New Indicator", None))
 #if QT_CONFIG(tooltip)

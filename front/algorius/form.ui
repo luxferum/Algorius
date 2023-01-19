@@ -12,8 +12,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1109</width>
-    <height>780</height>
+    <width>1060</width>
+    <height>774</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -2739,10 +2739,7 @@ gridline-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(
 background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(13, 13, 13, 255), stop:0.368715 rgba(26, 26, 26, 255), stop:0.675978 rgba(42, 42, 42, 255), stop:1 rgba(51, 51, 51, 255));
 selection-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 208, 164, 255), stop:1 rgba(3, 102, 80, 255));
 selection-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 208, 164, 255), stop:1 rgba(3, 102, 80, 255));
-border-top-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 208, 164, 255), stop:1 rgba(3, 102, 80, 255));
-border-right-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 208, 164, 255), stop:1 rgba(3, 102, 80, 255));
-border-bottom-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 208, 164, 255), stop:1 rgba(3, 102, 80, 255));
-border-left-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 208, 164, 255), stop:1 rgba(3, 102, 80, 255));</string>
+</string>
       </property>
       <property name="tabPosition">
        <enum>QTabWidget::South</enum>
@@ -2751,7 +2748,7 @@ border-left-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rg
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>14</number>
+       <number>1</number>
       </property>
       <property name="iconSize">
        <size>
@@ -4359,11 +4356,10 @@ alternate-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, 
            <string notr="true">color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 69, 208, 255), stop:0.517045 rgba(22, 154, 154, 255), stop:1 rgba(4, 131, 103, 255));
 selection-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 69, 208, 255), stop:0.517045 rgba(22, 154, 154, 255), stop:1 rgba(4, 131, 103, 255));
 gridline-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 69, 208, 255), stop:0.517045 rgba(22, 154, 154, 255), stop:1 rgba(4, 131, 103, 255));
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 0));
 border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 69, 208, 255), stop:0.517045 rgba(22, 154, 154, 255), stop:1 rgba(4, 131, 103, 255));</string>
           </property>
           <property name="frameShape">
-           <enum>QFrame::Box</enum>
+           <enum>QFrame::WinPanel</enum>
           </property>
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
@@ -4374,53 +4370,27 @@ border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6,
           <property name="midLineWidth">
            <number>2</number>
           </property>
-          <widget class="QWebEngineView" name="webEngineView">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>20</y>
-             <width>501</width>
-             <height>281</height>
-            </rect>
-           </property>
-           <property name="url">
-            <url>
-             <string>about:blank</string>
-            </url>
-           </property>
-          </widget>
-          <widget class="QPushButton" name="pushButton">
-           <property name="geometry">
-            <rect>
-             <x>230</x>
-             <y>110</y>
-             <width>81</width>
-             <height>81</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="rsc.qrc">
-             <normaloff>:/icones/icons8-adicionar-96.png</normaloff>:/icones/icons8-adicionar-96.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>100</width>
-             <height>100</height>
-            </size>
-           </property>
-          </widget>
+          <layout class="QGridLayout" name="gridLayout_10">
+           <item row="0" column="0">
+            <widget class="QWebEngineView" name="webEngineView">
+             <property name="url">
+              <url>
+               <string>about:blank</string>
+              </url>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
         <item row="0" column="1">
          <widget class="QFrame" name="frame_5">
           <property name="styleSheet">
-           <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 0));</string>
+           <string notr="true">border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 69, 208, 255), stop:0.517045 rgba(22, 154, 154, 255), stop:1 rgba(4, 131, 103, 255));
+color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 69, 208, 255), stop:0.517045 rgba(22, 154, 154, 255), stop:1 rgba(4, 131, 103, 255));</string>
           </property>
           <property name="frameShape">
-           <enum>QFrame::Box</enum>
+           <enum>QFrame::WinPanel</enum>
           </property>
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
@@ -4431,53 +4401,29 @@ border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6,
           <property name="midLineWidth">
            <number>2</number>
           </property>
-          <widget class="QWebEngineView" name="webEngineView_2">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>20</y>
-             <width>501</width>
-             <height>281</height>
-            </rect>
-           </property>
-           <property name="url">
-            <url>
-             <string>about:blank</string>
-            </url>
-           </property>
-          </widget>
-          <widget class="QPushButton" name="pushButton_2">
-           <property name="geometry">
-            <rect>
-             <x>230</x>
-             <y>110</y>
-             <width>81</width>
-             <height>81</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="rsc.qrc">
-             <normaloff>:/icones/icons8-adicionar-96.png</normaloff>:/icones/icons8-adicionar-96.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>100</width>
-             <height>100</height>
-            </size>
-           </property>
-          </widget>
+          <layout class="QGridLayout" name="gridLayout_9">
+           <item row="0" column="0">
+            <widget class="QWebEngineView" name="webEngineView_2">
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <property name="url">
+              <url>
+               <string>about:blank</string>
+              </url>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
         <item row="1" column="1">
          <widget class="QFrame" name="frame_6">
           <property name="styleSheet">
-           <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 0));</string>
+           <string notr="true"/>
           </property>
           <property name="frameShape">
-           <enum>QFrame::Box</enum>
+           <enum>QFrame::WinPanel</enum>
           </property>
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
@@ -4488,53 +4434,26 @@ border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6,
           <property name="midLineWidth">
            <number>2</number>
           </property>
-          <widget class="QWebEngineView" name="webEngineView_4">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>20</y>
-             <width>501</width>
-             <height>281</height>
-            </rect>
-           </property>
-           <property name="url">
-            <url>
-             <string>about:blank</string>
-            </url>
-           </property>
-          </widget>
-          <widget class="QPushButton" name="pushButton_3">
-           <property name="geometry">
-            <rect>
-             <x>230</x>
-             <y>110</y>
-             <width>81</width>
-             <height>81</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="rsc.qrc">
-             <normaloff>:/icones/icons8-adicionar-96.png</normaloff>:/icones/icons8-adicionar-96.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>100</width>
-             <height>100</height>
-            </size>
-           </property>
-          </widget>
+          <layout class="QGridLayout" name="gridLayout_11">
+           <item row="0" column="0">
+            <widget class="QWebEngineView" name="webEngineView_4">
+             <property name="url">
+              <url>
+               <string>about:blank</string>
+              </url>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
         <item row="1" column="0">
          <widget class="QFrame" name="frame_7">
           <property name="styleSheet">
-           <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 0));</string>
+           <string notr="true"/>
           </property>
           <property name="frameShape">
-           <enum>QFrame::Box</enum>
+           <enum>QFrame::WinPanel</enum>
           </property>
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
@@ -4545,44 +4464,17 @@ border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6,
           <property name="midLineWidth">
            <number>2</number>
           </property>
-          <widget class="QWebEngineView" name="webEngineView_3">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>20</y>
-             <width>501</width>
-             <height>281</height>
-            </rect>
-           </property>
-           <property name="url">
-            <url>
-             <string>about:blank</string>
-            </url>
-           </property>
-          </widget>
-          <widget class="QPushButton" name="pushButton_4">
-           <property name="geometry">
-            <rect>
-             <x>230</x>
-             <y>110</y>
-             <width>81</width>
-             <height>81</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="rsc.qrc">
-             <normaloff>:/icones/icons8-adicionar-96.png</normaloff>:/icones/icons8-adicionar-96.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>100</width>
-             <height>100</height>
-            </size>
-           </property>
-          </widget>
+          <layout class="QGridLayout" name="gridLayout_12">
+           <item row="0" column="0">
+            <widget class="QWebEngineView" name="webEngineView_3">
+             <property name="url">
+              <url>
+               <string>about:blank</string>
+              </url>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
        </layout>
@@ -10729,6 +10621,30 @@ selection-background-color: rgb(6, 208, 164);</string>
          </widget>
         </item>
         <item>
+         <widget class="QFrame" name="frame_10">
+          <property name="frameShape">
+           <enum>QFrame::Box</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Sunken</enum>
+          </property>
+          <property name="midLineWidth">
+           <number>2</number>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_24">
+           <item row="0" column="0">
+            <widget class="QWebEngineView" name="labChart">
+             <property name="url">
+              <url>
+               <string>about:blank</string>
+              </url>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
          <widget class="QCheckBox" name="checkBox_info4">
           <property name="maximumSize">
            <size>
@@ -11400,15 +11316,6 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgb
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QWebEngineView" name="labChart">
-          <property name="url">
-           <url>
-            <string>about:blank</string>
-           </url>
-          </property>
-         </widget>
-        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="tabPrec">
@@ -11569,6 +11476,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgb
                  <property name="font">
                   <font>
                    <family>Anita  Semi-square</family>
+                   <pointsize>19</pointsize>
                   </font>
                  </property>
                  <property name="styleSheet">
@@ -11595,10 +11503,16 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgb
                   <enum>Qt::AutoText</enum>
                  </property>
                  <property name="scaledContents">
-                  <bool>false</bool>
+                  <bool>true</bool>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignCenter</set>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
+                 </property>
+                 <property name="margin">
+                  <number>3</number>
                  </property>
                 </widget>
                </item>
@@ -11607,6 +11521,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgb
                  <property name="font">
                   <font>
                    <family>Anita  Semi-square</family>
+                   <pointsize>19</pointsize>
                    <underline>true</underline>
                   </font>
                  </property>
@@ -11639,6 +11554,12 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgb
                  <property name="alignment">
                   <set>Qt::AlignCenter</set>
                  </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
+                 </property>
+                 <property name="margin">
+                  <number>3</number>
+                 </property>
                 </widget>
                </item>
                <item row="1" column="0">
@@ -11646,6 +11567,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgb
                  <property name="font">
                   <font>
                    <family>Anita  Semi-square</family>
+                   <pointsize>19</pointsize>
                   </font>
                  </property>
                  <property name="styleSheet">
@@ -11673,10 +11595,16 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgb
                   <enum>Qt::AutoText</enum>
                  </property>
                  <property name="scaledContents">
-                  <bool>false</bool>
+                  <bool>true</bool>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignCenter</set>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
+                 </property>
+                 <property name="margin">
+                  <number>3</number>
                  </property>
                 </widget>
                </item>
@@ -11765,6 +11693,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgb
                  <property name="font">
                   <font>
                    <family>Anita  Semi-square</family>
+                   <pointsize>19</pointsize>
                    <underline>true</underline>
                   </font>
                  </property>
@@ -11796,6 +11725,12 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgb
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignCenter</set>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
+                 </property>
+                 <property name="margin">
+                  <number>3</number>
                  </property>
                 </widget>
                </item>
@@ -11850,6 +11785,7 @@ color: rgb(0, 0, 0);</string>
                  <property name="font">
                   <font>
                    <family>Anita  Semi-square</family>
+                   <pointsize>19</pointsize>
                    <underline>true</underline>
                   </font>
                  </property>
@@ -11881,6 +11817,12 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgb
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignCenter</set>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
+                 </property>
+                 <property name="margin">
+                  <number>3</number>
                  </property>
                 </widget>
                </item>
@@ -12031,7 +11973,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgb
 background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 0));</string>
                   </property>
                   <property name="frameShape">
-                   <enum>QFrame::Box</enum>
+                   <enum>QFrame::NoFrame</enum>
                   </property>
                   <property name="frameShadow">
                    <enum>QFrame::Raised</enum>
@@ -12638,7 +12580,7 @@ border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6,
 background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 0));</string>
                   </property>
                   <property name="frameShape">
-                   <enum>QFrame::Box</enum>
+                   <enum>QFrame::NoFrame</enum>
                   </property>
                   <property name="frameShadow">
                    <enum>QFrame::Raised</enum>
@@ -13249,6 +13191,9 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgb
                       <underline>true</underline>
                      </font>
                     </property>
+                    <property name="layoutDirection">
+                     <enum>Qt::LeftToRight</enum>
+                    </property>
                     <property name="styleSheet">
                      <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 0));
 color: rgb(6, 208, 164);</string>
@@ -13268,8 +13213,17 @@ color: rgb(6, 208, 164);</string>
                     <property name="text">
                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Interest&lt;/p&gt;&lt;p&gt;USA&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                     </property>
+                    <property name="textFormat">
+                     <enum>Qt::RichText</enum>
+                    </property>
+                    <property name="scaledContents">
+                     <bool>false</bool>
+                    </property>
                     <property name="alignment">
-                     <set>Qt::AlignCenter</set>
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                    <property name="wordWrap">
+                     <bool>true</bool>
                     </property>
                    </widget>
                   </item>
@@ -13411,7 +13365,10 @@ color: rgb(6, 208, 164);</string>
                      <bool>false</bool>
                     </property>
                     <property name="alignment">
-                     <set>Qt::AlignCenter</set>
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                    <property name="wordWrap">
+                     <bool>true</bool>
                     </property>
                    </widget>
                   </item>
@@ -13450,6 +13407,36 @@ color: rgb(6, 208, 164);</string>
         <string>Statistics Studies</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_19">
+        <item row="1" column="1">
+         <widget class="QWebEngineView" name="probChart1">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="url">
+           <url>
+            <string>about:blank</string>
+           </url>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QWebEngineView" name="probChart2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="url">
+           <url>
+            <string>about:blank</string>
+           </url>
+          </property>
+         </widget>
+        </item>
         <item row="0" column="0" rowspan="2">
          <widget class="QTableWidget" name="tableWidget_2">
           <property name="sizePolicy">
@@ -13457,6 +13444,20 @@ color: rgb(6, 208, 164);</string>
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(39, 39, 39, 255), stop:0.368715 rgba(57, 57, 57, 255), stop:0.675978 rgba(66, 66, 66, 255), stop:1 rgba(78, 78, 78, 255));
+alternate-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(77, 77, 77, 255), stop:0.368715 rgba(106, 106, 106, 255), stop:0.675978 rgba(95, 95, 95, 255), stop:1 rgba(117, 117, 117, 255));
+color: rgb(6, 208, 164);
+border-color: rgb(6, 208, 164);
+border-top-color: rgb(6, 208, 164);
+border-right-color: rgb(6, 208, 164);
+border-left-color: rgb(6, 208, 164);
+gridline-color: rgb(6, 208, 164);
+selection-color: rgb(0, 0, 0);
+selection-background-color: rgb(6, 208, 164);
+font: 9pt &quot;Anita  Semi-square&quot;;
+border-bottom-color: rgb(6, 208, 164);</string>
           </property>
           <property name="frameShape">
            <enum>QFrame::Box</enum>
@@ -13501,36 +13502,6 @@ color: rgb(6, 208, 164);</string>
           <column/>
           <column/>
           <column/>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QWebEngineView" name="probChart2">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="url">
-           <url>
-            <string>about:blank</string>
-           </url>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QWebEngineView" name="probChart1">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="url">
-           <url>
-            <string>about:blank</string>
-           </url>
-          </property>
          </widget>
         </item>
        </layout>
@@ -13885,47 +13856,41 @@ color: rgb(6, 208, 164);
            <number>6</number>
           </property>
           <item row="0" column="0">
-           <widget class="QWebEngineView" name="newChart">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-              <horstretch>255</horstretch>
-              <verstretch>255</verstretch>
-             </sizepolicy>
+           <widget class="QFrame" name="frame_11">
+            <property name="styleSheet">
+             <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(1, 8, 26, 255), stop:0.517045 rgba(11, 78, 78, 255), stop:1 rgba(3, 84, 66, 255));</string>
             </property>
-            <property name="url">
-             <url>
-              <string>about:blank</string>
-             </url>
+            <property name="frameShape">
+             <enum>QFrame::WinPanel</enum>
             </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <property name="midLineWidth">
+             <number>2</number>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_25">
+             <item row="0" column="0">
+              <widget class="QWebEngineView" name="newChart">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                 <horstretch>255</horstretch>
+                 <verstretch>255</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="url">
+                <url>
+                 <string>about:blank</string>
+                </url>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </item>
          </layout>
         </item>
        </layout>
-      </widget>
-      <widget class="QWidget" name="tabNewLayout">
-       <attribute name="icon">
-        <iconset resource="rsc.qrc">
-         <normaloff>:/icones/icons8-carrossel-de-exibição-96.png</normaloff>:/icones/icons8-carrossel-de-exibição-96.png</iconset>
-       </attribute>
-       <attribute name="title">
-        <string>New Layout</string>
-       </attribute>
-       <attribute name="toolTip">
-        <string>Create Layout</string>
-       </attribute>
-      </widget>
-      <widget class="QWidget" name="tabNewProfile">
-       <attribute name="icon">
-        <iconset resource="rsc.qrc">
-         <normaloff>:/icones/icons8-crie-um-novo-96.ico</normaloff>:/icones/icons8-crie-um-novo-96.ico</iconset>
-       </attribute>
-       <attribute name="title">
-        <string>New Profile</string>
-       </attribute>
-       <attribute name="toolTip">
-        <string>Create Profile</string>
-       </attribute>
       </widget>
       <widget class="QWidget" name="tabNewIndicator">
        <attribute name="icon">
@@ -24307,7 +24272,7 @@ color: rgb(85, 255, 127);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1109</width>
+     <width>1060</width>
      <height>22</height>
     </rect>
    </property>
@@ -24364,8 +24329,8 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgb
    <widget class="QMenu" name="menuMenu">
     <property name="geometry">
      <rect>
-      <x>360</x>
-      <y>288</y>
+      <x>269</x>
+      <y>127</y>
       <width>162</width>
       <height>100</height>
      </rect>
@@ -24437,10 +24402,10 @@ border-color: rgb(6, 208, 164);</string>
     <widget class="QMenu" name="menuNew">
      <property name="geometry">
       <rect>
-       <x>521</x>
-       <y>321</y>
+       <x>430</x>
+       <y>160</y>
        <width>136</width>
-       <height>164</height>
+       <height>118</height>
       </rect>
      </property>
      <property name="sizePolicy">
@@ -24489,8 +24454,6 @@ selection-color: rgb(0, 0, 0);</string>
      </property>
      <addaction name="actionChart"/>
      <addaction name="separator"/>
-     <addaction name="actionLayout"/>
-     <addaction name="actionProfile_2"/>
      <addaction name="separator"/>
      <addaction name="actionIndicator"/>
     </widget>
@@ -24557,8 +24520,8 @@ border-color: rgb(6, 208, 164);</string>
     <widget class="QMenu" name="menuFair_Price">
      <property name="geometry">
       <rect>
-       <x>-1407</x>
-       <y>130</y>
+       <x>513</x>
+       <y>137</y>
        <width>179</width>
        <height>90</height>
       </rect>
