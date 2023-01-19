@@ -242,12 +242,12 @@ class mainWithTabs(QMainWindow):
 
         if self.ui.Welcome.isVisible() == True:
             self.ui.actionSummarizer.triggered.connect(
-                lambda: self.ui.Welcome.setCurrentIndex(11))
+                lambda: self.ui.Welcome.setCurrentIndex(9))
         elif self.ui.Welcome.isVisible() == False:
             self.ui.actionSummarizer.triggered.connect(
-                lambda: self.ui.Welcome.setTabVisible(11, True))
+                lambda: self.ui.Welcome.setTabVisible(9, True))
             self.ui.actionSummarizer.triggered.connect(
-                lambda: self.ui.Welcome.setCurrentIndex(11))
+                lambda: self.ui.Welcome.setCurrentIndex(9))
 
     def irTabDashboard(self):
         if self.ui.Welcome.isVisible() == True:
@@ -312,97 +312,80 @@ class mainWithTabs(QMainWindow):
             self.ui.actionChart.triggered.connect(
                 lambda: self.ui.Welcome.setCurrentIndex(6))
 
-    def irTabLayout(self):
-        if self.ui.Welcome.isVisible() == True:
-            self.ui.actionLayout.triggered.connect(
-                lambda: self.ui.Welcome.setCurrentIndex(7))
-        elif self.ui.Welcome.isVisible() == False:
-            self.ui.actionLayout.triggered.connect(
-                lambda: self.ui.Welcome.setTabVisible(7, True))
-            self.ui.actionLayout.triggered.connect(
-                lambda: self.ui.Welcome.setCurrentIndex(7))
 
-    def irTabNewProfile(self):
-        if self.ui.Welcome.isVisible() == True:
-            self.ui.actionProfile_2.triggered.connect(
-                lambda: self.ui.Welcome.setCurrentIndex(8))
-        elif self.ui.Welcome.isVisible() == False:
-            self.ui.actionProfile_2.triggered.connect(
-                lambda: self.ui.Welcome.setTabVisible(8, True))
-            self.ui.actionProfile_2.triggered.connect(
-                lambda: self.ui.Welcome.setCurrentIndex(8))
+
         
 
     def irTabNewIndicator(self):
         if self.ui.Welcome.isVisible() == True:
             self.ui.actionIndicator.triggered.connect(
-                lambda: self.ui.Welcome.setCurrentIndex(9))
+                lambda: self.ui.Welcome.setCurrentIndex(7))
         elif self.ui.Welcome.isVisible() == False:
             self.ui.actionIndicator.triggered.connect(
-                lambda: self.ui.Welcome.setTabVisible(9, True))
+                lambda: self.ui.Welcome.setTabVisible(7, True))
             self.ui.actionIndicator.triggered.connect(
-                lambda: self.ui.Welcome.setCurrentIndex(9))
+                lambda: self.ui.Welcome.setCurrentIndex(7))
 
     def irTabSynthAsset(self):
         if self.ui.Welcome.isVisible() == True:
             self.ui.actionSynthetic_Asset.triggered.connect(
-                lambda: self.ui.Welcome.setCurrentIndex(10))
+                lambda: self.ui.Welcome.setCurrentIndex(8))
         elif self.ui.Welcome.isVisible() == False:
             self.ui.actionSynthetic_Asset.triggered.connect(
-                lambda: self.ui.Welcome.setTabVisible(10, True))
+                lambda: self.ui.Welcome.setTabVisible(8, True))
             self.ui.actionSynthetic_Asset.triggered.connect(
-                lambda: self.ui.Welcome.setCurrentIndex(10))
+                lambda: self.ui.Welcome.setCurrentIndex(8))
 
     def irTabPythonEditor(self):
         if self.ui.Welcome.isVisible() == True:
             self.ui.actionOpen_Python_Editor.triggered.connect(
-                lambda: self.ui.Welcome.setCurrentIndex(12))
+                lambda: self.ui.Welcome.setCurrentIndex(10))
         elif self.ui.Welcome.isVisible() == False:
             self.ui.actionOpen_Python_Editor.triggered.connect(
-                lambda: self.ui.Welcome.setTabVisible(12, True))
+                lambda: self.ui.Welcome.setTabVisible(10, True))
             self.ui.actionOpen_Python_Editor.triggered.connect(
-                lambda: self.ui.Welcome.setCurrentIndex(12))
+                lambda: self.ui.Welcome.setCurrentIndex(10))
 
     def irTabLoadIndicator(self):
         if self.ui.Welcome.isVisible() == True:
             self.ui.actionOpen_Indicator.triggered.connect(
-                lambda: self.ui.Welcome.setCurrentIndex(13))
+                lambda: self.ui.Welcome.setCurrentIndex(11))
         elif self.ui.Welcome.isVisible() == False:
             self.ui.actionOpen_Indicator.triggered.connect(
-                lambda: self.ui.Welcome.setTabVisible(13, True))
+                lambda: self.ui.Welcome.setTabVisible(11, True))
             self.ui.actionOpen_Indicator.triggered.connect(
-                lambda: self.ui.Welcome.setCurrentIndex(13))
+                lambda: self.ui.Welcome.setCurrentIndex(11))
 
     def irTabConfiguration(self):
         if self.ui.Welcome.isVisible() == True:
             self.ui.actionConfiguration.triggered.connect(
-                lambda: self.ui.Welcome.setCurrentIndex(14))
+                lambda: self.ui.Welcome.setCurrentIndex(12))
         elif self.ui.Welcome.isVisible() == False:
             self.ui.actionConfiguration.triggered.connect(
-                lambda: self.ui.Welcome.setTabVisible(14, True))
+                lambda: self.ui.Welcome.setTabVisible(12, True))
             self.ui.actionConfiguration.triggered.connect(
-                lambda: self.ui.Welcome.setCurrentIndex(14))
+                lambda: self.ui.Welcome.setCurrentIndex(12))
 
     def irTabPreferences(self):
         
         if self.ui.Welcome.isVisible() == True:
             self.ui.actionPreferences.triggered.connect(
-                lambda: self.ui.Welcome.setCurrentIndex(15))
+                lambda: self.ui.Welcome.setCurrentIndex(13))
         elif self.ui.Welcome.isVisible() == False:
             self.ui.actionPreferences.triggered.connect(
-                lambda: self.ui.Welcome.setTabVisible(15, True))
+                lambda: self.ui.Welcome.setTabVisible(13, True))
             self.ui.actionPreferences.triggered.connect(
-                lambda: self.ui.Welcome.setCurrentIndex(15))
+                lambda: self.ui.Welcome.setCurrentIndex(13))
     def irTabAbout(self):
         self.extbtn=QPushButton()
         if self.ui.Welcome.isVisible() == True:
             self.ui.actionAbout.triggered.connect(
-                lambda: self.ui.Welcome.setCurrentIndex(16))
+                lambda: self.ui.Welcome.setCurrentIndex(14))
         elif self.ui.Welcome.isVisible() == False:
             self.ui.actionAbout.triggered.connect(
-                lambda: self.ui.Welcome.setTabVisible(16, True))
+                lambda: self.ui.Welcome.setTabVisible(14, True))
             self.ui.actionAbout.triggered.connect(
-                lambda: self.ui.Welcome.setCurrentIndex(16))
+                lambda: self.ui.Welcome.setCurrentIndex(14))
         self.ui.Welcome.tabBar().setTabButton(
             16, self.ui.Welcome.tabBar().ButtonPosition.RightSide, self.extbtn)
         
