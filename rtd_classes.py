@@ -134,7 +134,9 @@ class RTD:
 
     def __init__(self, raw_data):
         '''Create an RTD object with rtd cleaned up'''
-        for k, v in rtd_clean_dict(raw_data).items():
+        d = rtd_clean_dict(raw_data)
+        self.name = d['ativo']
+        for k, v in d.items():
             setattr(self, k, [v])
 
     def __str__(self, qnt_attr=2):
@@ -163,14 +165,15 @@ class RTD:
         d = self.__dict__()
         df = pd.DataFrame.from_dict(d)
 
+
 class Worker(QObject):
     '''Worker class that implements running tasks'''
     frp0_res = pyqtSignal(RTD)
     dolfut_res = pyqtSignal(RTD)
-    
+
     TRYD = TrydSocket()
     TRYD.connect_socket(port=8080)
- 
+
     def run(self):
         while True:
             rtd_obj = RTD(self.TRYD.get_raw_rtd('FRP0'))
