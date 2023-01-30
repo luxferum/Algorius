@@ -165,13 +165,14 @@ class RTD:
         d = self.__dict__()
         df = pd.DataFrame.from_dict(d)
 
+
 class Worker(QObject):
     '''Worker class that implements running tasks'''
     res = pyqtSignal(dict)
     
     TRYD = TrydSocket()
     TRYD.connect_socket(port=8080)
- 
+
     def run(self):
         while True:
             time.sleep(2)
