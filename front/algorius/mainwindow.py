@@ -134,17 +134,17 @@ class mainWithTabs(QMainWindow):
         self.worker.moveToThread(self.thread)
         # Step 5: Connect signals and slots
         self.thread.started.connect(self.worker.run)
-        self.worker.frp0_res.connect(self.fairPrice)
+        self.worker.res.connect(self.fairPrice)
         self.thread.start()
 
-    def fairPrice(self, arr):
+    def fairPrice(self, dictf):
+        print(dictf)
         # self.ui.lcdNumberFuturo.display(self.ui.lcdNumberSpot.value(
-        # ) + arr.ultima[0]) # aqui vai o RTD do preço DOLFUT  # aqui vai o RTD do preço FRP0
-        self.ui.lcdNumberFuturo.display(arr.ultima[0])  
-        self.ui.lcdNumberSpot.display(self.ui.lcdNumberFuturo.value())  # aqui vai o RTD do preço spot(DOLFUT-FRP0)
-        # aqui vai o calculo do preço justo
-        self.ui.lcdNumberJusto.display(5365)
-        self.ui.lcdNumberCurva.display(5365)  # aqui vai o calculo da curva
+        # ) + arr.ultima[0]) # aqui vai o RTD do preço FRP0
+        self.ui.lcdNumberSpot.display(dictf['spot'])  # aqui vai o RTD do preço spot(DOLFUT-FRP0)
+        self.ui.lcdNumberJusto.display(dictf['fair']) # aqui vai o calculo do preço justo
+        self.ui.lcdNumberFuturo.display(dictf['future'])  # aqui vai o RTD do preço DOLFUT  
+        self.ui.lcdNumberCurva.display(0)  # aqui vai o calculo da curva
 
     def userProfile(self):
         self.ui.comboBox_nome.setSizeAdjustPolicy(

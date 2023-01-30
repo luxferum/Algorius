@@ -67,15 +67,15 @@ class RTD:
     #     return pd.DataFrame(RTD.rtd_dict, index=rtd_clean_keys())
 
     @classmethod
-    def fair_price(cls, di1fut_user_choice, juros_eua_user_choice):
+    def fair_price(cls, di1fut_user_choice, juros_eua_user_choice, tryd_socket):
         '''Calculate fair price with frp0 and dolfut'''
         # real time data
-        frp0 = RTD.rtd_dict['FRP0']
-        dolfut = RTD.rtd_dict['DOLFUT']
+        frp0 = RTD(tryd_socket.get_raw_rtd('FRP0'))
+        dolfut = RTD(tryd_socket.get_raw_rtd('DOLFUT'))
 
         # info used to calculate
-        spot = dolfut.fechamento - frp0.fechamento
-        delta_dias = dolfut.dias_uteis_ate_vencimento / 252
+        spot = dolfut.ultima - frp0.ultima
+        delta_dias = int(dolfut.dias_uteis_ate_vencimento) / 252
         delta_j = di1fut_user_choice - juros_eua_user_choice
 
         # intermediate results
@@ -85,7 +85,8 @@ class RTD:
         f = round(spot * numerador, 2)
 
         # print
-        print(f'fair price = {f} - spot = {spot}')
+        #print(f'fair price = {f} - spot = {spot}')
+        return spot, f, dolfut.ultima
 
     @classmethod
     def fair_price_ptax(cls, di1fut_user_choice):
@@ -97,8 +98,8 @@ class RTD:
         di = RTD.rtd_dict['DI1FUT']
 
         # info used to calculate
-        spot = dolfut.fechamento - frp0.fechamento
-        frcfut_fech = frcfut.fechamento
+        spot = dolfut.ultima - frp0.ultima
+        frcfut_fech = frcfut.ultima
         frcfut_dias = frcfut.dias_uteis_ate_vencimento / 252
         di_dias = di.dias_uteis_ate_vencimento / 252
 
@@ -110,7 +111,8 @@ class RTD:
         f = round(spot * numerador / denominador, 2)
 
         # print
-        print(f'fair price ptax = {f} - spot = {spot}')
+        #print(f'fair price ptax = {f} - spot = {spot}')
+        return f
 
     # @classmethod
     # def std_dev_on_scale():
@@ -135,7 +137,7 @@ class RTD:
     def __init__(self, raw_data):
         '''Create an RTD object with rtd cleaned up'''
         for k, v in rtd_clean_dict(raw_data).items():
-            setattr(self, k, [v])
+            setattr(self, k, v)
 
     def __str__(self, qnt_attr=2):
         '''Return a string representation of the RTD object'''
@@ -165,14 +167,19 @@ class RTD:
 
 class Worker(QObject):
     '''Worker class that implements running tasks'''
-    frp0_res = pyqtSignal(RTD)
-    dolfut_res = pyqtSignal(RTD)
+    res = pyqtSignal(dict)
     
     TRYD = TrydSocket()
     TRYD.connect_socket(port=8080)
  
     def run(self):
         while True:
-            rtd_obj = RTD(self.TRYD.get_raw_rtd('FRP0'))
-            time.sleep(0.5)
-            self.frp0_res.emit(rtd_obj)
+            time.sleep(2)
+            spot, fair, future = RTD.fair_price(12.75, 4.75, self.TRYD)
+            #fair_ptax = RTD.fair_price_ptax(1)
+
+            dict_final = {
+                'spot': spot,'future': future,'fair' : fair
+            }
+            self.res.emit(dict_final)
+
