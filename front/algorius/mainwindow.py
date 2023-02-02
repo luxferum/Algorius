@@ -1,9 +1,10 @@
+from rtd_classes import Worker
 from PySide6.QtWidgets import (
     QApplication, QDialog, QProgressBar, QSizePolicy, QWidget, QFileDialog)
 from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont, QFontDatabase, QGradient,
                            QIcon, QImage, QKeySequence, QLinearGradient, QPainter, QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QAbstractItemView, QApplication, QCheckBox, QComboBox, QDateEdit, QDoubleSpinBox, QFrame, QGraphicsView, QGridLayout, QGroupBox, QHeaderView,
-                               QLCDNumber, QLabel, QLineEdit, QMainWindow, QMenu, QMenuBar, QPushButton, QSizePolicy, QSlider, QTabWidget, QTableWidget, QTableWidgetItem, QToolButton, QWidget,QTabBar)
+                               QLCDNumber, QLabel, QLineEdit, QMainWindow, QMenu, QMenuBar, QPushButton, QSizePolicy, QSlider, QTabWidget, QTableWidget, QTableWidgetItem, QToolButton, QWidget, QTabBar)
 from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient, QCursor, QFont, QFontDatabase, QGradient,
                            QIcon, QImage, QKeySequence, QLinearGradient, QPainter, QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
@@ -35,10 +36,7 @@ import win32api
 import socket
 
 sys.path.append(os.path.abspath(os.path.join('')))
-from rtd_classes import Worker
-from ctypes import *
-import win32api
-import socket
+
 
 class login_window(QWidget):
     def __init__(self, parent=None):
@@ -79,6 +77,7 @@ class register_window(QDialog):
         self.ui = Ui_register_window()
         self.ui.setupUi(self)
 
+
 class Loading_window(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -96,12 +95,13 @@ class Loading_window(QDialog):
         self.ui.pushButton_endLoad.clicked.connect(
             lambda: self.janelaForm.show())
 
+
 class mainWithTabs(QMainWindow):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.ui = Ui_mainWithTabs()
         self.ui.setupUi(self)
-        self.incializarSemTabs()       
+        self.incializarSemTabs()
         self.sair2()
         self.irTabSummarizer()
         self.irTabUser()
@@ -117,9 +117,9 @@ class mainWithTabs(QMainWindow):
         self.irTabLoadIndicator()
         self.irTabConfiguration()
         self.irTabPreferences()
-        self.irTabAbout()        
+        self.irTabAbout()
         self.dials()
-        self.userProfile()         
+        self.userProfile()
         # self.fairPrice()
         self.rtd_worker()
         self.ui.Welcome.tabCloseRequested.connect(
@@ -137,13 +137,10 @@ class mainWithTabs(QMainWindow):
         self.worker.res.connect(self.fairPrice)
         self.thread.start()
 
-    def fairPrice(self, dictf):
-        print(dictf)
-        # self.ui.lcdNumberFuturo.display(self.ui.lcdNumberSpot.value(
-        # ) + arr.ultima[0]) # aqui vai o RTD do preço FRP0
-        self.ui.lcdNumberSpot.display(dictf['spot'])  # aqui vai o RTD do preço spot(DOLFUT-FRP0)
-        self.ui.lcdNumberJusto.display(dictf['fair']) # aqui vai o calculo do preço justo
-        self.ui.lcdNumberFuturo.display(dictf['future'])  # aqui vai o RTD do preço DOLFUT  
+    def fairPrice(self, res_dict):
+        self.ui.lcdNumberSpot.display(res_dict['spot'])  # spot from RTD
+        self.ui.lcdNumberJusto.display(res_dict['fair'])  # fair_price from RTD
+        self.ui.lcdNumberFuturo.display(res_dict['future'])  # dolfut from RTD
         self.ui.lcdNumberCurva.display(0)  # aqui vai o calculo da curva
 
     def userProfile(self):
@@ -169,6 +166,7 @@ class mainWithTabs(QMainWindow):
             self.ui.label_nome.setText("Novo usuário")
             self.ui.label_email.setText("Novo usuário")
             self.ui.label_cpf.setText("Novo usuário")
+
     def dials(self):
         self.ui.dialJurosEua.valueChanged.connect(
             lambda: self.ui.doubleSpinBox_jurosEUA.setValue(self.ui.dialJurosEua.value()))
@@ -260,10 +258,6 @@ class mainWithTabs(QMainWindow):
             self.ui.actionChart.triggered.connect(
                 lambda: self.ui.Welcome.setCurrentIndex(6))
 
-
-
-        
-
     def irTabNewIndicator(self):
         if self.ui.Welcome.isVisible() == True:
             self.ui.actionIndicator.triggered.connect(
@@ -315,7 +309,7 @@ class mainWithTabs(QMainWindow):
                 lambda: self.ui.Welcome.setCurrentIndex(12))
 
     def irTabPreferences(self):
-        
+
         if self.ui.Welcome.isVisible() == True:
             self.ui.actionPreferences.triggered.connect(
                 lambda: self.ui.Welcome.setCurrentIndex(13))
@@ -324,8 +318,9 @@ class mainWithTabs(QMainWindow):
                 lambda: self.ui.Welcome.setTabVisible(13, True))
             self.ui.actionPreferences.triggered.connect(
                 lambda: self.ui.Welcome.setCurrentIndex(13))
+
     def irTabAbout(self):
-        self.extbtn=QPushButton()
+        self.extbtn = QPushButton()
         if self.ui.Welcome.isVisible() == True:
             self.ui.actionAbout.triggered.connect(
                 lambda: self.ui.Welcome.setCurrentIndex(14))
@@ -336,7 +331,6 @@ class mainWithTabs(QMainWindow):
                 lambda: self.ui.Welcome.setCurrentIndex(14))
         self.ui.Welcome.tabBar().setTabButton(
             16, self.ui.Welcome.tabBar().ButtonPosition.RightSide, self.extbtn)
-        
 
     def sair2(self):
         self.ui.actionQuit.triggered.connect(
@@ -351,14 +345,12 @@ class mainWithTabs(QMainWindow):
         )
 
     def incializarSemTabs(self):
-        self.ui.Welcome.setTabsClosable(True)       
+        self.ui.Welcome.setTabsClosable(True)
 
-        i=0
+        i = 0
         for i in range(self.ui.Welcome.count()):
-            self.ui.Welcome.setTabVisible(i, False)  
-            i+=1          
-    
-    
+            self.ui.Welcome.setTabVisible(i, False)
+            i += 1
 
 
 class AThread(QThread):

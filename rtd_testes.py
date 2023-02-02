@@ -3,27 +3,19 @@ from rtd_classes import TrydSocket, RTD, Worker
 ''' This is used to test RTD functionalities'''
 
 # if __name__ == "__main__":
-#     tryd = TrydSocket()
-#     tryd.connect_socket(port=8080)
+#     # Create and connect to RTD
+#     tryd_socket = TrydSocket(port=8080)
 
-#     r1 = RTD(tryd.get_raw_rtd('DOLFUT'))
-#     r1.insert_rtd_in_dict()
+#     r1 = RTD(tryd_socket.get_raw_rtd('DOLFUT'))
+#     r2 = RTD(tryd_socket.get_raw_rtd('FRP0'))
+#     r3 = RTD(tryd_socket.get_raw_rtd('FRCFUT'))
 
-#     r2 = RTD(tryd.get_raw_rtd('FRP0'))
-#     r2.insert_rtd_in_dict()
+#     teste = RTD.fair_price(tryd_socket)
+#     print(teste)
 
-#     r3 = RTD(tryd.get_raw_rtd('FRCFUT'))
-#     r3.insert_rtd_in_dict()
-
-#     for k, v in RTD.rtd_dict.items():
-#         print(k)
-#         print(v)
-
-#     # df = RTD.return_rtd_df()
-#     # print(df.info())
-
-#     tryd.close_socket()
+#     # Release connection to server
+#     tryd_socket.close_socket()
 
 if __name__ == "__main__":
     w1 = Worker()
-    w1.run('FRP0', 1)
+    w1.run()
