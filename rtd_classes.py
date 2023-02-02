@@ -60,6 +60,8 @@ class RTD:
     @classmethod
     def fair_price(cls, tryd_socket):
         '''Calculate fair price with frp0 and dolfut'''
+        print(f'Calculating fair price')
+
         # real time data
         frp0 = RTD(tryd_socket.get_raw_rtd('FRP0'))
         dolfut = RTD(tryd_socket.get_raw_rtd('DOLFUT'))
@@ -68,7 +70,7 @@ class RTD:
         # info used to calculate
         spot = dolfut.ultima - frp0.ultima
         delta_dias = dolfut.dias_uteis_ate_vencimento / 252
-        delta_j = di1fut.ultima - RTD.JUROS_EUA
+        delta_j = (di1fut.ultima / 100) - (RTD.JUROS_EUA / 100)
 
         # final result
         fair_price = round(spot * exp(delta_j*delta_dias), 2)
@@ -79,27 +81,28 @@ class RTD:
     @classmethod
     def fair_price_ptax(cls, tryd_socket):
         '''Calculate fair price using ptax style with frp0, dolfut and frcfut'''
+        print(f'Calculating fair price ptax')
+
         # real time data
         frp0 = RTD(tryd_socket.get_raw_rtd('FRP0'))
         dolfut = RTD(tryd_socket.get_raw_rtd('DOLFUT'))
         di1fut = RTD(tryd_socket.get_raw_rtd('DI1FUT'))
-        frcfut = RTD(tryd_socket.get_raw_rtd('FRCFUT'))
+        frcfut = RTD(tryd_socket.get_raw_rtd('FRCF24'))
 
         # info used to calculate
         spot = dolfut.ultima - frp0.ultima
-        frcfut_fech = frcfut.ultima
         frcfut_dias = frcfut.dias_uteis_ate_vencimento / 252
         di1fut_dias = di1fut.dias_uteis_ate_vencimento / 252
 
         # intermediate results
         numerador = ((1+di1fut_dias) ** di1fut_dias)
-        denominador = 1 + frcfut_fech * frcfut_dias
+        denominador = 1 + (frcfut.ultima / 100) * frcfut_dias
 
         # final result
         fair_price_ptax = round(spot * numerador / denominador, 2)
 
         # print(f'fair price ptax = {f} - spot = {spot}')
-        return fair_price_ptax
+        return fair_price_ptax, spot, dolfut.ultima
 
     def __init__(self, raw_data):
         '''Create an RTD object with rtd cleaned up'''
@@ -132,9 +135,17 @@ class Worker(QObject):
         while True:
             fair, spot, future = RTD.fair_price(tryd_socket)
             res_dict = {
+                'fair': fair,
                 'spot': spot,
                 'future': future,
-                'fair': fair
+            }
+            print(res_dict)
+
+            fair, spot, future = RTD.fair_price_ptax(tryd_socket)
+            res_dict = {
+                'fair_ptax': fair,
+                'spot': spot,
+                'future': future,
             }
             print(res_dict)
 
