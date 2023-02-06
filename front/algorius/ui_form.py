@@ -22,9 +22,9 @@ from PySide6.QtWidgets import (QAbstractItemView, QAbstractScrollArea, QApplicat
     QFrame, QGridLayout, QGroupBox, QHBoxLayout,
     QHeaderView, QLCDNumber, QLabel, QLayout,
     QLineEdit, QMainWindow, QMenu, QMenuBar,
-    QPushButton, QSizePolicy, QSlider, QTabWidget,
-    QTableWidget, QTableWidgetItem, QToolButton, QVBoxLayout,
-    QWidget)
+    QPushButton, QRadioButton, QSizePolicy, QSlider,
+    QTabWidget, QTableWidget, QTableWidgetItem, QToolButton,
+    QVBoxLayout, QWidget)
 import rsc_rc
 import rsc_rc
 
@@ -34,7 +34,7 @@ class Ui_mainWithTabs(object):
             mainWithTabs.setObjectName(u"mainWithTabs")
         mainWithTabs.setWindowModality(Qt.NonModal)
         mainWithTabs.setEnabled(True)
-        mainWithTabs.resize(1060, 774)
+        mainWithTabs.resize(1352, 1045)
         mainWithTabs.setMinimumSize(QSize(500, 500))
         mainWithTabs.setMaximumSize(QSize(2292, 16777215))
         mainWithTabs.setBaseSize(QSize(1920, 1080))
@@ -3513,202 +3513,6 @@ class Ui_mainWithTabs(object):
 
         self.gridLayout_7.addWidget(self.frame, 0, 1, 1, 1)
 
-        self.gridLayout_3 = QGridLayout()
-        self.gridLayout_3.setObjectName(u"gridLayout_3")
-        self.gridLayout_3.setContentsMargins(0, -1, 0, -1)
-        self.label_spot = QLabel(self.frame_3)
-        self.label_spot.setObjectName(u"label_spot")
-        font10 = QFont()
-        font10.setFamilies([u"Anita  Semi-square"])
-        font10.setPointSize(19)
-        self.label_spot.setFont(font10)
-        self.label_spot.setStyleSheet(u"color: rgb(6, 208, 164);\n"
-"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(13, 13, 13, 255), stop:0.368715 rgba(26, 26, 26, 255), stop:0.675978 rgba(42, 42, 42, 255), stop:1 rgba(51, 51, 51, 255));\n"
-"")
-        self.label_spot.setFrameShape(QFrame.Box)
-        self.label_spot.setFrameShadow(QFrame.Raised)
-        self.label_spot.setLineWidth(0)
-        self.label_spot.setMidLineWidth(2)
-        self.label_spot.setTextFormat(Qt.AutoText)
-        self.label_spot.setScaledContents(True)
-        self.label_spot.setAlignment(Qt.AlignCenter)
-        self.label_spot.setWordWrap(True)
-        self.label_spot.setMargin(3)
-
-        self.gridLayout_3.addWidget(self.label_spot, 0, 0, 1, 1)
-
-        self.label_justo = QLabel(self.frame_3)
-        self.label_justo.setObjectName(u"label_justo")
-        font11 = QFont()
-        font11.setFamilies([u"Anita  Semi-square"])
-        font11.setPointSize(19)
-        font11.setUnderline(True)
-        self.label_justo.setFont(font11)
-        self.label_justo.setStyleSheet(u"color: rgb(6, 208, 164);\n"
-"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(13, 13, 13, 255), stop:0.368715 rgba(26, 26, 26, 255), stop:0.675978 rgba(42, 42, 42, 255), stop:1 rgba(51, 51, 51, 255));\n"
-"")
-        self.label_justo.setFrameShape(QFrame.Box)
-        self.label_justo.setFrameShadow(QFrame.Raised)
-        self.label_justo.setLineWidth(0)
-        self.label_justo.setMidLineWidth(2)
-        self.label_justo.setTextFormat(Qt.AutoText)
-        self.label_justo.setScaledContents(False)
-        self.label_justo.setAlignment(Qt.AlignCenter)
-        self.label_justo.setWordWrap(True)
-        self.label_justo.setMargin(3)
-
-        self.gridLayout_3.addWidget(self.label_justo, 3, 0, 1, 1)
-
-        self.label_futuro = QLabel(self.frame_3)
-        self.label_futuro.setObjectName(u"label_futuro")
-        self.label_futuro.setFont(font10)
-        self.label_futuro.setStyleSheet(u"\n"
-"color: rgb(6, 208, 164);\n"
-"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(13, 13, 13, 255), stop:0.368715 rgba(26, 26, 26, 255), stop:0.675978 rgba(42, 42, 42, 255), stop:1 rgba(51, 51, 51, 255));\n"
-"")
-        self.label_futuro.setFrameShape(QFrame.Box)
-        self.label_futuro.setFrameShadow(QFrame.Raised)
-        self.label_futuro.setLineWidth(0)
-        self.label_futuro.setMidLineWidth(2)
-        self.label_futuro.setTextFormat(Qt.AutoText)
-        self.label_futuro.setScaledContents(True)
-        self.label_futuro.setAlignment(Qt.AlignCenter)
-        self.label_futuro.setWordWrap(True)
-        self.label_futuro.setMargin(3)
-
-        self.gridLayout_3.addWidget(self.label_futuro, 1, 0, 1, 1)
-
-        self.lcdNumberFuturo = QLCDNumber(self.frame_3)
-        self.lcdNumberFuturo.setObjectName(u"lcdNumberFuturo")
-        self.lcdNumberFuturo.setFont(font)
-#if QT_CONFIG(accessibility)
-        self.lcdNumberFuturo.setAccessibleDescription(u"")
-#endif // QT_CONFIG(accessibility)
-        self.lcdNumberFuturo.setLayoutDirection(Qt.LeftToRight)
-        self.lcdNumberFuturo.setStyleSheet(u"color: rgb(0, 0, 0);\n"
-"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(126, 126, 126, 255), stop:1 rgba(255, 255, 255, 255));")
-        self.lcdNumberFuturo.setFrameShape(QFrame.Box)
-        self.lcdNumberFuturo.setFrameShadow(QFrame.Raised)
-        self.lcdNumberFuturo.setLineWidth(0)
-        self.lcdNumberFuturo.setMidLineWidth(2)
-        self.lcdNumberFuturo.setSmallDecimalPoint(True)
-        self.lcdNumberFuturo.setDigitCount(9)
-        self.lcdNumberFuturo.setSegmentStyle(QLCDNumber.Flat)
-
-        self.gridLayout_3.addWidget(self.lcdNumberFuturo, 1, 1, 1, 1)
-
-        self.lcdNumberPTAX = QLCDNumber(self.frame_3)
-        self.lcdNumberPTAX.setObjectName(u"lcdNumberPTAX")
-        self.lcdNumberPTAX.setFont(font)
-        self.lcdNumberPTAX.setStyleSheet(u"color: rgb(0, 0, 0);\n"
-"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 208, 164, 255), stop:1 rgba(3, 102, 80, 255));")
-        self.lcdNumberPTAX.setFrameShape(QFrame.Box)
-        self.lcdNumberPTAX.setFrameShadow(QFrame.Raised)
-        self.lcdNumberPTAX.setLineWidth(0)
-        self.lcdNumberPTAX.setMidLineWidth(2)
-        self.lcdNumberPTAX.setSmallDecimalPoint(True)
-        self.lcdNumberPTAX.setDigitCount(9)
-        self.lcdNumberPTAX.setSegmentStyle(QLCDNumber.Flat)
-
-        self.gridLayout_3.addWidget(self.lcdNumberPTAX, 5, 1, 1, 1)
-
-        self.label_curva = QLabel(self.frame_3)
-        self.label_curva.setObjectName(u"label_curva")
-        self.label_curva.setFont(font11)
-        self.label_curva.setStyleSheet(u"color: rgb(6, 208, 164);\n"
-"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(13, 13, 13, 255), stop:0.368715 rgba(26, 26, 26, 255), stop:0.675978 rgba(42, 42, 42, 255), stop:1 rgba(51, 51, 51, 255));\n"
-"")
-        self.label_curva.setFrameShape(QFrame.Box)
-        self.label_curva.setFrameShadow(QFrame.Raised)
-        self.label_curva.setLineWidth(0)
-        self.label_curva.setMidLineWidth(2)
-        self.label_curva.setTextFormat(Qt.AutoText)
-        self.label_curva.setScaledContents(False)
-        self.label_curva.setAlignment(Qt.AlignCenter)
-        self.label_curva.setWordWrap(True)
-        self.label_curva.setMargin(3)
-
-        self.gridLayout_3.addWidget(self.label_curva, 4, 0, 1, 1)
-
-        self.lcdNumberJusto = QLCDNumber(self.frame_3)
-        self.lcdNumberJusto.setObjectName(u"lcdNumberJusto")
-        self.lcdNumberJusto.setFont(font)
-#if QT_CONFIG(accessibility)
-        self.lcdNumberJusto.setAccessibleDescription(u"")
-#endif // QT_CONFIG(accessibility)
-        self.lcdNumberJusto.setLayoutDirection(Qt.LeftToRight)
-        self.lcdNumberJusto.setStyleSheet(u"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 208, 164, 255), stop:1 rgba(3, 102, 80, 255));\n"
-"color: rgb(0, 0, 0);")
-        self.lcdNumberJusto.setFrameShape(QFrame.Box)
-        self.lcdNumberJusto.setFrameShadow(QFrame.Raised)
-        self.lcdNumberJusto.setLineWidth(0)
-        self.lcdNumberJusto.setMidLineWidth(2)
-        self.lcdNumberJusto.setSmallDecimalPoint(True)
-        self.lcdNumberJusto.setDigitCount(9)
-        self.lcdNumberJusto.setSegmentStyle(QLCDNumber.Flat)
-        self.lcdNumberJusto.setProperty("value", 5326.500000000000000)
-
-        self.gridLayout_3.addWidget(self.lcdNumberJusto, 3, 1, 1, 1)
-
-        self.label_justoPTAX = QLabel(self.frame_3)
-        self.label_justoPTAX.setObjectName(u"label_justoPTAX")
-        self.label_justoPTAX.setFont(font11)
-        self.label_justoPTAX.setStyleSheet(u"color: rgb(6, 208, 164);\n"
-"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(13, 13, 13, 255), stop:0.368715 rgba(26, 26, 26, 255), stop:0.675978 rgba(42, 42, 42, 255), stop:1 rgba(51, 51, 51, 255));\n"
-"")
-        self.label_justoPTAX.setFrameShape(QFrame.Box)
-        self.label_justoPTAX.setFrameShadow(QFrame.Raised)
-        self.label_justoPTAX.setLineWidth(0)
-        self.label_justoPTAX.setMidLineWidth(2)
-        self.label_justoPTAX.setTextFormat(Qt.AutoText)
-        self.label_justoPTAX.setScaledContents(False)
-        self.label_justoPTAX.setAlignment(Qt.AlignCenter)
-        self.label_justoPTAX.setWordWrap(True)
-        self.label_justoPTAX.setMargin(3)
-
-        self.gridLayout_3.addWidget(self.label_justoPTAX, 5, 0, 1, 1)
-
-        self.lcdNumberSpot = QLCDNumber(self.frame_3)
-        self.lcdNumberSpot.setObjectName(u"lcdNumberSpot")
-        self.lcdNumberSpot.setEnabled(True)
-        self.lcdNumberSpot.setFont(font1)
-        self.lcdNumberSpot.setStyleSheet(u"color: rgb(0, 0, 0);\n"
-"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(126, 126, 126, 255), stop:1 rgba(255, 255, 255, 255));\n"
-"alternate-background-color: rgb(0, 0, 0);\n"
-"border-color: rgb(0, 0, 0);\n"
-"gridline-color: rgb(0, 0, 0);\n"
-"selection-color: rgb(0, 0, 0);\n"
-"selection-background-color: rgb(0, 0, 0);")
-        self.lcdNumberSpot.setFrameShape(QFrame.Box)
-        self.lcdNumberSpot.setFrameShadow(QFrame.Raised)
-        self.lcdNumberSpot.setLineWidth(0)
-        self.lcdNumberSpot.setMidLineWidth(2)
-        self.lcdNumberSpot.setSmallDecimalPoint(True)
-        self.lcdNumberSpot.setDigitCount(9)
-        self.lcdNumberSpot.setSegmentStyle(QLCDNumber.Flat)
-        self.lcdNumberSpot.setProperty("value", 0.000000000000000)
-        self.lcdNumberSpot.setProperty("intValue", 0)
-
-        self.gridLayout_3.addWidget(self.lcdNumberSpot, 0, 1, 1, 1)
-
-        self.lcdNumberCurva = QLCDNumber(self.frame_3)
-        self.lcdNumberCurva.setObjectName(u"lcdNumberCurva")
-        self.lcdNumberCurva.setFont(font)
-        self.lcdNumberCurva.setStyleSheet(u"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 208, 164, 255), stop:1 rgba(3, 102, 80, 255));\n"
-"color: rgb(0, 0, 0);")
-        self.lcdNumberCurva.setFrameShape(QFrame.Box)
-        self.lcdNumberCurva.setFrameShadow(QFrame.Raised)
-        self.lcdNumberCurva.setLineWidth(0)
-        self.lcdNumberCurva.setMidLineWidth(2)
-        self.lcdNumberCurva.setSmallDecimalPoint(True)
-        self.lcdNumberCurva.setDigitCount(9)
-        self.lcdNumberCurva.setSegmentStyle(QLCDNumber.Flat)
-
-        self.gridLayout_3.addWidget(self.lcdNumberCurva, 4, 1, 1, 1)
-
-
-        self.gridLayout_7.addLayout(self.gridLayout_3, 0, 0, 3, 1)
-
         self.frame_2 = QFrame(self.frame_3)
         self.frame_2.setObjectName(u"frame_2")
         sizePolicy2.setHeightForWidth(self.frame_2.sizePolicy().hasHeightForWidth())
@@ -3728,11 +3532,11 @@ class Ui_mainWithTabs(object):
         self.gridLayout_6.setContentsMargins(9, 9, -1, -1)
         self.label_dataB = QLabel(self.frame_2)
         self.label_dataB.setObjectName(u"label_dataB")
-        font12 = QFont()
-        font12.setFamilies([u"Anita  Semi-square"])
-        font12.setPointSize(10)
-        font12.setUnderline(True)
-        self.label_dataB.setFont(font12)
+        font10 = QFont()
+        font10.setFamilies([u"Anita  Semi-square"])
+        font10.setPointSize(10)
+        font10.setUnderline(True)
+        self.label_dataB.setFont(font10)
         self.label_dataB.setStyleSheet(u"color: rgb(6, 208, 164);\n"
 "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 0));")
         self.label_dataB.setFrameShape(QFrame.NoFrame)
@@ -3745,8 +3549,8 @@ class Ui_mainWithTabs(object):
 
         self.gridLayout_6.addWidget(self.label_dataB, 0, 0, 1, 1)
 
-        self.dateEdit_beggining = QDateEdit(self.frame_2)
-        self.dateEdit_beggining.setObjectName(u"dateEdit_beggining")
+        self.dateEdit_end = QDateEdit(self.frame_2)
+        self.dateEdit_end.setObjectName(u"dateEdit_end")
         palette13 = QPalette()
         palette13.setBrush(QPalette.Active, QPalette.WindowText, brush2)
         gradient306 = QLinearGradient(0, 0, 1, 1)
@@ -3856,48 +3660,24 @@ class Ui_mainWithTabs(object):
 #if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
         palette13.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush127)
 #endif
-        self.dateEdit_beggining.setPalette(palette13)
-        self.dateEdit_beggining.setFont(font)
-        self.dateEdit_beggining.setStyleSheet(u"color: rgb(6, 208, 164);\n"
+        self.dateEdit_end.setPalette(palette13)
+        self.dateEdit_end.setFont(font)
+        self.dateEdit_end.setStyleSheet(u"color: rgb(6, 208, 164);\n"
 "selection-background-color: rgb(6, 208, 164);\n"
 "selection-color: rgb(0, 0, 0);\n"
 "gridline-color: rgb(6, 208, 164);\n"
 "border-color: rgb(6, 208, 164);\n"
 "alternate-background-color: rgb(6, 208, 164);\n"
 "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(13, 13, 13, 255), stop:0.368715 rgba(26, 26, 26, 255), stop:0.675978 rgba(42, 42, 42, 255), stop:1 rgba(51, 51, 51, 255));")
-        self.dateEdit_beggining.setWrapping(False)
-        self.dateEdit_beggining.setFrame(True)
-        self.dateEdit_beggining.setAlignment(Qt.AlignCenter)
-        self.dateEdit_beggining.setAccelerated(True)
-        self.dateEdit_beggining.setMaximumDateTime(QDateTime(QDate(3000, 12, 31), QTime(23, 59, 59)))
-        self.dateEdit_beggining.setMinimumDateTime(QDateTime(QDate(1900, 1, 1), QTime(0, 0, 0)))
-        self.dateEdit_beggining.setCalendarPopup(True)
-        self.dateEdit_beggining.setCurrentSectionIndex(0)
-        self.dateEdit_beggining.setTimeSpec(Qt.LocalTime)
+        self.dateEdit_end.setFrame(True)
+        self.dateEdit_end.setAlignment(Qt.AlignCenter)
+        self.dateEdit_end.setAccelerated(True)
+        self.dateEdit_end.setCalendarPopup(True)
 
-        self.gridLayout_6.addWidget(self.dateEdit_beggining, 0, 1, 1, 1)
+        self.gridLayout_6.addWidget(self.dateEdit_end, 1, 1, 1, 1)
 
-        self.label_dataE = QLabel(self.frame_2)
-        self.label_dataE.setObjectName(u"label_dataE")
-        font13 = QFont()
-        font13.setFamilies([u"Anita  Semi-square"])
-        font13.setPointSize(12)
-        font13.setUnderline(True)
-        self.label_dataE.setFont(font13)
-        self.label_dataE.setStyleSheet(u"color: rgb(6, 208, 164);\n"
-"border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 208, 164, 255), stop:1 rgba(3, 102, 80, 255));\n"
-"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 0));")
-        self.label_dataE.setFrameShape(QFrame.NoFrame)
-        self.label_dataE.setFrameShadow(QFrame.Raised)
-        self.label_dataE.setLineWidth(0)
-        self.label_dataE.setMidLineWidth(2)
-        self.label_dataE.setAlignment(Qt.AlignCenter)
-        self.label_dataE.setMargin(0)
-
-        self.gridLayout_6.addWidget(self.label_dataE, 1, 0, 1, 1)
-
-        self.dateEdit_end = QDateEdit(self.frame_2)
-        self.dateEdit_end.setObjectName(u"dateEdit_end")
+        self.dateEdit_beggining = QDateEdit(self.frame_2)
+        self.dateEdit_beggining.setObjectName(u"dateEdit_beggining")
         palette14 = QPalette()
         palette14.setBrush(QPalette.Active, QPalette.WindowText, brush2)
         gradient315 = QLinearGradient(0, 0, 1, 1)
@@ -4007,24 +3787,256 @@ class Ui_mainWithTabs(object):
 #if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
         palette14.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush127)
 #endif
-        self.dateEdit_end.setPalette(palette14)
-        self.dateEdit_end.setFont(font)
-        self.dateEdit_end.setStyleSheet(u"color: rgb(6, 208, 164);\n"
+        self.dateEdit_beggining.setPalette(palette14)
+        self.dateEdit_beggining.setFont(font)
+        self.dateEdit_beggining.setStyleSheet(u"color: rgb(6, 208, 164);\n"
 "selection-background-color: rgb(6, 208, 164);\n"
 "selection-color: rgb(0, 0, 0);\n"
 "gridline-color: rgb(6, 208, 164);\n"
 "border-color: rgb(6, 208, 164);\n"
 "alternate-background-color: rgb(6, 208, 164);\n"
 "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(13, 13, 13, 255), stop:0.368715 rgba(26, 26, 26, 255), stop:0.675978 rgba(42, 42, 42, 255), stop:1 rgba(51, 51, 51, 255));")
-        self.dateEdit_end.setFrame(True)
-        self.dateEdit_end.setAlignment(Qt.AlignCenter)
-        self.dateEdit_end.setAccelerated(True)
-        self.dateEdit_end.setCalendarPopup(True)
+        self.dateEdit_beggining.setWrapping(False)
+        self.dateEdit_beggining.setFrame(True)
+        self.dateEdit_beggining.setAlignment(Qt.AlignCenter)
+        self.dateEdit_beggining.setAccelerated(True)
+        self.dateEdit_beggining.setMaximumDateTime(QDateTime(QDate(3000, 12, 31), QTime(23, 59, 59)))
+        self.dateEdit_beggining.setMinimumDateTime(QDateTime(QDate(1900, 1, 1), QTime(0, 0, 0)))
+        self.dateEdit_beggining.setCalendarPopup(True)
+        self.dateEdit_beggining.setCurrentSectionIndex(0)
+        self.dateEdit_beggining.setTimeSpec(Qt.LocalTime)
 
-        self.gridLayout_6.addWidget(self.dateEdit_end, 1, 1, 1, 1)
+        self.gridLayout_6.addWidget(self.dateEdit_beggining, 0, 1, 1, 1)
+
+        self.label_dataE = QLabel(self.frame_2)
+        self.label_dataE.setObjectName(u"label_dataE")
+        font11 = QFont()
+        font11.setFamilies([u"Anita  Semi-square"])
+        font11.setPointSize(12)
+        font11.setUnderline(True)
+        self.label_dataE.setFont(font11)
+        self.label_dataE.setStyleSheet(u"color: rgb(6, 208, 164);\n"
+"border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 208, 164, 255), stop:1 rgba(3, 102, 80, 255));\n"
+"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 0));")
+        self.label_dataE.setFrameShape(QFrame.NoFrame)
+        self.label_dataE.setFrameShadow(QFrame.Raised)
+        self.label_dataE.setLineWidth(0)
+        self.label_dataE.setMidLineWidth(2)
+        self.label_dataE.setAlignment(Qt.AlignCenter)
+        self.label_dataE.setMargin(0)
+
+        self.gridLayout_6.addWidget(self.label_dataE, 1, 0, 1, 1)
+
+        self.AutoInterestRadioButton = QRadioButton(self.frame_2)
+        self.AutoInterestRadioButton.setObjectName(u"AutoInterestRadioButton")
+        self.AutoInterestRadioButton.setStyleSheet(u"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 0));")
+
+        self.gridLayout_6.addWidget(self.AutoInterestRadioButton, 2, 0, 1, 1)
+
+        self.ManualInterestRadioButton = QRadioButton(self.frame_2)
+        self.ManualInterestRadioButton.setObjectName(u"ManualInterestRadioButton")
+        self.ManualInterestRadioButton.setStyleSheet(u"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 0));")
+
+        self.gridLayout_6.addWidget(self.ManualInterestRadioButton, 2, 1, 1, 1)
 
 
         self.gridLayout_7.addWidget(self.frame_2, 1, 1, 1, 1)
+
+        self.gridLayout_3 = QGridLayout()
+        self.gridLayout_3.setObjectName(u"gridLayout_3")
+        self.gridLayout_3.setContentsMargins(0, -1, 0, -1)
+        self.label_spot = QLabel(self.frame_3)
+        self.label_spot.setObjectName(u"label_spot")
+        font12 = QFont()
+        font12.setFamilies([u"Anita  Semi-square"])
+        font12.setPointSize(19)
+        self.label_spot.setFont(font12)
+        self.label_spot.setStyleSheet(u"color: rgb(6, 208, 164);\n"
+"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(13, 13, 13, 255), stop:0.368715 rgba(26, 26, 26, 255), stop:0.675978 rgba(42, 42, 42, 255), stop:1 rgba(51, 51, 51, 255));\n"
+"")
+        self.label_spot.setFrameShape(QFrame.Box)
+        self.label_spot.setFrameShadow(QFrame.Raised)
+        self.label_spot.setLineWidth(0)
+        self.label_spot.setMidLineWidth(2)
+        self.label_spot.setTextFormat(Qt.AutoText)
+        self.label_spot.setScaledContents(True)
+        self.label_spot.setAlignment(Qt.AlignCenter)
+        self.label_spot.setWordWrap(True)
+        self.label_spot.setMargin(3)
+
+        self.gridLayout_3.addWidget(self.label_spot, 0, 0, 1, 1)
+
+        self.label_justo = QLabel(self.frame_3)
+        self.label_justo.setObjectName(u"label_justo")
+        font13 = QFont()
+        font13.setFamilies([u"Anita  Semi-square"])
+        font13.setPointSize(19)
+        font13.setUnderline(True)
+        self.label_justo.setFont(font13)
+        self.label_justo.setStyleSheet(u"color: rgb(6, 208, 164);\n"
+"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(13, 13, 13, 255), stop:0.368715 rgba(26, 26, 26, 255), stop:0.675978 rgba(42, 42, 42, 255), stop:1 rgba(51, 51, 51, 255));\n"
+"")
+        self.label_justo.setFrameShape(QFrame.Box)
+        self.label_justo.setFrameShadow(QFrame.Raised)
+        self.label_justo.setLineWidth(0)
+        self.label_justo.setMidLineWidth(2)
+        self.label_justo.setTextFormat(Qt.AutoText)
+        self.label_justo.setScaledContents(False)
+        self.label_justo.setAlignment(Qt.AlignCenter)
+        self.label_justo.setWordWrap(True)
+        self.label_justo.setMargin(3)
+
+        self.gridLayout_3.addWidget(self.label_justo, 3, 0, 1, 1)
+
+        self.label_futuro = QLabel(self.frame_3)
+        self.label_futuro.setObjectName(u"label_futuro")
+        self.label_futuro.setFont(font12)
+        self.label_futuro.setStyleSheet(u"\n"
+"color: rgb(6, 208, 164);\n"
+"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(13, 13, 13, 255), stop:0.368715 rgba(26, 26, 26, 255), stop:0.675978 rgba(42, 42, 42, 255), stop:1 rgba(51, 51, 51, 255));\n"
+"")
+        self.label_futuro.setFrameShape(QFrame.Box)
+        self.label_futuro.setFrameShadow(QFrame.Raised)
+        self.label_futuro.setLineWidth(0)
+        self.label_futuro.setMidLineWidth(2)
+        self.label_futuro.setTextFormat(Qt.AutoText)
+        self.label_futuro.setScaledContents(True)
+        self.label_futuro.setAlignment(Qt.AlignCenter)
+        self.label_futuro.setWordWrap(True)
+        self.label_futuro.setMargin(3)
+
+        self.gridLayout_3.addWidget(self.label_futuro, 1, 0, 1, 1)
+
+        self.lcdNumberFuturo = QLCDNumber(self.frame_3)
+        self.lcdNumberFuturo.setObjectName(u"lcdNumberFuturo")
+        self.lcdNumberFuturo.setFont(font)
+#if QT_CONFIG(accessibility)
+        self.lcdNumberFuturo.setAccessibleDescription(u"")
+#endif // QT_CONFIG(accessibility)
+        self.lcdNumberFuturo.setLayoutDirection(Qt.LeftToRight)
+        self.lcdNumberFuturo.setStyleSheet(u"color: rgb(0, 0, 0);\n"
+"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(126, 126, 126, 255), stop:1 rgba(255, 255, 255, 255));")
+        self.lcdNumberFuturo.setFrameShape(QFrame.Box)
+        self.lcdNumberFuturo.setFrameShadow(QFrame.Raised)
+        self.lcdNumberFuturo.setLineWidth(0)
+        self.lcdNumberFuturo.setMidLineWidth(2)
+        self.lcdNumberFuturo.setSmallDecimalPoint(True)
+        self.lcdNumberFuturo.setDigitCount(9)
+        self.lcdNumberFuturo.setSegmentStyle(QLCDNumber.Flat)
+
+        self.gridLayout_3.addWidget(self.lcdNumberFuturo, 1, 1, 1, 1)
+
+        self.lcdNumberPTAX = QLCDNumber(self.frame_3)
+        self.lcdNumberPTAX.setObjectName(u"lcdNumberPTAX")
+        self.lcdNumberPTAX.setFont(font)
+        self.lcdNumberPTAX.setStyleSheet(u"color: rgb(0, 0, 0);\n"
+"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 208, 164, 255), stop:1 rgba(3, 102, 80, 255));")
+        self.lcdNumberPTAX.setFrameShape(QFrame.Box)
+        self.lcdNumberPTAX.setFrameShadow(QFrame.Raised)
+        self.lcdNumberPTAX.setLineWidth(0)
+        self.lcdNumberPTAX.setMidLineWidth(2)
+        self.lcdNumberPTAX.setSmallDecimalPoint(True)
+        self.lcdNumberPTAX.setDigitCount(9)
+        self.lcdNumberPTAX.setSegmentStyle(QLCDNumber.Flat)
+
+        self.gridLayout_3.addWidget(self.lcdNumberPTAX, 5, 1, 1, 1)
+
+        self.label_curva = QLabel(self.frame_3)
+        self.label_curva.setObjectName(u"label_curva")
+        self.label_curva.setFont(font13)
+        self.label_curva.setStyleSheet(u"color: rgb(6, 208, 164);\n"
+"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(13, 13, 13, 255), stop:0.368715 rgba(26, 26, 26, 255), stop:0.675978 rgba(42, 42, 42, 255), stop:1 rgba(51, 51, 51, 255));\n"
+"")
+        self.label_curva.setFrameShape(QFrame.Box)
+        self.label_curva.setFrameShadow(QFrame.Raised)
+        self.label_curva.setLineWidth(0)
+        self.label_curva.setMidLineWidth(2)
+        self.label_curva.setTextFormat(Qt.AutoText)
+        self.label_curva.setScaledContents(False)
+        self.label_curva.setAlignment(Qt.AlignCenter)
+        self.label_curva.setWordWrap(True)
+        self.label_curva.setMargin(3)
+
+        self.gridLayout_3.addWidget(self.label_curva, 4, 0, 1, 1)
+
+        self.lcdNumberJusto = QLCDNumber(self.frame_3)
+        self.lcdNumberJusto.setObjectName(u"lcdNumberJusto")
+        self.lcdNumberJusto.setFont(font)
+#if QT_CONFIG(accessibility)
+        self.lcdNumberJusto.setAccessibleDescription(u"")
+#endif // QT_CONFIG(accessibility)
+        self.lcdNumberJusto.setLayoutDirection(Qt.LeftToRight)
+        self.lcdNumberJusto.setStyleSheet(u"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 208, 164, 255), stop:1 rgba(3, 102, 80, 255));\n"
+"color: rgb(0, 0, 0);")
+        self.lcdNumberJusto.setFrameShape(QFrame.Box)
+        self.lcdNumberJusto.setFrameShadow(QFrame.Raised)
+        self.lcdNumberJusto.setLineWidth(0)
+        self.lcdNumberJusto.setMidLineWidth(2)
+        self.lcdNumberJusto.setSmallDecimalPoint(True)
+        self.lcdNumberJusto.setDigitCount(9)
+        self.lcdNumberJusto.setSegmentStyle(QLCDNumber.Flat)
+        self.lcdNumberJusto.setProperty("value", 5326.500000000000000)
+
+        self.gridLayout_3.addWidget(self.lcdNumberJusto, 3, 1, 1, 1)
+
+        self.label_justoPTAX = QLabel(self.frame_3)
+        self.label_justoPTAX.setObjectName(u"label_justoPTAX")
+        self.label_justoPTAX.setFont(font13)
+        self.label_justoPTAX.setStyleSheet(u"color: rgb(6, 208, 164);\n"
+"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(13, 13, 13, 255), stop:0.368715 rgba(26, 26, 26, 255), stop:0.675978 rgba(42, 42, 42, 255), stop:1 rgba(51, 51, 51, 255));\n"
+"")
+        self.label_justoPTAX.setFrameShape(QFrame.Box)
+        self.label_justoPTAX.setFrameShadow(QFrame.Raised)
+        self.label_justoPTAX.setLineWidth(0)
+        self.label_justoPTAX.setMidLineWidth(2)
+        self.label_justoPTAX.setTextFormat(Qt.AutoText)
+        self.label_justoPTAX.setScaledContents(False)
+        self.label_justoPTAX.setAlignment(Qt.AlignCenter)
+        self.label_justoPTAX.setWordWrap(True)
+        self.label_justoPTAX.setMargin(3)
+
+        self.gridLayout_3.addWidget(self.label_justoPTAX, 5, 0, 1, 1)
+
+        self.lcdNumberSpot = QLCDNumber(self.frame_3)
+        self.lcdNumberSpot.setObjectName(u"lcdNumberSpot")
+        self.lcdNumberSpot.setEnabled(True)
+        self.lcdNumberSpot.setFont(font1)
+        self.lcdNumberSpot.setStyleSheet(u"color: rgb(0, 0, 0);\n"
+"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(126, 126, 126, 255), stop:1 rgba(255, 255, 255, 255));\n"
+"alternate-background-color: rgb(0, 0, 0);\n"
+"border-color: rgb(0, 0, 0);\n"
+"gridline-color: rgb(0, 0, 0);\n"
+"selection-color: rgb(0, 0, 0);\n"
+"selection-background-color: rgb(0, 0, 0);")
+        self.lcdNumberSpot.setFrameShape(QFrame.Box)
+        self.lcdNumberSpot.setFrameShadow(QFrame.Raised)
+        self.lcdNumberSpot.setLineWidth(0)
+        self.lcdNumberSpot.setMidLineWidth(2)
+        self.lcdNumberSpot.setSmallDecimalPoint(True)
+        self.lcdNumberSpot.setDigitCount(9)
+        self.lcdNumberSpot.setSegmentStyle(QLCDNumber.Flat)
+        self.lcdNumberSpot.setProperty("value", 0.000000000000000)
+        self.lcdNumberSpot.setProperty("intValue", 0)
+
+        self.gridLayout_3.addWidget(self.lcdNumberSpot, 0, 1, 1, 1)
+
+        self.lcdNumberCurva = QLCDNumber(self.frame_3)
+        self.lcdNumberCurva.setObjectName(u"lcdNumberCurva")
+        self.lcdNumberCurva.setFont(font)
+        self.lcdNumberCurva.setStyleSheet(u"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 208, 164, 255), stop:1 rgba(3, 102, 80, 255));\n"
+"color: rgb(0, 0, 0);")
+        self.lcdNumberCurva.setFrameShape(QFrame.Box)
+        self.lcdNumberCurva.setFrameShadow(QFrame.Raised)
+        self.lcdNumberCurva.setLineWidth(0)
+        self.lcdNumberCurva.setMidLineWidth(2)
+        self.lcdNumberCurva.setSmallDecimalPoint(True)
+        self.lcdNumberCurva.setDigitCount(9)
+        self.lcdNumberCurva.setSegmentStyle(QLCDNumber.Flat)
+
+        self.gridLayout_3.addWidget(self.lcdNumberCurva, 4, 1, 1, 1)
+
+
+        self.gridLayout_7.addLayout(self.gridLayout_3, 0, 0, 3, 1)
 
         self.frame_8 = QFrame(self.frame_3)
         self.frame_8.setObjectName(u"frame_8")
@@ -4043,47 +4055,6 @@ class Ui_mainWithTabs(object):
         self.gridLayout_13.setObjectName(u"gridLayout_13")
         self.gridLayout_5 = QGridLayout()
         self.gridLayout_5.setObjectName(u"gridLayout_5")
-        self.label_jurosEUA = QLabel(self.frame_8)
-        self.label_jurosEUA.setObjectName(u"label_jurosEUA")
-        self.label_jurosEUA.setFont(font12)
-        self.label_jurosEUA.setLayoutDirection(Qt.LeftToRight)
-        self.label_jurosEUA.setStyleSheet(u"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 0));\n"
-"color: rgb(6, 208, 164);")
-        self.label_jurosEUA.setFrameShape(QFrame.Box)
-        self.label_jurosEUA.setFrameShadow(QFrame.Raised)
-        self.label_jurosEUA.setLineWidth(0)
-        self.label_jurosEUA.setMidLineWidth(2)
-        self.label_jurosEUA.setTextFormat(Qt.RichText)
-        self.label_jurosEUA.setScaledContents(False)
-        self.label_jurosEUA.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.label_jurosEUA.setWordWrap(True)
-
-        self.gridLayout_5.addWidget(self.label_jurosEUA, 2, 0, 2, 1)
-
-        self.dialJurosEua = QDial(self.frame_8)
-        self.dialJurosEua.setObjectName(u"dialJurosEua")
-        self.dialJurosEua.setStyleSheet(u"background-color: rgb(6, 208, 164);\n"
-"color: rgb(6, 208, 164);")
-        self.dialJurosEua.setWrapping(True)
-        self.dialJurosEua.setNotchTarget(0.010000000000000)
-        self.dialJurosEua.setNotchesVisible(True)
-
-        self.gridLayout_5.addWidget(self.dialJurosEua, 2, 2, 1, 1)
-
-        self.doubleSpinBox_jurosEUA = QDoubleSpinBox(self.frame_8)
-        self.doubleSpinBox_jurosEUA.setObjectName(u"doubleSpinBox_jurosEUA")
-        self.doubleSpinBox_jurosEUA.setEnabled(True)
-        self.doubleSpinBox_jurosEUA.setFont(font)
-        self.doubleSpinBox_jurosEUA.setStyleSheet(u"selection-color: rgb(0, 0, 0);\n"
-"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(13, 13, 13, 255), stop:0.368715 rgba(26, 26, 26, 255), stop:0.675978 rgba(42, 42, 42, 255), stop:1 rgba(51, 51, 51, 255));\n"
-"selection-background-color: rgb(6, 208, 164);")
-        self.doubleSpinBox_jurosEUA.setWrapping(True)
-        self.doubleSpinBox_jurosEUA.setAccelerated(True)
-        self.doubleSpinBox_jurosEUA.setDecimals(2)
-        self.doubleSpinBox_jurosEUA.setSingleStep(0.010000000000000)
-
-        self.gridLayout_5.addWidget(self.doubleSpinBox_jurosEUA, 2, 1, 1, 1)
-
         self.doubleSpinBox_jurosBR = QDoubleSpinBox(self.frame_8)
         self.doubleSpinBox_jurosBR.setObjectName(u"doubleSpinBox_jurosBR")
         self.doubleSpinBox_jurosBR.setFont(font)
@@ -4111,9 +4082,50 @@ class Ui_mainWithTabs(object):
 
         self.gridLayout_5.addWidget(self.dialJurosBr, 0, 2, 1, 1)
 
+        self.doubleSpinBox_jurosEUA = QDoubleSpinBox(self.frame_8)
+        self.doubleSpinBox_jurosEUA.setObjectName(u"doubleSpinBox_jurosEUA")
+        self.doubleSpinBox_jurosEUA.setEnabled(True)
+        self.doubleSpinBox_jurosEUA.setFont(font)
+        self.doubleSpinBox_jurosEUA.setStyleSheet(u"selection-color: rgb(0, 0, 0);\n"
+"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(13, 13, 13, 255), stop:0.368715 rgba(26, 26, 26, 255), stop:0.675978 rgba(42, 42, 42, 255), stop:1 rgba(51, 51, 51, 255));\n"
+"selection-background-color: rgb(6, 208, 164);")
+        self.doubleSpinBox_jurosEUA.setWrapping(True)
+        self.doubleSpinBox_jurosEUA.setAccelerated(True)
+        self.doubleSpinBox_jurosEUA.setDecimals(2)
+        self.doubleSpinBox_jurosEUA.setSingleStep(0.010000000000000)
+
+        self.gridLayout_5.addWidget(self.doubleSpinBox_jurosEUA, 3, 1, 1, 1)
+
+        self.label_jurosEUA = QLabel(self.frame_8)
+        self.label_jurosEUA.setObjectName(u"label_jurosEUA")
+        self.label_jurosEUA.setFont(font10)
+        self.label_jurosEUA.setLayoutDirection(Qt.LeftToRight)
+        self.label_jurosEUA.setStyleSheet(u"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 0));\n"
+"color: rgb(6, 208, 164);")
+        self.label_jurosEUA.setFrameShape(QFrame.Box)
+        self.label_jurosEUA.setFrameShadow(QFrame.Raised)
+        self.label_jurosEUA.setLineWidth(0)
+        self.label_jurosEUA.setMidLineWidth(2)
+        self.label_jurosEUA.setTextFormat(Qt.RichText)
+        self.label_jurosEUA.setScaledContents(False)
+        self.label_jurosEUA.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.label_jurosEUA.setWordWrap(True)
+
+        self.gridLayout_5.addWidget(self.label_jurosEUA, 3, 0, 2, 1)
+
+        self.dialJurosEua = QDial(self.frame_8)
+        self.dialJurosEua.setObjectName(u"dialJurosEua")
+        self.dialJurosEua.setStyleSheet(u"background-color: rgb(6, 208, 164);\n"
+"color: rgb(6, 208, 164);")
+        self.dialJurosEua.setWrapping(True)
+        self.dialJurosEua.setNotchTarget(0.010000000000000)
+        self.dialJurosEua.setNotchesVisible(True)
+
+        self.gridLayout_5.addWidget(self.dialJurosEua, 3, 2, 1, 1)
+
         self.label_jurosBR = QLabel(self.frame_8)
         self.label_jurosBR.setObjectName(u"label_jurosBR")
-        self.label_jurosBR.setFont(font12)
+        self.label_jurosBR.setFont(font10)
         self.label_jurosBR.setStyleSheet(u"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 0));\n"
 "color: rgb(6, 208, 164);")
         self.label_jurosBR.setFrameShape(QFrame.Box)
@@ -7366,7 +7378,7 @@ class Ui_mainWithTabs(object):
         mainWithTabs.setCentralWidget(self.centralwidget)
         self.menuBar = QMenuBar(mainWithTabs)
         self.menuBar.setObjectName(u"menuBar")
-        self.menuBar.setGeometry(QRect(0, 0, 1060, 22))
+        self.menuBar.setGeometry(QRect(0, 0, 1352, 22))
         sizePolicy7 = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.MinimumExpanding)
         sizePolicy7.setHorizontalStretch(140)
         sizePolicy7.setVerticalStretch(140)
@@ -7526,7 +7538,7 @@ class Ui_mainWithTabs(object):
 
         self.retranslateUi(mainWithTabs)
 
-        self.Welcome.setCurrentIndex(1)
+        self.Welcome.setCurrentIndex(3)
         self.comboBox_nome.setCurrentIndex(0)
 
 
@@ -7654,6 +7666,16 @@ class Ui_mainWithTabs(object):
 #endif // QT_CONFIG(tooltip)
         self.label_Live.setText(QCoreApplication.translate("mainWithTabs", u"LIVE:", None))
         self.label_onOff.setText(QCoreApplication.translate("mainWithTabs", u"OFF", None))
+        self.label_dataB.setText(QCoreApplication.translate("mainWithTabs", u"Beginning", None))
+#if QT_CONFIG(tooltip)
+        self.dateEdit_end.setToolTip(QCoreApplication.translate("mainWithTabs", u"<html><head/><body><p>Select end date</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(tooltip)
+        self.dateEdit_beggining.setToolTip(QCoreApplication.translate("mainWithTabs", u"<html><head/><body><p>Select start date</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.label_dataE.setText(QCoreApplication.translate("mainWithTabs", u"End", None))
+        self.AutoInterestRadioButton.setText(QCoreApplication.translate("mainWithTabs", u"Auto. Interest", None))
+        self.ManualInterestRadioButton.setText(QCoreApplication.translate("mainWithTabs", u"Manual Interest", None))
         self.label_spot.setText(QCoreApplication.translate("mainWithTabs", u"<html><head/><body><p><span style=\" text-decoration: underline;\">SPOT</span></p></body></html>", None))
         self.label_justo.setText(QCoreApplication.translate("mainWithTabs", u"<html><head/><body><p>FAIR</p></body></html>", None))
         self.label_futuro.setText(QCoreApplication.translate("mainWithTabs", u"<html><head/><body><p><span style=\" text-decoration: underline;\">FUTURE</span></p></body></html>", None))
@@ -7674,26 +7696,18 @@ class Ui_mainWithTabs(object):
 #if QT_CONFIG(tooltip)
         self.lcdNumberCurva.setToolTip(QCoreApplication.translate("mainWithTabs", u"<html><head/><body><p>Curve Value</p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.label_dataB.setText(QCoreApplication.translate("mainWithTabs", u"Beginning", None))
-#if QT_CONFIG(tooltip)
-        self.dateEdit_beggining.setToolTip(QCoreApplication.translate("mainWithTabs", u"<html><head/><body><p>Select start date</p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.label_dataE.setText(QCoreApplication.translate("mainWithTabs", u"End", None))
-#if QT_CONFIG(tooltip)
-        self.dateEdit_end.setToolTip(QCoreApplication.translate("mainWithTabs", u"<html><head/><body><p>Select end date</p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.label_jurosEUA.setText(QCoreApplication.translate("mainWithTabs", u"<html><head/><body><p>Interest</p><p>USA</p></body></html>", None))
-#if QT_CONFIG(tooltip)
-        self.dialJurosEua.setToolTip(QCoreApplication.translate("mainWithTabs", u"<html><head/><body><p>Select USA interest rate</p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-#if QT_CONFIG(tooltip)
-        self.doubleSpinBox_jurosEUA.setToolTip(QCoreApplication.translate("mainWithTabs", u"<html><head/><body><p>Select USA interest rate</p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
 #if QT_CONFIG(tooltip)
         self.doubleSpinBox_jurosBR.setToolTip(QCoreApplication.translate("mainWithTabs", u"<html><head/><body><p>Select Brazil's or your country interest rate</p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
 #if QT_CONFIG(tooltip)
         self.dialJurosBr.setToolTip(QCoreApplication.translate("mainWithTabs", u"<html><head/><body><p>Select Brazil's or your country interest rate</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(tooltip)
+        self.doubleSpinBox_jurosEUA.setToolTip(QCoreApplication.translate("mainWithTabs", u"<html><head/><body><p>Select USA interest rate</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.label_jurosEUA.setText(QCoreApplication.translate("mainWithTabs", u"<html><head/><body><p>Interest</p><p>USA</p></body></html>", None))
+#if QT_CONFIG(tooltip)
+        self.dialJurosEua.setToolTip(QCoreApplication.translate("mainWithTabs", u"<html><head/><body><p>Select USA interest rate</p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.label_jurosBR.setText(QCoreApplication.translate("mainWithTabs", u"<html><head/><body><p>Interest</p><p>BR</p></body></html>", None))
         self.Welcome.setTabText(self.Welcome.indexOf(self.tabPrec), QCoreApplication.translate("mainWithTabs", u"Precification", None))
