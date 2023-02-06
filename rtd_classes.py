@@ -65,7 +65,7 @@ class RTD:
         # real time data
         frp0 = RTD(tryd_socket.get_raw_rtd('FRP0'))
         dolfut = RTD(tryd_socket.get_raw_rtd('DOLFUT'))
-        di1fut = RTD(tryd_socket.get_raw_rtd('DI1FUT'))
+        di1fut = RTD(tryd_socket.get_raw_rtd('DI1F25'))
 
         # info used to calculate
         spot = dolfut.ultima - frp0.ultima
@@ -86,8 +86,8 @@ class RTD:
         # real time data
         frp0 = RTD(tryd_socket.get_raw_rtd('FRP0'))
         dolfut = RTD(tryd_socket.get_raw_rtd('DOLFUT'))
-        di1fut = RTD(tryd_socket.get_raw_rtd('DI1FUT'))
-        frcfut = RTD(tryd_socket.get_raw_rtd('FRCF24'))
+        di1fut = RTD(tryd_socket.get_raw_rtd('DI1F25'))
+        frcfut = RTD(tryd_socket.get_raw_rtd('FRCF25'))
 
         # info used to calculate
         spot = dolfut.ultima - frp0.ultima
@@ -139,15 +139,6 @@ class Worker(QObject):
                 'spot': spot,
                 'future': future,
             }
-            print(res_dict)
 
-            fair, spot, future = RTD.fair_price_ptax(tryd_socket)
-            res_dict = {
-                'fair_ptax': fair,
-                'spot': spot,
-                'future': future,
-            }
-            print(res_dict)
-
-            # time.sleep(1)
+            time.sleep(1)
             self.res.emit(res_dict)

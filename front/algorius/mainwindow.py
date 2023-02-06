@@ -26,66 +26,12 @@ from PyQt6.QtCore import QObject, QThread, pyqtSignal
 import hashlib
 import sys
 import rsc_rc
-from time import sleep
 
-##from rtd_preprocessing import *
-# from rtd_calculation import *
+sys.path.append(os.path.abspath(os.path.join('')))
+from rtd_classes import Worker
 from ctypes import *
 import win32api
 import socket
-
-
-class Worker(QObject):
-    progress = pyqtSignal(int)
-
-    # --- ESCOLHER OS ATIVOS -----------------#
-    ATIVO = ['FRP0', 'DOLFUT']
-    COTACAO = 'COT$S|'
-    # ========================================#
-
-    # --- INFORMACOES DO SERVIDOR ------------#
-    HOST = '192.168.0.5'  # ipv4
-    PORT = 8080
-    # ========================================#
-
-    def run(self):
-        while True:
-            test = self.start_rtd
-            sleep(1)
-            self.progress.emit(test)
-
-    def ByteConvert(self, dataInfo, ativo):
-        return str.encode(dataInfo + ativo + '#')
-
-    array_dict_assets = []
-
-    def start_rtd(self):
-        try:
-            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-                s.connect((self.HOST, self.PORT))
-                print(
-                    f'\nId da thread principal: {win32api.GetCurrentThreadId()}')
-                global array_dict_assets
-                try:
-                    for item in self.ATIVO:
-                        s.sendall(self.ByteConvert(self.COTACAO, item))
-                        # b'COT$S|PETR4#'
-                        data = s.recv(1024)
-                        asset = data.decode().replace("COT!", "").split("|")
-                        dict_assets = create_clean_dict(asset)
-                        array_dict_assets.append(dict_assets)
-
-                    dol_fut, frp0 = array_dict_assets[0], array_dict_assets[1]
-                    fair_price = self.fairPrice(dol_fut, frp0)
-                    return fair_price
-
-                except Exception as ex:
-                    print(ex)
-
-        except Exception as ex:
-            print(
-                f'\nNão foi possivel conectar no servidor RTD. Erro:\n{ex}\n')
-
 
 class login_window(QWidget):
     def __init__(self, parent=None):
@@ -160,8 +106,6 @@ class mainWithTabs(QMainWindow):
         self.irTabProbability()
         self.irTabSheet()
         self.irTabChart()
-        self.irTabLayout()
-        self.irTabNewProfile()
         self.irTabNewIndicator()
         self.irTabSynthAsset()
         self.irTabPythonEditor()
@@ -171,8 +115,7 @@ class mainWithTabs(QMainWindow):
         self.irTabAbout()        
         self.dials()
         self.userProfile()         
-        # self.fairPrice()
-        # self.rtd_worker()
+        self.rtd_worker()
         self.ui.Welcome.tabCloseRequested.connect(
             lambda: self.ui.Welcome.setTabVisible(self.ui.Welcome.currentIndex(), False))
 
@@ -185,18 +128,18 @@ class mainWithTabs(QMainWindow):
         self.worker.moveToThread(self.thread)
         # Step 5: Connect signals and slots
         self.thread.started.connect(self.worker.run)
-        self.worker.progress.connect(self.fairPrice)
+        self.worker.res.connect(self.fairPrice)
         self.thread.start()
 
-    def fairPrice(self, n):
-        self.ui.lcdNumberFuturo.display(self.ui.lcdNumberSpot.value(
-        ) + self.ui.lcdNumberFrp.value())  # aqui vai o RTD do preço DOLFUT
-        self.ui.lcdNumberFrp.display(20)  # aqui vai o RTD do preço FRP0
-        self.ui.lcdNumberSpot.display(self.ui.lcdNumberFuturo.value(
-        ) - self.ui.lcdNumberFrp.value())  # aqui vai o RTD do preço spot(DOLFUT-FRP0)
-        # aqui vai o calculo do preço justo
-        self.ui.lcdNumberJusto.display(5365)
-        self.ui.lcdNumberCurva.display(5365)  # aqui vai o calculo da curva
+    def fairPrice(self, dictf):
+        print(dictf)
+        # self.ui.lcdNumberFuturo.display(self.ui.lcdNumberSpot.value(
+        # ) + arr.ultima[0]) # aqui vai o RTD do preço FRP0
+        #teste123
+        self.ui.lcdNumberSpot.display(dictf['spot'])  # aqui vai o RTD do preço spot(DOLFUT-FRP0)
+        self.ui.lcdNumberJusto.display(dictf['fair']) # aqui vai o calculo do preço justo
+        self.ui.lcdNumberFuturo.display(dictf['future'])  # aqui vai o RTD do preço DOLFUT  
+        self.ui.lcdNumberCurva.display(0)  # aqui vai o calculo da curva
 
     def userProfile(self):
         self.ui.comboBox_nome.setSizeAdjustPolicy(
