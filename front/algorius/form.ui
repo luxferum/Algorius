@@ -11505,42 +11505,23 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgb
                 <property name="horizontalSpacing">
                  <number>6</number>
                 </property>
-                <item row="0" column="0">
-                 <widget class="QLabel" name="label_dataB">
-                  <property name="font">
-                   <font>
-                    <family>Anita  Semi-square</family>
-                    <pointsize>10</pointsize>
-                    <underline>true</underline>
-                   </font>
-                  </property>
+                <item row="2" column="0">
+                 <widget class="QRadioButton" name="AutoInterestRadioButton">
                   <property name="styleSheet">
-                   <string notr="true">color: rgb(6, 208, 164);
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 0));</string>
-                  </property>
-                  <property name="frameShape">
-                   <enum>QFrame::NoFrame</enum>
-                  </property>
-                  <property name="frameShadow">
-                   <enum>QFrame::Raised</enum>
-                  </property>
-                  <property name="lineWidth">
-                   <number>0</number>
-                  </property>
-                  <property name="midLineWidth">
-                   <number>2</number>
+                   <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 0));</string>
                   </property>
                   <property name="text">
-                   <string>Beginning</string>
+                   <string>Auto. Interest</string>
                   </property>
-                  <property name="textFormat">
-                   <enum>Qt::AutoText</enum>
+                 </widget>
+                </item>
+                <item row="2" column="1">
+                 <widget class="QRadioButton" name="ManualInterestRadioButton">
+                  <property name="styleSheet">
+                   <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 0));</string>
                   </property>
-                  <property name="scaledContents">
-                   <bool>false</bool>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignCenter</set>
+                  <property name="text">
+                   <string>Manual Interest</string>
                   </property>
                  </widget>
                 </item>
@@ -12079,6 +12060,82 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgb
                   </property>
                   <property name="calendarPopup">
                    <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QLabel" name="label_dataB">
+                  <property name="font">
+                   <font>
+                    <family>Anita  Semi-square</family>
+                    <pointsize>10</pointsize>
+                    <underline>true</underline>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">color: rgb(6, 208, 164);
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 0));</string>
+                  </property>
+                  <property name="frameShape">
+                   <enum>QFrame::NoFrame</enum>
+                  </property>
+                  <property name="frameShadow">
+                   <enum>QFrame::Raised</enum>
+                  </property>
+                  <property name="lineWidth">
+                   <number>0</number>
+                  </property>
+                  <property name="midLineWidth">
+                   <number>2</number>
+                  </property>
+                  <property name="text">
+                   <string>Beginning</string>
+                  </property>
+                  <property name="textFormat">
+                   <enum>Qt::AutoText</enum>
+                  </property>
+                  <property name="scaledContents">
+                   <bool>false</bool>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLabel" name="label_dataE">
+                  <property name="font">
+                   <font>
+                    <family>Anita  Semi-square</family>
+                    <pointsize>12</pointsize>
+                    <underline>true</underline>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">color: rgb(6, 208, 164);
+border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 208, 164, 255), stop:1 rgba(3, 102, 80, 255));
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 0));</string>
+                  </property>
+                  <property name="frameShape">
+                   <enum>QFrame::NoFrame</enum>
+                  </property>
+                  <property name="frameShadow">
+                   <enum>QFrame::Raised</enum>
+                  </property>
+                  <property name="lineWidth">
+                   <number>0</number>
+                  </property>
+                  <property name="midLineWidth">
+                   <number>2</number>
+                  </property>
+                  <property name="text">
+                   <string>End</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="margin">
+                   <number>0</number>
                   </property>
                  </widget>
                 </item>
@@ -12649,61 +12706,86 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgb
                   </property>
                  </widget>
                 </item>
-                <item row="1" column="0">
-                 <widget class="QLabel" name="label_dataE">
-                  <property name="font">
-                   <font>
-                    <family>Anita  Semi-square</family>
-                    <pointsize>12</pointsize>
-                    <underline>true</underline>
-                   </font>
+                <item row="3" column="0">
+                 <widget class="QComboBox" name="comboBox">
+                  <property name="enabled">
+                   <bool>false</bool>
                   </property>
-                  <property name="styleSheet">
-                   <string notr="true">color: rgb(6, 208, 164);
-border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 208, 164, 255), stop:1 rgba(3, 102, 80, 255));
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 0));</string>
-                  </property>
-                  <property name="frameShape">
-                   <enum>QFrame::NoFrame</enum>
-                  </property>
-                  <property name="frameShadow">
-                   <enum>QFrame::Raised</enum>
-                  </property>
-                  <property name="lineWidth">
-                   <number>0</number>
-                  </property>
-                  <property name="midLineWidth">
-                   <number>2</number>
-                  </property>
-                  <property name="text">
-                   <string>End</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignCenter</set>
-                  </property>
-                  <property name="margin">
-                   <number>0</number>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="0">
-                 <widget class="QRadioButton" name="AutoInterestRadioButton">
-                  <property name="styleSheet">
-                   <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 0));</string>
-                  </property>
-                  <property name="text">
-                   <string>Auto. Interest</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="1">
-                 <widget class="QRadioButton" name="ManualInterestRadioButton">
-                  <property name="styleSheet">
-                   <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 0));</string>
-                  </property>
-                  <property name="text">
-                   <string>Manual Interest</string>
-                  </property>
+                  <item>
+                   <property name="text">
+                    <string>DI1F23</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>DI1F24</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>DI1F25</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>DI1F26</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>DI1F27</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>DI1F28</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>DI1F29</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>DI1F30</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>DI1F31</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>DI1F32</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>DI1F33</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>DI1F34</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>DI1F35</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>DI1F36</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>DI1F37</string>
+                   </property>
+                  </item>
                  </widget>
                 </item>
                </layout>

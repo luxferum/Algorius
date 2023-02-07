@@ -28,7 +28,7 @@ import sys
 import rsc_rc
 
 sys.path.append(os.path.abspath(os.path.join('')))
-from rtd_classes import Worker
+#from rtd_classes import Worker
 from ctypes import *
 import win32api
 import socket
@@ -114,22 +114,23 @@ class mainWithTabs(QMainWindow):
         self.irTabPreferences()
         self.irTabAbout()        
         self.dials()
-        self.userProfile()         
-        self.rtd_worker()
+        self.userProfile() 
+        self.dropBoxInterest()
+        #self.rtd_worker()
         self.ui.Welcome.tabCloseRequested.connect(
             lambda: self.ui.Welcome.setTabVisible(self.ui.Welcome.currentIndex(), False))
 
-    def rtd_worker(self):
+    #def rtd_worker(self):
         # Step 2: Create a QThread object
-        self.thread = QThread()
+        #self.thread = QThread()
         # Step 3: Create a worker object
-        self.worker = Worker()
+        #self.worker = Worker()
         # Step 4: Move worker to the thread
-        self.worker.moveToThread(self.thread)
+        #self.worker.moveToThread(self.thread)
         # Step 5: Connect signals and slots
-        self.thread.started.connect(self.worker.run)
-        self.worker.res.connect(self.fairPrice)
-        self.thread.start()
+        #self.thread.started.connect(self.worker.run)
+        #self.worker.res.connect(self.fairPrice)
+        #self.thread.start()
 
     def fairPrice(self, dictf):
         print(dictf)
@@ -257,7 +258,11 @@ class mainWithTabs(QMainWindow):
 
 
 
-        
+    def dropBoxInterest(self):
+        self.ui.AutoInterestRadioButton.toggled.connect(
+            lambda: self.ui.comboBox.setEnabled(True))
+        self.ui.ManualInterestRadioButton.toggled.connect(
+            lambda: self.ui.comboBox.setEnabled(False))
 
     def irTabNewIndicator(self):
         if self.ui.Welcome.isVisible() == True:
