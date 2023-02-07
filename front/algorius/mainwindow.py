@@ -28,7 +28,7 @@ import sys
 import rsc_rc
 
 sys.path.append(os.path.abspath(os.path.join('')))
-#from rtd_classes import Worker
+from rtd_classes import Worker
 from ctypes import *
 import win32api
 import socket
@@ -116,24 +116,25 @@ class mainWithTabs(QMainWindow):
         self.dials()
         self.userProfile() 
         self.dropBoxInterest()
-        #self.rtd_worker()
+        self.rtd_worker()
         self.ui.Welcome.tabCloseRequested.connect(
             lambda: self.ui.Welcome.setTabVisible(self.ui.Welcome.currentIndex(), False))
+        self.ui.comboBox.currentIndexChanged.connect(self.interestChanged)        
 
-    #def rtd_worker(self):
+    def rtd_worker(self):
         # Step 2: Create a QThread object
-        #self.thread = QThread()
+        self.thread = QThread()
         # Step 3: Create a worker object
-        #self.worker = Worker()
+        self.worker = Worker()
         # Step 4: Move worker to the thread
-        #self.worker.moveToThread(self.thread)
+        self.worker.moveToThread(self.thread)
         # Step 5: Connect signals and slots
-        #self.thread.started.connect(self.worker.run)
-        #self.worker.res.connect(self.fairPrice)
-        #self.thread.start()
+        self.thread.started.connect(self.worker.run)
+        self.worker.res.connect(self.fairPrice)
+        self.thread.start()
 
     def fairPrice(self, dictf):
-        print(dictf)
+        # print(dictf)
         # self.ui.lcdNumberFuturo.display(self.ui.lcdNumberSpot.value(
         # ) + arr.ultima[0]) # aqui vai o RTD do preço FRP0
         #teste123
@@ -256,7 +257,8 @@ class mainWithTabs(QMainWindow):
             self.ui.actionChart.triggered.connect(
                 lambda: self.ui.Welcome.setCurrentIndex(6))
 
-
+    def interestChanged(self,ix):
+        print(self.ui.comboBox.currentText(), ix)
 
     def dropBoxInterest(self):
         self.ui.AutoInterestRadioButton.toggled.connect(
