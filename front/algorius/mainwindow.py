@@ -117,9 +117,8 @@ class mainWithTabs(QMainWindow):
         self.userProfile() 
         self.dropBoxInterest()
         self.rtd_worker()
-        self.ui.Welcome.tabCloseRequested.connect(
-            lambda: self.ui.Welcome.setTabVisible(self.ui.Welcome.currentIndex(), False))
-        self.ui.comboBox.currentIndexChanged.connect(self.interestChanged)        
+        self.ui.comboBox.currentIndexChanged.connect(self.interestChanged)  
+        self.ui.Welcome.tabCloseRequested.connect(self.tabVisible)      
 
     def rtd_worker(self):
         # Step 2: Create a QThread object
@@ -171,9 +170,11 @@ class mainWithTabs(QMainWindow):
             lambda: self.ui.doubleSpinBox_jurosEUA.setValue(self.ui.dialJurosEua.value()))
         self.ui.dialJurosBr.valueChanged.connect(
             lambda: self.ui.doubleSpinBox_jurosBR.setValue(self.ui.dialJurosBr.value()))
+        
+    def tabVisible(self, ix):
+        self.ui.Welcome.setTabVisible(ix, False)
 
     def irTabUser(self):
-
         if self.ui.Welcome.isVisible() == True:
             self.ui.actionUserProfile.triggered.connect(
                 lambda: self.ui.Welcome.setCurrentIndex(0))
@@ -184,7 +185,6 @@ class mainWithTabs(QMainWindow):
                 lambda: self.ui.Welcome.setCurrentIndex(0))
 
     def irTabSummarizer(self):
-
         if self.ui.Welcome.isVisible() == True:
             self.ui.actionSummarizer.triggered.connect(
                 lambda: self.ui.Welcome.setCurrentIndex(9))
@@ -317,7 +317,6 @@ class mainWithTabs(QMainWindow):
                 lambda: self.ui.Welcome.setCurrentIndex(12))
 
     def irTabPreferences(self):
-        
         if self.ui.Welcome.isVisible() == True:
             self.ui.actionPreferences.triggered.connect(
                 lambda: self.ui.Welcome.setCurrentIndex(13))
@@ -338,7 +337,6 @@ class mainWithTabs(QMainWindow):
                 lambda: self.ui.Welcome.setCurrentIndex(14))
         self.ui.Welcome.tabBar().setTabButton(
             16, self.ui.Welcome.tabBar().ButtonPosition.RightSide, self.extbtn)
-        
 
     def sair2(self):
         self.ui.actionQuit.triggered.connect(
@@ -354,22 +352,10 @@ class mainWithTabs(QMainWindow):
 
     def incializarSemTabs(self):
         self.ui.Welcome.setTabsClosable(True)       
-
         i=0
         for i in range(self.ui.Welcome.count()):
             self.ui.Welcome.setTabVisible(i, False)  
-            i+=1          
-    
-    
-
-
-class AThread(QThread):
-    def run(self):
-        count = 0
-        while count < 5:
-            time.sleep(1)
-            print("A Increasing")
-            count += 1
+            i+=1       
 
 
 ###########################################################################################
