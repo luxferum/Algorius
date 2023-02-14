@@ -116,6 +116,7 @@ class mainWithTabs(QMainWindow):
         self.dials()
         self.userProfile() 
         self.dropBoxInterest()
+        self.lcdDIatual()
         self.rtd_worker()
         self.ui.comboBox.currentIndexChanged.connect(self.interestChanged)  
         self.ui.Welcome.tabCloseRequested.connect(self.tabVisible)      
@@ -142,6 +143,8 @@ class mainWithTabs(QMainWindow):
         self.ui.lcdNumberFuturo.display(dictf['future'])  # aqui vai o RTD do preço DOLFUT  
         self.ui.lcdNumberCurva.display(0)  # aqui vai o calculo da curva
 
+    def lcdDIatual(self):
+        self.ui.lcdNumber_DiAtual
     def userProfile(self):
         self.ui.comboBox_nome.setSizeAdjustPolicy(
             self.ui.comboBox_nome.SizeAdjustPolicy.AdjustToContents)
