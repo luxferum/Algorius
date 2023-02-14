@@ -81,7 +81,7 @@ class RTD:
         fair_price = round(spot * exp(delta_j*delta_dias), 2)
 
         # print(f'fair price = {fair_price} - spot = {spot}')
-        return fair_price, spot, dolfut.ultima
+        return fair_price, spot, dolfut.ultima, di1fut.ultima
 
     @classmethod
     def fair_price_ptax(cls, tryd_socket):
@@ -140,11 +140,12 @@ class Worker(QObject):
 
         while True:
             print(self.juros_br)
-            fair, spot, future = RTD.fair_price(tryd_socket, self.juros_br)
+            fair, spot, future, juros_br = RTD.fair_price(tryd_socket, self.juros_br)
             res_dict = {
                 'fair': fair,
                 'spot': spot,
                 'future': future,
+                'juros_br' : juros_br
             }
             # time.sleep(1)
             self.res.emit(res_dict)
