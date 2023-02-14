@@ -133,16 +133,14 @@ class mainWithTabs(QMainWindow):
         self.thread.start()
 
     def fairPrice(self, dictf):
-        # print(dictf)
-        # self.ui.lcdNumberFuturo.display(self.ui.lcdNumberSpot.value(
-        # ) + arr.ultima[0]) # aqui vai o RTD do preço FRP0
-        #teste123
-        self.ui.lcdNumberSpot.display(dictf['spot'])  # aqui vai o RTD do preço spot(DOLFUT-FRP0)
-        self.ui.lcdNumberJusto.display(dictf['fair']) # aqui vai o calculo do preço justo
-        self.ui.lcdNumberFuturo.display(dictf['future'])  # aqui vai o RTD do preço DOLFUT  
-        self.ui.lcdNumberCurva.display(0)  # aqui vai o calculo da curva
-        self.ui.lcdNumber_8.display(dictf['juros_br'])  
+        self.ui.lcdNumberSpot.display(dictf['spot']) 
+        self.ui.lcdNumberJusto.display(dictf['fair'])
+        self.ui.lcdNumberFuturo.display(dictf['future'])  
+        self.ui.lcdNumberCurva.display(-1) 
+        self.ui.lcdNumberPTAX.display(dictf['fair_ptax'])  
         
+        self.ui.lcdNumber_8.display(dictf['juros_br'])
+
     def userProfile(self):
         self.ui.comboBox_nome.setSizeAdjustPolicy(
             self.ui.comboBox_nome.SizeAdjustPolicy.AdjustToContents)
