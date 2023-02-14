@@ -3860,6 +3860,17 @@ class Ui_mainWithTabs(object):
 
         self.gridLayout_6.addWidget(self.comboBox, 3, 0, 1, 1)
 
+        self.lcdNumber_8 = QLCDNumber(self.frame_2)
+        self.lcdNumber_8.setObjectName(u"lcdNumber_8")
+        self.lcdNumber_8.setStyleSheet(u"color: rgb(6, 208, 164);\n"
+"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(13, 13, 13, 255), stop:0.368715 rgba(26, 26, 26, 255), stop:0.675978 rgba(42, 42, 42, 255), stop:1 rgba(51, 51, 51, 255));")
+        self.lcdNumber_8.setLineWidth(0)
+        self.lcdNumber_8.setMidLineWidth(2)
+        self.lcdNumber_8.setSmallDecimalPoint(True)
+        self.lcdNumber_8.setDigitCount(6)
+
+        self.gridLayout_6.addWidget(self.lcdNumber_8, 3, 1, 1, 1)
+
 
         self.gridLayout_7.addWidget(self.frame_2, 1, 1, 1, 1)
 

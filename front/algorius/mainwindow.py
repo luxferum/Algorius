@@ -144,7 +144,7 @@ class mainWithTabs(QMainWindow):
         self.ui.lcdNumberCurva.display(0)  # aqui vai o calculo da curva
 
     def lcdDIatual(self):
-        self.ui.lcdNumber_DiAtual
+        self.ui.lcdNumber_8.display()
     def userProfile(self):
         self.ui.comboBox_nome.setSizeAdjustPolicy(
             self.ui.comboBox_nome.SizeAdjustPolicy.AdjustToContents)
