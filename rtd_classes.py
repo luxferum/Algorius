@@ -64,13 +64,13 @@ class RTD:
     '''RTD class is a real time data object with cleaned rtd values as attributes'''
 
     @classmethod
-    def fair_price(cls, tryd_socket, juros_eua=4.59):
+    def fair_price(cls, tryd_socket,juros_br, juros_eua=4.59):
         '''Calculate fair price with frp0 and dolfut'''
 
         # real time data
         frp0 = RTD(tryd_socket.get_raw_rtd('FRP0'))
         dolfut = RTD(tryd_socket.get_raw_rtd('DOLFUT'))
-        di1fut = RTD(tryd_socket.get_raw_rtd('DI1F25'))
+        di1fut = RTD(tryd_socket.get_raw_rtd(juros_br))
 
         # info used to calculate
         spot = dolfut.ultima - frp0.ultima
@@ -132,21 +132,19 @@ class RTD:
 class Worker(QObject):
     '''Worker class that implements running tasks'''
     res = pyqtSignal(dict)
+    #juros_eua = pyqtSignal(float)
+    juros_br = 'DI1F25'
 
     def run(self):
         tryd_socket = TrydSocket(port=8080)
 
-        count = 0
-        while count < 100:
-            fair, spot, future = RTD.fair_price(tryd_socket)
+        while True:
+            print(self.juros_br)
+            fair, spot, future = RTD.fair_price(tryd_socket, self.juros_br)
             res_dict = {
                 'fair': fair,
                 'spot': spot,
                 'future': future,
             }
-
-            print(res_dict)
-            count += 1
-
             # time.sleep(1)
             self.res.emit(res_dict)

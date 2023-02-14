@@ -257,8 +257,8 @@ class mainWithTabs(QMainWindow):
             self.ui.actionChart.triggered.connect(
                 lambda: self.ui.Welcome.setCurrentIndex(6))
 
-    def interestChanged(self,ix):
-        print(self.ui.comboBox.currentText(), ix)
+    def interestChanged(self):
+        self.worker.juros_br = self.ui.comboBox.currentText()
 
     def dropBoxInterest(self):
         self.ui.AutoInterestRadioButton.toggled.connect(
