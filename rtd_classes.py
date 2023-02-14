@@ -41,26 +41,31 @@ class TrydSocket():
 
     def get_raw_rtd(self, asset_name):
         '''Use socket to return raw real time data given an asset_name'''
-        print(f'----- Getting data from {asset_name=}')
-        info = str.encode(TrydSocket.COTACAO + asset_name + '#')
-        self.s.sendall(info)
-        data = self.s.recv(1024).decode()  # .replace("COT!", "").split("|")
-        data = re.search('(?<=COT!)(.*)(?=#)', data)
+        # print(f'\tGetting data from {asset_name=}')
+
+        # buffer for real time data
+        self.s.sendall(str.encode(TrydSocket.COTACAO + asset_name + '#'))
+        buffer = self.s.recv(1024).decode()
+
+        # filter buffer to match selected asset
+        pattern = re.compile(f'(?<=COT!{asset_name})(.*)(?=#)')
+        data = re.search(pattern, buffer)
         self.s.sendall(b'')
 
-        # time.sleep(0.5)
-        return self.get_raw_rtd(asset_name) if data is None else data.group().split('|')
+        if data is None:
+            # reexecute function if regex not found
+            return self.get_raw_rtd(asset_name)
+        else:
+            # return list of values for the selected asset
+            return data.group().split('|')
 
 
 class RTD:
     '''RTD class is a real time data object with cleaned rtd values as attributes'''
-    DI1FUT = 12.75
-    JUROS_EUA = 4.75
 
     @classmethod
-    def fair_price(cls, tryd_socket):
+    def fair_price(cls, tryd_socket, juros_eua=4.59):
         '''Calculate fair price with frp0 and dolfut'''
-        print(f'Calculating fair price')
 
         # real time data
         frp0 = RTD(tryd_socket.get_raw_rtd('FRP0'))
@@ -70,7 +75,7 @@ class RTD:
         # info used to calculate
         spot = dolfut.ultima - frp0.ultima
         delta_dias = dolfut.dias_uteis_ate_vencimento / 252
-        delta_j = (di1fut.ultima / 100) - (RTD.JUROS_EUA / 100)
+        delta_j = (di1fut.ultima / 100) - (juros_eua / 100)
 
         # final result
         fair_price = round(spot * exp(delta_j*delta_dias), 2)
@@ -81,7 +86,6 @@ class RTD:
     @classmethod
     def fair_price_ptax(cls, tryd_socket):
         '''Calculate fair price using ptax style with frp0, dolfut and frcfut'''
-        print(f'Calculating fair price ptax')
 
         # real time data
         frp0 = RTD(tryd_socket.get_raw_rtd('FRP0'))
@@ -132,7 +136,8 @@ class Worker(QObject):
     def run(self):
         tryd_socket = TrydSocket(port=8080)
 
-        while True:
+        count = 0
+        while count < 100:
             fair, spot, future = RTD.fair_price(tryd_socket)
             res_dict = {
                 'fair': fair,
@@ -140,5 +145,8 @@ class Worker(QObject):
                 'future': future,
             }
 
-            time.sleep(1)
+            print(res_dict)
+            count += 1
+
+            # time.sleep(1)
             self.res.emit(res_dict)
