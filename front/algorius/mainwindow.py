@@ -3,7 +3,7 @@ from PySide6.QtWidgets import (
 from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont, QFontDatabase, QGradient,
                            QIcon, QImage, QKeySequence, QLinearGradient, QPainter, QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QAbstractItemView, QApplication, QCheckBox, QComboBox, QDateEdit, QDoubleSpinBox, QFrame, QGraphicsView, QGridLayout, QGroupBox, QHeaderView,
-                               QLCDNumber, QLabel, QLineEdit, QMainWindow, QMenu, QMenuBar, QPushButton, QSizePolicy, QSlider, QTabWidget, QTableWidget, QTableWidgetItem, QToolButton, QWidget,QTabBar)
+                               QLCDNumber, QLabel, QLineEdit, QMainWindow, QMenu, QMenuBar, QPushButton, QSizePolicy, QSlider, QTabWidget, QTableWidget, QTableWidgetItem, QToolButton, QWidget, QTabBar)
 from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient, QCursor, QFont, QFontDatabase, QGradient,
                            QIcon, QImage, QKeySequence, QLinearGradient, QPainter, QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
@@ -32,6 +32,7 @@ from rtd_classes import Worker
 from ctypes import *
 import win32api
 import socket
+
 
 class login_window(QWidget):
     def __init__(self, parent=None):
@@ -96,7 +97,7 @@ class mainWithTabs(QMainWindow):
         super().__init__(parent)
         self.ui = Ui_mainWithTabs()
         self.ui.setupUi(self)
-        self.incializarSemTabs()       
+        self.incializarSemTabs()
         self.sair2()
         self.irTabSummarizer()
         self.irTabUser()
@@ -112,13 +113,13 @@ class mainWithTabs(QMainWindow):
         self.irTabLoadIndicator()
         self.irTabConfiguration()
         self.irTabPreferences()
-        self.irTabAbout()        
+        self.irTabAbout()
         self.dials()
-        self.userProfile() 
+        self.userProfile()
         self.dropBoxInterest()
         self.rtd_worker()
-        self.ui.comboBox.currentIndexChanged.connect(self.interestChanged)  
-        self.ui.Welcome.tabCloseRequested.connect(self.tabVisible)      
+        self.ui.comboBox.currentIndexChanged.connect(self.interestChanged)
+        self.ui.Welcome.tabCloseRequested.connect(self.tabVisible)
 
     def rtd_worker(self):
         # Step 2: Create a QThread object
@@ -133,12 +134,12 @@ class mainWithTabs(QMainWindow):
         self.thread.start()
 
     def fairPrice(self, dictf):
-        self.ui.lcdNumberSpot.display(dictf['spot']) 
+        self.ui.lcdNumberSpot.display(dictf['spot'])
         self.ui.lcdNumberJusto.display(dictf['fair'])
-        self.ui.lcdNumberFuturo.display(dictf['future'])  
-        self.ui.lcdNumberCurva.display(-1) 
-        self.ui.lcdNumberPTAX.display(dictf['fair_ptax'])  
-        
+        self.ui.lcdNumberFuturo.display(dictf['future'])
+        self.ui.lcdNumberCurva.display(-1)
+        self.ui.lcdNumberPTAX.display(dictf['fair_ptax'])
+
         self.ui.lcdNumber_8.display(dictf['juros_br'])
 
     def userProfile(self):
@@ -164,12 +165,13 @@ class mainWithTabs(QMainWindow):
             self.ui.label_nome.setText("Novo usuário")
             self.ui.label_email.setText("Novo usuário")
             self.ui.label_cpf.setText("Novo usuário")
+
     def dials(self):
         self.ui.dialJurosEua.valueChanged.connect(
             lambda: self.ui.doubleSpinBox_jurosEUA.setValue(self.ui.dialJurosEua.value()))
         self.ui.dialJurosBr.valueChanged.connect(
             lambda: self.ui.doubleSpinBox_jurosBR.setValue(self.ui.dialJurosBr.value()))
-        
+
     def tabVisible(self, ix):
         self.ui.Welcome.setTabVisible(ix, False)
 
@@ -324,8 +326,9 @@ class mainWithTabs(QMainWindow):
                 lambda: self.ui.Welcome.setTabVisible(13, True))
             self.ui.actionPreferences.triggered.connect(
                 lambda: self.ui.Welcome.setCurrentIndex(13))
+
     def irTabAbout(self):
-        self.extbtn=QPushButton()
+        self.extbtn = QPushButton()
         if self.ui.Welcome.isVisible() == True:
             self.ui.actionAbout.triggered.connect(
                 lambda: self.ui.Welcome.setCurrentIndex(14))
@@ -350,11 +353,11 @@ class mainWithTabs(QMainWindow):
         )
 
     def incializarSemTabs(self):
-        self.ui.Welcome.setTabsClosable(True)       
-        i=0
+        self.ui.Welcome.setTabsClosable(True)
+        i = 0
         for i in range(self.ui.Welcome.count()):
-            self.ui.Welcome.setTabVisible(i, False)  
-            i+=1       
+            self.ui.Welcome.setTabVisible(i, False)
+            i += 1
 
 
 ###########################################################################################

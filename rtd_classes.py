@@ -1,12 +1,10 @@
-from collections import defaultdict
-import re
 from PyQt6.QtCore import QObject, pyqtSignal
 from numpy import exp
 import pandas as pd
 import win32api
 import socket
-import time
-from rtd_auxiliar import rtd_clean_dict, rtd_clean_keys
+import re
+from rtd_auxiliar import rtd_clean_dict
 
 
 class TrydSocket():
@@ -22,6 +20,7 @@ class TrydSocket():
 
     def __init__(self, port=8080):
         '''Create and connect to socket to access tryd to get real time data'''
+
         self.host = socket.gethostbyname(socket.gethostname())
         self.port = port
 
@@ -32,16 +31,17 @@ class TrydSocket():
 
     def close_socket(self):
         '''Releases the resource associated with connection socket'''
+
         self.s.close()
 
     def print_id_thread(self):
         '''Print ID thread'''
+
         print(f'Socket: {self.s}\n')
         print(f'\nId da thread principal: {win32api.GetCurrentThreadId()}')
 
     def get_raw_rtd(self, asset_name):
         '''Use socket to return raw real time data given an asset_name'''
-        # print(f'\tGetting data from {asset_name=}')
 
         # buffer for real time data
         self.s.sendall(str.encode(TrydSocket.COTACAO + asset_name + '#'))
@@ -64,7 +64,7 @@ class RTD:
     '''RTD class is a real time data object with cleaned rtd values as attributes'''
 
     @classmethod
-    def fair_price(cls, tryd_socket,juros_br, juros_eua=4.59):
+    def fair_price(cls, tryd_socket, juros_br, juros_eua=4.59):
         '''Calculate fair price with frp0 and dolfut'''
 
         # real time data
@@ -108,11 +108,13 @@ class RTD:
 
     def __init__(self, raw_data):
         '''Create an RTD object with rtd cleaned up'''
+
         for k, v in rtd_clean_dict(raw_data).items():
             setattr(self, k, v)
 
     def __str__(self, qnt_attr=10):
         '''Return a string representation of the RTD object'''
+
         print(f'----------------------------')
         for i, (k, v) in enumerate(self.__dict__.items()):
             if i < qnt_attr:
@@ -124,11 +126,13 @@ class RTD:
 
     def return_rtd_as_df(self):
         '''Return a rtd object as a dataframe'''
+
         return pd.DataFrame.from_dict(self.__dict__())
 
 
 class Worker(QObject):
     '''Worker class that implements running tasks'''
+
     res = pyqtSignal(dict)
     juros_br = 'DI1F25'
 
@@ -136,14 +140,16 @@ class Worker(QObject):
         tryd_socket = TrydSocket(port=8080)
 
         while True:
-            print(self.juros_br)
-            fair, spot, future, juros_br = RTD.fair_price(tryd_socket, self.juros_br)
             fair_ptax = RTD.fair_price_ptax(tryd_socket, self.juros_br)
+            fair, spot, future, juros_br = RTD.fair_price(
+                tryd_socket, self.juros_br)
+
             res_dict = {
                 'fair': fair,
                 'spot': spot,
                 'future': future,
-                'juros_br' : juros_br, 
-                'fair_ptax' : fair_ptax
+                'juros_br': juros_br,
+                'fair_ptax': fair_ptax
             }
+
             self.res.emit(res_dict)

@@ -1,4 +1,4 @@
-#NÃO REFATORAR ESSE AQUIVO COMO NOME dash.py
+# NÃO REFATORAR ESSE AQUIVO COMO NOME dash.py
 
 from dash import Dash, html, dcc
 import plotly.express as px
