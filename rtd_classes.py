@@ -90,7 +90,7 @@ class RTD:
         frp0 = RTD(tryd_socket.get_raw_rtd('FRP0'))
         dolfut = RTD(tryd_socket.get_raw_rtd('DOLFUT'))
         di1fut = RTD(tryd_socket.get_raw_rtd(juros_br))
-        frcfut = RTD(tryd_socket.get_raw_rtd('FRCF25'))
+        frcfut = RTD(tryd_socket.get_raw_rtd('FRCJ23'))
 
         # info used to calculate
         spot = dolfut.ultima - frp0.ultima
@@ -98,7 +98,7 @@ class RTD:
         di1fut_dias = di1fut.dias_uteis_ate_vencimento / 252
 
         # intermediate results
-        numerador = ((1+di1fut_dias) ** di1fut_dias)
+        numerador = (1 + (di1fut.ultima / 100) / 252) ** di1fut_dias
         denominador = 1 + (frcfut.ultima / 100) * frcfut_dias
 
         # final result
@@ -134,7 +134,7 @@ class Worker(QObject):
     '''Worker class that implements running tasks'''
 
     res = pyqtSignal(dict)
-    juros_br = 'DI1F25'
+    juros_br = 'DI1H23'  # 'DI1F25' 'DI1H23'
 
     def run(self):
         tryd_socket = TrydSocket(port=8080)
@@ -145,11 +145,13 @@ class Worker(QObject):
                 tryd_socket, self.juros_br)
 
             res_dict = {
+                'fair_ptax': fair_ptax,
                 'fair': fair,
                 'spot': spot,
                 'future': future,
                 'juros_br': juros_br,
-                'fair_ptax': fair_ptax
             }
+
+            print(res_dict)
 
             self.res.emit(res_dict)
