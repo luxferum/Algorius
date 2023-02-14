@@ -80,17 +80,16 @@ class RTD:
         # final result
         fair_price = round(spot * exp(delta_j*delta_dias), 2)
 
-        # print(f'fair price = {fair_price} - spot = {spot}')
         return fair_price, spot, dolfut.ultima, di1fut.ultima
 
     @classmethod
-    def fair_price_ptax(cls, tryd_socket):
+    def fair_price_ptax(cls, tryd_socket, juros_br):
         '''Calculate fair price using ptax style with frp0, dolfut and frcfut'''
 
         # real time data
         frp0 = RTD(tryd_socket.get_raw_rtd('FRP0'))
         dolfut = RTD(tryd_socket.get_raw_rtd('DOLFUT'))
-        di1fut = RTD(tryd_socket.get_raw_rtd('DI1F25'))
+        di1fut = RTD(tryd_socket.get_raw_rtd(juros_br))
         frcfut = RTD(tryd_socket.get_raw_rtd('FRCF25'))
 
         # info used to calculate
@@ -105,8 +104,7 @@ class RTD:
         # final result
         fair_price_ptax = round(spot * numerador / denominador, 2)
 
-        # print(f'fair price ptax = {f} - spot = {spot}')
-        return fair_price_ptax, spot, dolfut.ultima
+        return fair_price_ptax
 
     def __init__(self, raw_data):
         '''Create an RTD object with rtd cleaned up'''
@@ -132,7 +130,6 @@ class RTD:
 class Worker(QObject):
     '''Worker class that implements running tasks'''
     res = pyqtSignal(dict)
-    #juros_eua = pyqtSignal(float)
     juros_br = 'DI1F25'
 
     def run(self):
@@ -141,11 +138,12 @@ class Worker(QObject):
         while True:
             print(self.juros_br)
             fair, spot, future, juros_br = RTD.fair_price(tryd_socket, self.juros_br)
+            fair_ptax = RTD.fair_price_ptax(tryd_socket, self.juros_br)
             res_dict = {
                 'fair': fair,
                 'spot': spot,
                 'future': future,
-                'juros_br' : juros_br
+                'juros_br' : juros_br, 
+                'fair_ptax' : fair_ptax
             }
-            # time.sleep(1)
             self.res.emit(res_dict)
