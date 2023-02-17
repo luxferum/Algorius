@@ -140,16 +140,14 @@ class Worker(QObject):
         tryd_socket = TrydSocket(port=8080)
 
         while True:
-            fair_ptax = RTD.fair_price_ptax(tryd_socket, self.juros_br)
-            fair, spot, future, juros_br = RTD.fair_price(
+            #fair_ptax = RTD.fair_price_ptax(tryd_socket, self.juros_br)
+            fair, spot, future = RTD.fair_price(
                 tryd_socket, self.juros_br)
 
             res_dict = {
-                'fair_ptax': fair_ptax,
                 'fair': fair,
                 'spot': spot,
                 'future': future,
-                'juros_br': juros_br,
             }
 
             print(res_dict)
