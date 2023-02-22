@@ -1,5 +1,8 @@
 # Ignore pycache folder
-_pycache_/
+__pycache__
+
+# Ignore file
+# tryd_buffer.txt
 
 # EXEMPLOS ABAIXO
 

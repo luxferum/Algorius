@@ -1,7 +1,6 @@
 from unidecode import unidecode
-from numpy import NaN
 
-rtd_keys = ["Ativo                         ",  # describe each one
+rtd_keys = ["Ativo                         ",
             "Última                        ",
             "Var.                          ",
             "Qtd. Compra                   ",
@@ -89,8 +88,6 @@ rtd_keys = ["Ativo                         ",  # describe each one
             "PTAX Fut. P3                  ",
             "PTAX Fut. P4                  ",
             "PTAX Fut. Oficial             ",
-            # "MAIS1",
-            # "MAIS2",
             ]
 
 
