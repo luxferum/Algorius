@@ -28,7 +28,7 @@ import sys
 import rsc_rc
 
 sys.path.append(os.path.abspath(os.path.join('')))
-from rtd_classes import Worker
+from worker import Worker
 from ctypes import *
 import win32api
 import socket

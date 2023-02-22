@@ -1,16 +1,10 @@
 # Ignore pycache folder
 __pycache__
 
-# Ignore files
-# tryd_buffer.txt
-
-# EXEMPLOS ABAIXO
+# ---------- EXEMPLOS ---------- 
 
 # Ignore Mac system files
 #.DS_store
-
-# Ignore node_modules folder
-#node_modules
 
 # Ignore all text files
 #*.txt
