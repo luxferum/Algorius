@@ -27,11 +27,11 @@ import hashlib
 import sys
 import rsc_rc
 
-sys.path.append(os.path.abspath(os.path.join('')))
-from worker import Worker
-from ctypes import *
-import win32api
-import socket
+# sys.path.append(os.path.abspath(os.path.join('')))
+# from rtd_classes import Worker
+# from ctypes import *
+# import win32api
+# import socket
 
 
 class login_window(QWidget):
@@ -114,33 +114,97 @@ class mainWithTabs(QMainWindow):
         self.irTabConfiguration()
         self.irTabPreferences()
         self.irTabAbout()
-        self.dials()
         self.userProfile()
-        self.dropBoxInterest()
-        self.rtd_worker()
-        self.ui.comboBox.currentIndexChanged.connect(self.interestChanged)
+        self.configurationFairPrice()
+        # self.rtd_worker()
         self.ui.Welcome.tabCloseRequested.connect(self.tabVisible)
 
-    def rtd_worker(self):
-        # Step 2: Create a QThread object
-        self.thread = QThread()
-        # Step 3: Create a worker object
-        self.worker = Worker()
-        # Step 4: Move worker to the thread
-        self.worker.moveToThread(self.thread)
-        # Step 5: Connect signals and slots
-        self.thread.started.connect(self.worker.run)
-        self.worker.res.connect(self.fairPrice)
-        self.thread.start()
+    # def rtd_worker(self):
+    #     # Step 2: Create a QThread object
+    #     self.thread = QThread()
+    #     # Step 3: Create a worker object
+    #     self.worker = Worker()
+    #     # Step 4: Move worker to the thread
+    #     self.worker.moveToThread(self.thread)
+    #     # Step 5: Connect signals and slots
+    #     self.thread.started.connect(self.worker.run)
+    #     self.worker.res.connect(self.fairPrice)
+    #     self.thread.start()
+
+    def configurationFairPrice(self):
+        self.ui.doubleSpinBox_manualUSinterest.setDisabled(True)
+        self.ui.pushButton_manualDIGO.setDisabled(True)
+        self.ui.pushButton_manualDIGO.setDisabled(True)
+        self.ui.doubleSpinBox_ManualFRC.setDisabled(True)
+        self.ui.doubleSpinBox_ManualPTAX.setDisabled(True)
+        self.ui.pushButton_ManualCurveGO.setDisabled(True)
+        self.ui.doubleSpinBox_manualDI.setDisabled(True)
+        
+        self.ui.radioButtonRTDdi.toggled.connect(
+            lambda: self.ui.doubleSpinBox_manualDI.setDisabled(True))
+        self.ui.radioButtonRTDdi.toggled.connect(lambda:
+                                                 self.ui.doubleSpinBox_manualUSinterest.setDisabled(True))
+        self.ui.radioButtonRTDdi.toggled.connect(lambda:
+                                                 self.ui.pushButton_manualDIGO.setDisabled(True))
+        self.ui.radioButtonRTDdi.toggled.connect(lambda:
+                                                 self.ui.lcdNumber_RTDdi.setEnabled(True))
+        self.ui.radioButtonRTDdi.toggled.connect(lambda:
+                                                 self.ui.doubleSpinBox_RTDusInterest.setEnabled(True))
+        self.ui.radioButtonRTDdi.toggled.connect(lambda:
+                                                 self.ui.pushButton_RTDdiGO.setEnabled(True))
+        self.ui.radioButtonRTDdi.toggled.connect(lambda:
+                                                 self.ui.comboBoxRTDdi.setEnabled(True))
+
+
+        self.ui.radioButton_ManualDI.toggled.connect(lambda:
+                                                     self.ui.doubleSpinBox_manualDI.setEnabled(True))
+        self.ui.radioButton_ManualDI.toggled.connect(lambda:
+                                                     self.ui.doubleSpinBox_manualUSinterest.setEnabled(True))
+        self.ui.radioButton_ManualDI.toggled.connect(lambda:
+                                                     self.ui.pushButton_manualDIGO.setEnabled(True))
+        self.ui.radioButton_ManualDI.toggled.connect(lambda:
+                                                     self.ui.lcdNumber_RTDdi.setDisabled(True))
+        self.ui.radioButton_ManualDI.toggled.connect(lambda:
+                                                     self.ui.doubleSpinBox_RTDusInterest.setDisabled(True))
+        self.ui.radioButton_ManualDI.toggled.connect(lambda:
+                                                     self.ui.pushButton_RTDdiGO.setDisabled(True))
+        self.ui.radioButton_ManualDI.toggled.connect(lambda:
+                                                     self.ui.comboBoxRTDdi.setDisabled(True))
+
+        self.ui.radioButton_RtdCurve.toggled.connect(
+            lambda: self.ui.doubleSpinBox_ManualFRC.setDisabled(True))
+        self.ui.radioButton_RtdCurve.toggled.connect(lambda:
+                                                     self.ui.doubleSpinBox_ManualPTAX.setDisabled(True))
+        self.ui.radioButton_RtdCurve.toggled.connect(lambda:
+                                                     self.ui.pushButton_ManualCurveGO.setDisabled(True))
+        self.ui.radioButton_RtdCurve.toggled.connect(lambda:
+                                                     self.ui.comboBox_FRC.setEnabled(True))
+        self.ui.radioButton_RtdCurve.toggled.connect(lambda:
+                                                     self.ui.comboBox_RtdPTAX.setEnabled(True))
+        self.ui.radioButton_RtdCurve.toggled.connect(lambda:
+                                                     self.ui.pushButton_RTDcurveGO.setEnabled(True))
+
+        self.ui.radioButton_ManualCurve.toggled.connect(lambda:
+                                                        self.ui.doubleSpinBox_ManualFRC.setEnabled(True))
+        self.ui.radioButton_ManualCurve.toggled.connect(lambda:
+                                                        self.ui.doubleSpinBox_ManualPTAX.setEnabled(True))
+        self.ui.radioButton_ManualCurve.toggled.connect(lambda:
+                                                        self.ui.pushButton_ManualCurveGO.setEnabled(True))
+        self.ui.radioButton_ManualCurve.toggled.connect(lambda:
+                                                        self.ui.comboBox_FRC.setDisabled(True))
+        self.ui.radioButton_ManualCurve.toggled.connect(lambda:
+                                                        self.ui.comboBox_RtdPTAX.setDisabled(True))
+        self.ui.radioButton_ManualCurve.toggled.connect(lambda:
+                                                        self.ui.pushButton_RTDcurveGO.setDisabled(True))
 
     def fairPrice(self, dictf):
         self.ui.lcdNumberSpot.display(dictf['spot'])
         self.ui.lcdNumberJusto.display(dictf['fair'])
         self.ui.lcdNumberFuturo.display(dictf['future'])
         self.ui.lcdNumberCurva.display(-1)
-        #self.ui.lcdNumberPTAX.display(dictf['ptax'])
+        self.ui.lcdNumberPTAX.display(dictf['fair_ptax'])
 
-        #self.ui.lcdNumber_8.display(dictf['juros_br'])
+        self.ui.lcdNumber_8.display(dictf['juros_br'])
 
     def userProfile(self):
         self.ui.comboBox_nome.setSizeAdjustPolicy(
@@ -165,12 +229,6 @@ class mainWithTabs(QMainWindow):
             self.ui.label_nome.setText("Novo usuário")
             self.ui.label_email.setText("Novo usuário")
             self.ui.label_cpf.setText("Novo usuário")
-
-    def dials(self):
-        self.ui.dialJurosEua.valueChanged.connect(
-            lambda: self.ui.doubleSpinBox_jurosEUA.setValue(self.ui.dialJurosEua.value()))
-        self.ui.dialJurosBr.valueChanged.connect(
-            lambda: self.ui.doubleSpinBox_jurosBR.setValue(self.ui.dialJurosBr.value()))
 
     def tabVisible(self, ix):
         self.ui.Welcome.setTabVisible(ix, False)
@@ -257,15 +315,6 @@ class mainWithTabs(QMainWindow):
                 lambda: self.ui.Welcome.setTabVisible(6, True))
             self.ui.actionChart.triggered.connect(
                 lambda: self.ui.Welcome.setCurrentIndex(6))
-
-    def interestChanged(self):
-        self.worker.juros_br = self.ui.comboBox.currentText()
-
-    def dropBoxInterest(self):
-        self.ui.AutoInterestRadioButton.toggled.connect(
-            lambda: self.ui.comboBox.setEnabled(True))
-        self.ui.ManualInterestRadioButton.toggled.connect(
-            lambda: self.ui.comboBox.setEnabled(False))
 
     def irTabNewIndicator(self):
         if self.ui.Welcome.isVisible() == True:
