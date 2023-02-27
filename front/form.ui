@@ -1415,11 +1415,8 @@ color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 208, 1
               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;CPF&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
              <property name="styleSheet">
-              <string notr="true">selection-background-color: rgb(0, 0, 0);
-selection-color: rgb(6, 208, 164);
-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 208, 164, 255), stop:1 rgba(3, 102, 80, 255));
-color: rgb(6, 208, 164);
-background-color: rgb(9, 5, 13);</string>
+              <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 0));
+color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(126, 126, 126, 255), stop:1 rgba(255, 255, 255, 255));</string>
              </property>
              <property name="frameShape">
               <enum>QFrame::Box</enum>
@@ -1451,8 +1448,9 @@ background-color: rgb(9, 5, 13);</string>
                <kerning>false</kerning>
               </font>
              </property>
-             <property name="toolTip">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Help&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <property name="styleSheet">
+              <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 0));
+color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(126, 126, 126, 255), stop:1 rgba(255, 255, 255, 255));</string>
              </property>
              <property name="accessibleName">
               <string>Help</string>
@@ -1488,22 +1486,15 @@ selection-background-color: rgb(6, 208, 164);
            </item>
            <item row="1" column="0">
             <widget class="QLabel" name="label_13">
-             <property name="minimumSize">
-              <size>
-               <width>50</width>
-               <height>70</height>
-              </size>
-             </property>
              <property name="autoFillBackground">
               <bool>false</bool>
              </property>
              <property name="styleSheet">
               <string notr="true">selection-background-color: rgb(6, 208, 164);
-image: url(:/icones/user.svg);
 border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 69, 208, 255), stop:0.517045 rgba(22, 154, 154, 255), stop:1 rgba(4, 131, 103, 255));
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(13, 13, 13, 255), stop:0.368715 rgba(26, 26, 26, 255), stop:0.675978 rgba(42, 42, 42, 255), stop:1 rgba(51, 51, 51, 255));
 selection-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 69, 208, 255), stop:0.517045 rgba(22, 154, 154, 255), stop:1 rgba(4, 131, 103, 255));
-color: rgb(112, 112, 112);
-background-color: rgb(9, 5, 13);</string>
+color: rgb(112, 112, 112);</string>
              </property>
              <property name="frameShape">
               <enum>QFrame::Box</enum>
@@ -1523,14 +1514,57 @@ background-color: rgb(9, 5, 13);</string>
              <property name="textFormat">
               <enum>Qt::AutoText</enum>
              </property>
+             <property name="pixmap">
+              <pixmap resource="rsc.qrc">:/icones/icons8-selfies-96.png</pixmap>
+             </property>
              <property name="scaledContents">
-              <bool>true</bool>
+              <bool>false</bool>
              </property>
              <property name="alignment">
               <set>Qt::AlignBottom|Qt::AlignHCenter</set>
              </property>
              <property name="wordWrap">
               <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QLabel" name="label_email">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>Anita  Semi-square</family>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;E-mail&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">selection-background-color: rgb(0, 0, 0);
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(13, 13, 13, 255), stop:0.368715 rgba(26, 26, 26, 255), stop:0.675978 rgba(42, 42, 42, 255), stop:1 rgba(51, 51, 51, 255));
+selection-color: rgb(6, 208, 164);
+color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 208, 164, 255), stop:1 rgba(3, 102, 80, 255));
+color: rgb(6, 208, 164);</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::Box</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <property name="lineWidth">
+              <number>0</number>
+             </property>
+             <property name="midLineWidth">
+              <number>2</number>
+             </property>
+             <property name="text">
+              <string/>
              </property>
             </widget>
            </item>
@@ -1615,8 +1649,10 @@ color: rgb(6, 208, 164);</string>
               <bool>false</bool>
              </property>
              <property name="styleSheet">
-              <string notr="true">color: rgb(230, 5, 64);
-
+              <string notr="true">color: rgb(6, 208, 164);
+alternate-background-color: rgb(6, 208, 164);
+color: rgb(6, 208, 164);
+gridline-color: rgb(6, 208, 164);
 selection-color: rgb(0, 0, 0);
 gridline-color: rgb(255, 255, 255);
 selection-background-color: rgb(6, 208, 164);
@@ -1724,7 +1760,8 @@ background-color: rgb(9, 5, 13);</string>
              </property>
              <property name="styleSheet">
               <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 0, 0, 0), stop:1 rgba(255, 255, 255, 0));
-color: rgb(230, 5, 64)</string>
+alternate-background-color: rgb(56, 56, 56);
+color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(126, 126, 126, 255), stop:1 rgba(255, 255, 255, 255));</string>
              </property>
              <property name="frameShape">
               <enum>QFrame::NoFrame</enum>
@@ -1862,6 +1899,56 @@ background-color: rgb(9, 5, 13);</string>
              </property>
              <property name="text">
               <string/>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_13">
+             <property name="minimumSize">
+              <size>
+               <width>50</width>
+               <height>70</height>
+              </size>
+             </property>
+             <property name="autoFillBackground">
+              <bool>false</bool>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">selection-background-color: rgb(6, 208, 164);
+border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 69, 208, 255), stop:0.517045 rgba(22, 154, 154, 255), stop:1 rgba(4, 131, 103, 255));
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(13, 13, 13, 255), stop:0.368715 rgba(26, 26, 26, 255), stop:0.675978 rgba(42, 42, 42, 255), stop:1 rgba(51, 51, 51, 255));
+selection-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(6, 69, 208, 255), stop:0.517045 rgba(22, 154, 154, 255), stop:1 rgba(4, 131, 103, 255));
+color: rgb(112, 112, 112);</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::Box</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <property name="lineWidth">
+              <number>0</number>
+             </property>
+             <property name="midLineWidth">
+              <number>2</number>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="textFormat">
+              <enum>Qt::AutoText</enum>
+             </property>
+             <property name="pixmap">
+              <pixmap resource="rsc.qrc">:/icones/user.svg</pixmap>
+             </property>
+             <property name="scaledContents">
+              <bool>true</bool>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignBottom|Qt::AlignHCenter</set>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
              </property>
             </widget>
            </item>
@@ -20211,10 +20298,10 @@ selection-background-color: rgb(230, 5, 64);</string>
    <widget class="QMenu" name="menuMenu">
     <property name="geometry">
      <rect>
-      <x>1039</x>
-      <y>134</y>
-      <width>169</width>
-      <height>106</height>
+      <x>269</x>
+      <y>127</y>
+      <width>162</width>
+      <height>100</height>
      </rect>
     </property>
     <property name="sizePolicy">
