@@ -1,9 +1,14 @@
 <RCC>
   <qresource prefix="icones">
+    <file>icone algorius paleta nova.png</file>
+    <file>LOGO ALGURIOS escrita nova paleta.png</file>
+    <file>icone algorius nova paleta.svg</file>
+    <file>LOGO ALGURIOS escrita nova paleta.svg</file>
     <file>icone alguros.ico</file>
     <file>icons8-ações-96.ico</file>
     <file>icons8-add-album-96.ico</file>
     <file>icons8-add-tab-50.ico</file>
+    <file>user.svg</file>
     <file>icons8-add-tab-100.ico</file>
     <file>icons8-adicionar-50.ico</file>
     <file>icons8-adicionar-50-2.ico</file>
