@@ -32,6 +32,7 @@ import rsc_rc
 # from ctypes import *
 # import win32api
 # import socket
+# ALO
 
 
 class login_window(QWidget):
@@ -139,7 +140,7 @@ class mainWithTabs(QMainWindow):
         self.ui.doubleSpinBox_ManualPTAX.setDisabled(True)
         self.ui.pushButton_ManualCurveGO.setDisabled(True)
         self.ui.doubleSpinBox_manualDI.setDisabled(True)
-        
+
         self.ui.radioButtonRTDdi.toggled.connect(
             lambda: self.ui.doubleSpinBox_manualDI.setDisabled(True))
         self.ui.radioButtonRTDdi.toggled.connect(lambda:
@@ -154,7 +155,6 @@ class mainWithTabs(QMainWindow):
                                                  self.ui.pushButton_RTDdiGO.setEnabled(True))
         self.ui.radioButtonRTDdi.toggled.connect(lambda:
                                                  self.ui.comboBoxRTDdi.setEnabled(True))
-
 
         self.ui.radioButton_ManualDI.toggled.connect(lambda:
                                                      self.ui.doubleSpinBox_manualDI.setEnabled(True))
