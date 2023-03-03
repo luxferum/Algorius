@@ -1,6 +1,6 @@
 import sys
 
-from PySide6.QtWidgets import QApplication, QDialog, QWidget, QFileDialog, QMainWindow, QPushButton, QWidget
+from PySide6.QtWidgets import QApplication, QDialog, QWidget, QFileDialog, QMainWindow, QPushButton, QWidget, QTableWidgetItem
 from PyQt6.QtCore import QThread
 
 import rsc_rc
@@ -93,15 +93,24 @@ class mainWithTabs(QMainWindow):
         self.irTabAbout()
         self.userProfile()
         self.configurationFairPrice()
-        self.worker = Worker(self.fairPrice)
+        self.worker = Worker(self.rtd_to_front)
         self.ui.Welcome.tabCloseRequested.connect(self.tabVisible)
 
-    def fairPrice(self, d):
-        self.ui.lcdNumberSpot.display(d['spot'])
-        self.ui.lcdNumberJusto.display(d['fair'])
-        self.ui.lcdNumberFuturo.display(d['future'])
-        self.ui.lcdNumberPTAX.display(d['fair_ptax'])
-        self.ui.lcdNumberCurva.display(-1)
+    def rtd_to_front(self, d):
+        ui = self.ui
+        ui.lcdNumberSpot.display(d['spot'])
+        ui.lcdNumberJusto.display(d['fair'])
+        ui.lcdNumberFuturo.display(d['future'])
+        ui.lcdNumberPTAX.display(d['fair_ptax'])
+        ui.lcdNumberCurva.display(-1)
+        ui.lcdNumberSummarizer.display(d['summarizer'])
+        ui.tableWidget_summarizer.setItem(0, 1, QTableWidgetItem(d['frc']))
+        ui.tableWidget_summarizer.setItem(1, 1, QTableWidgetItem(d['di1f1']))
+        ui.tableWidget_summarizer.setItem(2, 1, QTableWidgetItem(d['di1f2']))
+        ui.tableWidget_summarizer.setItem(3, 1, QTableWidgetItem(d['dolfut']))
+        ui.tableWidget_summarizer.setItem(4, 1, QTableWidgetItem(d['wdofut']))
+        ui.tableWidget_summarizer.setItem(5, 1, QTableWidgetItem(d['indfut']))
+        ui.tableWidget_summarizer.setItem(6, 1, QTableWidgetItem(d['winfut']))
 
     def configurationFairPrice(self):
         self.ui.doubleSpinBox_manualUSinterest.setDisabled(True)

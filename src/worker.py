@@ -31,6 +31,8 @@ class Worker(QObject):
         while (True):
             fair, spot, future, di = RTD.fair_price(socket, juros_br)
             fair_ptax, _, _, _ = RTD.fair_price_ptax(socket, juros_br)
+            summarizer, frc, di1f1, di1f2, dolfut, wdofut, indfut, winfut = RTD.summarizer(
+                socket)
 
             res_dict = {
                 'fair': fair,
@@ -38,7 +40,16 @@ class Worker(QObject):
                 'spot': spot,
                 'future': future,
                 'di': di,
+                'summarizer': summarizer,
+                'frc': str(frc),
+                'di1f1': str(di1f1),
+                'di1f2': str(di1f2),
+                'dolfut': str(dolfut),
+                'wdofut': str(wdofut),
+                'indfut': str(indfut),
+                'winfut': str(winfut)
             }
+
             print(res_dict)
 
             self.res.emit(res_dict)

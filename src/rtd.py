@@ -8,6 +8,34 @@ class RTD:
     '''RTD class is a real time data object with cleaned values from Tryd as attributes'''
 
     @classmethod
+    def summarizer(cls, socket):
+        '''Calculate Summarizer'''
+
+        # get real time data
+        frc = RTD(socket.get_raw_rtd('FRCN23')).saldo_agr
+        di1f1 = RTD(socket.get_raw_rtd('DI1F24')).saldo_agr
+        di1f2 = RTD(socket.get_raw_rtd('DI1F25')).saldo_agr
+        dolfut = RTD(socket.get_raw_rtd('DOLFUT')).saldo_agr
+        wdofut = RTD(socket.get_raw_rtd('WDOFUT')).saldo_agr
+        indfut = RTD(socket.get_raw_rtd('INDFUT')).saldo_agr
+        winfut = RTD(socket.get_raw_rtd('WINFUT')).saldo_agr
+
+        # get correlation of each asset in relation of wdofut from profit
+        frc_peso = .084 + .031 + (-.107)
+        di1f1_peso = .363
+        di1f2_peso = .464
+        dolfut_peso = 1
+        wdofut_peso = 1
+        indfut_peso = -.669
+        winfut_peso = -.667
+
+        # calculate
+        summarizer = frc*frc_peso + di1f1*di1f1_peso + di1f2*di1f2_peso + dolfut * \
+            dolfut_peso + wdofut * wdofut_peso + indfut*indfut_peso + winfut*winfut_peso
+
+        return summarizer, frc, di1f1, di1f2, dolfut, wdofut, indfut, winfut
+
+    @classmethod
     def fair_price(cls, socket, juros_br, juros_eua=4.59):
         '''Calculate fair price'''
 
