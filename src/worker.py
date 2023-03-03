@@ -1,4 +1,4 @@
-from PyQt6.QtCore import QObject, pyqtSignal
+from PyQt6.QtCore import QObject, pyqtSignal, QThread
 
 from trydsocket import TrydSocket
 from rtd import RTD
@@ -9,7 +9,21 @@ class Worker(QObject):
 
     res = pyqtSignal(dict)
     socket = TrydSocket()
-    juros_br = 'DI1H23'
+    juros_br = 'DI1F24'
+
+    def __init__(self, callback, parent=None):
+        super().__init__(parent)
+        # Step 2: Create a QThread object
+        self.thread = QThread()
+        # Step 4: Move worker to the thread
+        self.moveToThread(self.thread)
+        # Step 5: Connect signals and slots
+        self.thread.started.connect(self.run)
+        self.res.connect(callback)
+        self.thread.start()
+
+    def destroy_thread(self):
+        self.thread.exit()
 
     def run(self):
         socket, juros_br = self.socket, self.juros_br
@@ -25,6 +39,6 @@ class Worker(QObject):
                 'future': future,
                 'di': di,
             }
-            # print(res_dict)
+            print(res_dict)
 
             self.res.emit(res_dict)

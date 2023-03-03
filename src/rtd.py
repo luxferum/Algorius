@@ -8,7 +8,7 @@ class RTD:
     '''RTD class is a real time data object with cleaned values from Tryd as attributes'''
 
     @classmethod
-    def fair_price(cls, socket, juros_br='DI1H23', juros_eua=4.59):
+    def fair_price(cls, socket, juros_br, juros_eua=4.59):
         '''Calculate fair price'''
 
         # get real time data
@@ -27,14 +27,14 @@ class RTD:
         return fair_price, spot, dolfut.ultima, di1fut.ultima
 
     @classmethod
-    def fair_price_ptax(cls, socket, juros_br='DI1H23'):
+    def fair_price_ptax(cls, socket, juros_br):
         '''Calculate fair price using ptax style'''
 
         # real time data
         frp0 = RTD(socket.get_raw_rtd('FRP0'))
         dolfut = RTD(socket.get_raw_rtd('DOLFUT'))
         di1fut = RTD(socket.get_raw_rtd(juros_br))
-        frcfut = RTD(socket.get_raw_rtd('FRCJ23'))
+        frcfut = RTD(socket.get_raw_rtd('FRCJ24'))
 
         # first calculation
         spot = dolfut.ultima - frp0.ultima
