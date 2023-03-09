@@ -1,13 +1,12 @@
+from PySide6.QtWidgets import QApplication, QDialog, QWidget, QFileDialog, QMainWindow, QPushButton, QWidget, QTableWidgetItem
 import sys
 
-from PySide6.QtWidgets import QApplication, QDialog, QWidget, QFileDialog, QMainWindow, QPushButton, QWidget, QTableWidgetItem
-from PyQt6.QtCore import QThread
-
-import rsc_rc
+from ui_register import Ui_register_window
 from ui_login import Ui_login_window
 from ui_load import Ui_Loading_window
 from ui_form import Ui_mainWithTabs
-from ui_register import Ui_register_window
+import rsc_rc
+
 from worker import Worker
 
 
@@ -98,19 +97,21 @@ class mainWithTabs(QMainWindow):
 
     def rtd_to_front(self, d):
         ui = self.ui
+        # fair price
         ui.lcdNumberSpot.display(d['spot'])
         ui.lcdNumberJusto.display(d['fair'])
         ui.lcdNumberFuturo.display(d['future'])
         ui.lcdNumberPTAX.display(d['fair_ptax'])
         ui.lcdNumberCurva.display(-1)
+        # summarizer
         ui.lcdNumberSummarizer.display(d['summarizer'])
-        ui.tableWidget_summarizer.setItem(0, 1, QTableWidgetItem(d['frc']))
-        ui.tableWidget_summarizer.setItem(1, 1, QTableWidgetItem(d['di1f1']))
-        ui.tableWidget_summarizer.setItem(2, 1, QTableWidgetItem(d['di1f2']))
-        ui.tableWidget_summarizer.setItem(3, 1, QTableWidgetItem(d['dolfut']))
-        ui.tableWidget_summarizer.setItem(4, 1, QTableWidgetItem(d['wdofut']))
-        ui.tableWidget_summarizer.setItem(5, 1, QTableWidgetItem(d['indfut']))
-        ui.tableWidget_summarizer.setItem(6, 1, QTableWidgetItem(d['winfut']))
+        ui.tableWidget_summarizer.setItem(0, 2, QTableWidgetItem(d['frc']))
+        ui.tableWidget_summarizer.setItem(1, 2, QTableWidgetItem(d['ddi']))
+        ui.tableWidget_summarizer.setItem(2, 2, QTableWidgetItem(d['di']))
+        ui.tableWidget_summarizer.setItem(3, 2, QTableWidgetItem(d['dol']))
+        ui.tableWidget_summarizer.setItem(4, 2, QTableWidgetItem(d['wdo']))
+        ui.tableWidget_summarizer.setItem(5, 2, QTableWidgetItem(d['ind']))
+        ui.tableWidget_summarizer.setItem(6, 2, QTableWidgetItem(d['win']))
 
     def configurationFairPrice(self):
         self.ui.doubleSpinBox_manualUSinterest.setDisabled(True)
