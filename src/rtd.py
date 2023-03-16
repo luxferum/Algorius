@@ -1,66 +1,117 @@
-from numpy import exp
+import datetime
+
 import pandas as pd
+from numpy import exp
 
 from auxiliar import rtd_clean_dict
 
+month2letter = {
+    1: "F",
+    2: "G",
+    3: "H",
+    4: "J",
+    5: "K",
+    6: "M",
+    7: "N",
+    8: "Q",
+    9: "U",
+    10: "V",
+    11: "X",
+    12: "Z",
+}
+
 
 class RTD:
-    '''RTD class is a real time data object with cleaned values from Tryd as attributes'''
+    """RTD class is a real time data object with cleaned values from Tryd as attributes"""
+
+    @classmethod
+    def get_correct_ticker(cls, prefix):
+        """Get correct ticker based on the month and year"""
+
+        # get today's date
+        data = datetime.datetime.now()
+
+        # get year and month
+        year = int(data.strftime("%y"))
+        month = int(data.strftime("%m"))
+
+        # tryd letter based on a month
+        letter = month2letter[month]
+
+        # ticker with letter and year
+        ticker = prefix + str(letter) + str(year)
+        print(ticker)
+
+        # while(1):
+        #     frc = RTD(socket.get_raw_rtd(ticker))
+        #     if frc != None:
+        #         return No
 
     @classmethod
     def summarizer(cls, socket):
-        '''Calculate Summarizer'''
+        """Calculate Summarizer"""
 
         # get real time data
-        frc = RTD(socket.get_raw_rtd('FRCN23'))
-        ddi = RTD(socket.get_raw_rtd('DI1F24'))
-        di = RTD(socket.get_raw_rtd('DI1F25'))
-        dol = RTD(socket.get_raw_rtd('DOLFUT'))
-        wdo = RTD(socket.get_raw_rtd('WDOFUT'))
-        ind = RTD(socket.get_raw_rtd('INDFUT'))
-        win = RTD(socket.get_raw_rtd('WINFUT'))
+        frc = RTD(socket.get_raw_rtd("FRCN23"))
+        ddi = RTD(socket.get_raw_rtd("DDI1F24"))
+        di = RTD(socket.get_raw_rtd("DI1F24"))
+        dol = RTD(socket.get_raw_rtd("DOLFUT"))
+        wdo = RTD(socket.get_raw_rtd("WDOFUT"))
+        ind = RTD(socket.get_raw_rtd("INDFUT"))
+        win = RTD(socket.get_raw_rtd("WINFUT"))
 
         # calculate financial volume
-        frc_volfin = 50_000 * (wdo.ultima / 1_000)
-        ddi_volfin = 50_000 * (wdo.ultima / 1_000)
-        di_volfin = 100_000 / pow(1 + ddi.ultima / 100,
-                                  ddi.dias_uteis_ate_vencimento / 252)
-        dol_volfin = 50_000 * dol.ultima
-        wdo_volfin = 10_000 * dol.ultima
-        ind_volfin = ind.ultima
-        win_volfin = 0.20 * win.ultima
+        frc_volfin = frc.saldo_agr * 50_000 * (wdo.ultima / 1_000)
+        ddi_volfin = ddi.saldo_agr * 50_000 * (wdo.ultima / 1_000)
+        di_volfin = di.saldo_agr * (
+            100_000 / pow(1 + ddi.ultima / 100, ddi.dias_uteis_ate_vencimento / 252)
+        )
+        dol_volfin = dol.saldo_agr * 50_000 * (dol.ultima / 1_000)
+        wdo_volfin = wdo.saldo_agr * 10_000 * (dol.ultima / 1_000)
+        ind_volfin = ind.saldo_agr * ind.ultima
+        win_volfin = win.saldo_agr * win.ultima * 0.20
 
         # from profit: correlation between the asset and wdo/dol?
-        frc_dol_corr = .084 + .031 + (-.107)
-        ddi_dol_corr = .363
-        di_dol_corr = .464
+        frc_dol_corr = 0.084 + 0.031 + (-0.107)
+        ddi_dol_corr = 0.363
+        di_dol_corr = 0.464
         dol_dol_corr = 1
         wdo_dol_corr = 1
-        ind_dol_corr = -.669
-        win_dol_corr = -.667
+        ind_dol_corr = -0.669
+        win_dol_corr = -0.667
 
         # calculate agression * correlation with dol * financial volume
-        frc_calc = frc.saldo_agr * frc_dol_corr * frc_volfin
-        ddi_calc = ddi.saldo_agr * ddi_dol_corr * ddi_volfin
-        di_calc = di.saldo_agr * di_dol_corr * di_volfin
-        dol_calc = dol.saldo_agr * dol_dol_corr * dol_volfin
-        wdo_calc = wdo.saldo_agr * wdo_dol_corr * wdo_volfin
-        ind_calc = ind.saldo_agr * ind_dol_corr * ind_volfin
-        win_calc = win.saldo_agr * win_dol_corr * win_volfin
+        frc_calc = frc_dol_corr * frc_volfin
+        ddi_calc = ddi_dol_corr * ddi_volfin
+        di_calc = di_dol_corr * di_volfin
+        dol_calc = dol_dol_corr * dol_volfin
+        wdo_calc = wdo_dol_corr * wdo_volfin
+        ind_calc = ind_dol_corr * ind_volfin
+        win_calc = win_dol_corr * win_volfin
 
         # calculate summarizer
-        summarizer = frc_calc + ddi_calc + di_calc + \
-            dol_calc + wdo_calc + ind_calc + win_calc
+        summarizer = (
+            frc_calc + ddi_calc + di_calc + dol_calc + wdo_calc + ind_calc + win_calc
+        )
 
-        return summarizer, frc_calc, ddi_calc, di_calc, dol_calc, wdo_calc, ind_calc, win_calc
+        return (
+            summarizer,
+            frc_calc,
+            ddi_calc,
+            di_calc,
+            dol_calc,
+            wdo_calc,
+            ind_calc,
+            win_calc,
+        )
 
     @classmethod
-    def fair_price(cls, socket, di_code='DI1F24', juros_eua=4.59):
-        '''Calculate fair price'''
+    def fair_price(cls, socket, di_code="DI1F24", juros_eua=4.59):
+        """Calculate fair price"""
 
         # get real time data
-        frp0 = RTD(socket.get_raw_rtd('FRP0'))
-        dol = RTD(socket.get_raw_rtd('DOLFUT'))
+        frp0 = RTD(socket.get_raw_rtd("FRP0"))
+        dol = RTD(socket.get_raw_rtd("DOLFUT"))
         di = RTD(socket.get_raw_rtd(di_code))
 
         # first calculation
@@ -69,18 +120,18 @@ class RTD:
         delta_j = (di.ultima / 100) - (juros_eua / 100)
 
         # final result
-        fair_price = spot * exp(delta_j*delta_dias)
+        fair_price = spot * exp(delta_j * delta_dias)
 
         return fair_price, spot, dol.ultima, di.ultima
 
     @classmethod
-    def fair_price_ptax(cls, socket, di_code='DI1F24'):
-        '''Calculate fair price using ptax style'''
+    def fair_price_ptax(cls, socket, di_code="DI1F24"):
+        """Calculate fair price using ptax style"""
 
         # real time data
-        frc = RTD(socket.get_raw_rtd('FRCJ24'))
-        frp0 = RTD(socket.get_raw_rtd('FRP0'))
-        dol = RTD(socket.get_raw_rtd('DOLFUT'))
+        frc = RTD(socket.get_raw_rtd("FRCJ24"))
+        frp0 = RTD(socket.get_raw_rtd("FRP0"))
+        dol = RTD(socket.get_raw_rtd("DOLFUT"))
         di = RTD(socket.get_raw_rtd(di_code))
 
         # first calculation
@@ -98,10 +149,10 @@ class RTD:
         return fair_price_ptax, spot, dol.ultima, di.ultima
 
     def __init__(self, raw_data):
-        '''Create a RTD object with raw data'''
+        """Create a RTD object with raw data"""
 
         # create a raw list using raw data string
-        raw_data_list = raw_data.split('|')
+        raw_data_list = raw_data.split("|")
 
         # create a clean dictionary using raw data list
         clean_data_dict = rtd_clean_dict(raw_data_list)
@@ -111,12 +162,15 @@ class RTD:
             setattr(self, k, v)
 
     def __str__(self):
-        '''Return a RTD object as a string'''
-        ativo = self.__dict__['ativo']
-        ultima = self.__dict__['ultima']
-        volume = self.__dict__['volume']
-        return f'{ativo=} {ultima=} {volume=}'
+        """Return a RTD object as a string"""
+        ativo = self.__dict__["ativo"]
+        ultima = self.__dict__["ultima"]
+        volume = self.__dict__["volume"]
+        return f"{ativo=} {ultima=} {volume=}"
 
     def return_rtd_as_df(self):
-        '''Return a RTD object as a dataframe'''
+        """Return a RTD object as a dataframe"""
         return pd.DataFrame.from_dict(self.__dict__())
+
+
+RTD.get_correct_ticker("FRC")
