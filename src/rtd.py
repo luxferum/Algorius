@@ -1,60 +1,21 @@
-import datetime
-
 import pandas as pd
 from numpy import exp
 
 from auxiliar import rtd_clean_dict
-
-month2letter = {
-    1: "F",
-    2: "G",
-    3: "H",
-    4: "J",
-    5: "K",
-    6: "M",
-    7: "N",
-    8: "Q",
-    9: "U",
-    10: "V",
-    11: "X",
-    12: "Z",
-}
+from trydsocket import TrydSocket
 
 
 class RTD:
     """RTD class is a real time data object with cleaned values from Tryd as attributes"""
 
     @classmethod
-    def get_correct_ticker(cls, prefix):
-        """Get correct ticker based on the month and year"""
-
-        # get today's date
-        data = datetime.datetime.now()
-
-        # get year and month
-        year = int(data.strftime("%y"))
-        month = int(data.strftime("%m"))
-
-        # tryd letter based on a month
-        letter = month2letter[month]
-
-        # ticker with letter and year
-        ticker = prefix + str(letter) + str(year)
-        print(ticker)
-
-        # while(1):
-        #     frc = RTD(socket.get_raw_rtd(ticker))
-        #     if frc != None:
-        #         return No
-
-    @classmethod
     def summarizer(cls, socket):
         """Calculate Summarizer"""
 
         # get real time data
-        frc = RTD(socket.get_raw_rtd("FRCN23"))
-        ddi = RTD(socket.get_raw_rtd("DDI1F24"))
-        di = RTD(socket.get_raw_rtd("DI1F24"))
+        frc = RTD(socket.get_raw_rtd("FRC"))
+        ddi = RTD(socket.get_raw_rtd("DDI"))
+        di = RTD(socket.get_raw_rtd("DI1"))
         dol = RTD(socket.get_raw_rtd("DOLFUT"))
         wdo = RTD(socket.get_raw_rtd("WDOFUT"))
         ind = RTD(socket.get_raw_rtd("INDFUT"))
@@ -112,7 +73,7 @@ class RTD:
         # get real time data
         frp0 = RTD(socket.get_raw_rtd("FRP0"))
         dol = RTD(socket.get_raw_rtd("DOLFUT"))
-        di = RTD(socket.get_raw_rtd(di_code))
+        di = RTD(socket.get_raw_rtd("DI1"))
 
         # first calculation
         spot = dol.ultima - frp0.ultima
@@ -129,10 +90,10 @@ class RTD:
         """Calculate fair price using ptax style"""
 
         # real time data
-        frc = RTD(socket.get_raw_rtd("FRCJ24"))
+        frc = RTD(socket.get_raw_rtd("FRC"))
         frp0 = RTD(socket.get_raw_rtd("FRP0"))
         dol = RTD(socket.get_raw_rtd("DOLFUT"))
-        di = RTD(socket.get_raw_rtd(di_code))
+        di = RTD(socket.get_raw_rtd("DI1"))
 
         # first calculation
         spot = dol.ultima - frp0.ultima
@@ -171,6 +132,3 @@ class RTD:
     def return_rtd_as_df(self):
         """Return a RTD object as a dataframe"""
         return pd.DataFrame.from_dict(self.__dict__())
-
-
-RTD.get_correct_ticker("FRC")

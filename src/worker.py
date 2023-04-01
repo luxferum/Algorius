@@ -1,15 +1,16 @@
-from PyQt6.QtCore import QObject, pyqtSignal, QThread
+from PyQt6.QtCore import QObject, QThread, pyqtSignal
 
-from trydsocket import TrydSocket
 from rtd import RTD
+from trydsocket import TrydSocket
 
 
 class Worker(QObject):
-    '''Worker class that implements running tasks'''
+    """Worker class that implements running tasks"""
+
     res = pyqtSignal(dict)
 
     def __init__(self, callback=None, parent=None):
-        '''Constructor worker class with given callback and parent'''
+        """Constructor worker class with given callback and parent"""
         super().__init__(parent)
         if callback is not None:
             # Step 1: Create a QThread object
@@ -22,35 +23,36 @@ class Worker(QObject):
             self.thread.start()
 
     def destroy_thread(self):
-        '''Destroy the thread using exit() method'''
+        """Destroy the thread using exit() method"""
         self.thread.exit()
 
     def run(self):
-        '''Get real time data and send signal to frontend'''
+        """Get real time data and send signal to frontend"""
         socket = TrydSocket()
 
-        while (True):
+        while True:
             fair, spot, future, _ = RTD.fair_price(socket)
             fair_ptax, _, _, _ = RTD.fair_price_ptax(socket)
-            summarizer, frc, ddi, di, dol, wdo, ind, win = RTD.summarizer(
-                socket)
+            summarizer, frc, ddi, di, dol, wdo, ind, win = RTD.summarizer(socket)
 
             res_dict = {
-                'fair': round(fair, 2),
-                'spot': round(spot, 2),
-                'future': round(future, 2),
-                'fair_ptax': round(fair_ptax, 2),
-                'summarizer': round(summarizer, 2),
-                'frc': str(round(frc, 2)),
-                'ddi': str(round(ddi, 2)),
-                'di': str(round(di, 2)),
-                'dol': str(round(dol, 2)),
-                'wdo': str(round(wdo, 2)),
-                'ind': str(round(ind, 2)),
-                'win': str(round(win, 2))
+                "fair": round(fair, 2),
+                "spot": round(spot, 2),
+                "future": round(future, 2),
+                "fair_ptax": round(fair_ptax, 2),
+                "summarizer": round(summarizer, 2),
+                "frc": str(round(frc, 2)),
+                "ddi": str(round(ddi, 2)),
+                "di": str(round(di, 2)),
+                "dol": str(round(dol, 2)),
+                "wdo": str(round(wdo, 2)),
+                "ind": str(round(ind, 2)),
+                "win": str(round(win, 2)),
             }
 
-            for k, v in res_dict.items():
-                print(f'{k} = {v}')
+            # for k, v in res_dict.items():
+            #     print(f"{k} = {v}")
+
+            break
 
             self.res.emit(res_dict)
