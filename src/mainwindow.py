@@ -1,11 +1,12 @@
-from PySide6.QtWidgets import QApplication, QDialog, QWidget, QFileDialog, QMainWindow, QPushButton, QWidget, QTableWidgetItem
 import sys
 
-from ui_register import Ui_register_window
-from ui_login import Ui_login_window
-from ui_load import Ui_Loading_window
-from ui_form import Ui_mainWithTabs
 import rsc_rc
+from PySide6.QtWidgets import (QApplication, QDialog, QFileDialog, QMainWindow,
+                               QPushButton, QTableWidgetItem, QWidget)
+from ui_form import Ui_mainWithTabs
+from ui_load import Ui_Loading_window
+from ui_login import Ui_login_window
+from ui_register import Ui_register_window
 
 from worker import Worker
 
