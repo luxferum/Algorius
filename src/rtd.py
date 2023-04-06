@@ -67,7 +67,7 @@ class RTD:
         )
 
     @classmethod
-    def fair_price(cls, socket, di_code="DI1F24", juros_eua=4.59):
+    def fair_price(cls, socket, juros_eua=4.59):
         """Calculate fair price"""
 
         # get real time data
@@ -86,7 +86,7 @@ class RTD:
         return fair_price, spot, dol.ultima, di.ultima
 
     @classmethod
-    def fair_price_ptax(cls, socket, di_code="DI1F24"):
+    def fair_price_ptax(cls, socket):
         """Calculate fair price using ptax style"""
 
         # real time data
