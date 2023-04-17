@@ -1,38 +1,14 @@
-from PySide6.QtWidgets import (
-    QApplication, QDialog, QProgressBar, QSizePolicy, QWidget, QFileDialog)
-from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont, QFontDatabase, QGradient,
-                           QIcon, QImage, QKeySequence, QLinearGradient, QPainter, QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QAbstractItemView, QApplication, QCheckBox, QComboBox, QDateEdit, QDoubleSpinBox, QFrame, QGraphicsView, QGridLayout, QGroupBox, QHeaderView,
-                               QLCDNumber, QLabel, QLineEdit, QMainWindow, QMenu, QMenuBar, QPushButton, QSizePolicy, QSlider, QTabWidget, QTableWidget, QTableWidgetItem, QToolButton, QWidget, QTabBar)
-from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient, QCursor, QFont, QFontDatabase, QGradient,
-                           QIcon, QImage, QKeySequence, QLinearGradient, QPainter, QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
-                            QMetaObject, QObject, QPoint, QRect, QSize, QTime, QUrl, Qt, QThread)
-from PyQt6 import QtGui
-from pathlib import Path
-from ui_login import Ui_login_window
-from ui_load import Ui_Loading_window
-from ui_form import Ui_mainWithTabs
-from ui_register import Ui_register_window
-import os
-import time
-from PySide6.QtCore import *
-import PySide6.QtWidgets
-import PySide6.QtGui
-from PySide6 import QtCore
-import PySide6
-from PyQt6.QtCore import Qt
-from PyQt6.QtCore import QObject, QThread, pyqtSignal
-import hashlib
 import sys
-import rsc_rc
 
-# sys.path.append(os.path.abspath(os.path.join('')))
-# from rtd_classes import Worker
-# from ctypes import *
-# import win32api
-# import socket
-# ALO
+import rsc_rc
+from PySide6.QtWidgets import (QApplication, QDialog, QFileDialog, QMainWindow,
+                               QPushButton, QTableWidgetItem, QWidget)
+from ui_form import Ui_mainWithTabs
+from ui_load import Ui_Loading_window
+from ui_login import Ui_login_window
+from ui_register import Ui_register_window
+
+from worker import Worker
 
 
 class login_window(QWidget):
@@ -117,20 +93,26 @@ class mainWithTabs(QMainWindow):
         self.irTabAbout()
         self.userProfile()
         self.configurationFairPrice()
-        # self.rtd_worker()
+        self.worker = Worker(self.rtd_to_front)
         self.ui.Welcome.tabCloseRequested.connect(self.tabVisible)
 
-    # def rtd_worker(self):
-    #     # Step 2: Create a QThread object
-    #     self.thread = QThread()
-    #     # Step 3: Create a worker object
-    #     self.worker = Worker()
-    #     # Step 4: Move worker to the thread
-    #     self.worker.moveToThread(self.thread)
-    #     # Step 5: Connect signals and slots
-    #     self.thread.started.connect(self.worker.run)
-    #     self.worker.res.connect(self.fairPrice)
-    #     self.thread.start()
+    def rtd_to_front(self, d):
+        ui = self.ui
+        # fair price
+        ui.lcdNumberSpot.display(d['spot'])
+        ui.lcdNumberJusto.display(d['fair'])
+        ui.lcdNumberFuturo.display(d['future'])
+        ui.lcdNumberPTAX.display(d['fair_ptax'])
+        ui.lcdNumberCurva.display(-1)
+        # summarizer
+        ui.lcdNumberSummarizer.display(d['summarizer'])
+        ui.tableWidget_summarizer.setItem(0, 2, QTableWidgetItem(d['frc']))
+        ui.tableWidget_summarizer.setItem(1, 2, QTableWidgetItem(d['ddi']))
+        ui.tableWidget_summarizer.setItem(2, 2, QTableWidgetItem(d['di']))
+        ui.tableWidget_summarizer.setItem(3, 2, QTableWidgetItem(d['dol']))
+        ui.tableWidget_summarizer.setItem(4, 2, QTableWidgetItem(d['wdo']))
+        ui.tableWidget_summarizer.setItem(5, 2, QTableWidgetItem(d['ind']))
+        ui.tableWidget_summarizer.setItem(6, 2, QTableWidgetItem(d['win']))
 
     def configurationFairPrice(self):
         self.ui.doubleSpinBox_manualUSinterest.setDisabled(True)
@@ -196,15 +178,6 @@ class mainWithTabs(QMainWindow):
                                                         self.ui.comboBox_RtdPTAX.setDisabled(True))
         self.ui.radioButton_ManualCurve.toggled.connect(lambda:
                                                         self.ui.pushButton_RTDcurveGO.setDisabled(True))
-
-    def fairPrice(self, dictf):
-        self.ui.lcdNumberSpot.display(dictf['spot'])
-        self.ui.lcdNumberJusto.display(dictf['fair'])
-        self.ui.lcdNumberFuturo.display(dictf['future'])
-        self.ui.lcdNumberCurva.display(-1)
-        self.ui.lcdNumberPTAX.display(dictf['fair_ptax'])
-
-        self.ui.lcdNumber_8.display(dictf['juros_br'])
 
     def userProfile(self):
         self.ui.comboBox_nome.setSizeAdjustPolicy(
@@ -409,12 +382,9 @@ class mainWithTabs(QMainWindow):
             i += 1
 
 
-###########################################################################################
-# MAIN###########################################################################################
 app = QApplication(sys.argv)
 
 start = login_window()
 start.show()
 
 sys.exit(app.exec())
-# MAIN###########################################################################################
