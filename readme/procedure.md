@@ -14,5 +14,5 @@
 ## Envio de um commit específico para uma branch específica.
 
 - O primeiro passo é armazenar a hash do seu commit após realizá-lo. Caso não tenha armazenado, use o comando ```git log``` e procure o seu commit na lista gerada.
-- Após localizar a hash, utilize o comando ```git push origin "HASH":refs/head/"BRANCH"```.
-    - Exemplo: ```git push origin 2466083c7ea67d3b3c77a83cbe0448c05f4b15b8:refs/head/main```.
+- Após localizar a hash, utilize o comando ```git push origin "HASH":main"```.
+    - Exemplo: ```git push origin 2466083c7ea67d3b3c77a83cbe0448c05f4b15b8:main```.
