@@ -50,8 +50,8 @@ class Worker(QObject):
                 "win": str(round(win, 2)),
             }
 
-            # for k, v in res_dict.items():
-            #     print(f"{k} = {v}")
+            for k, v in res_dict.items():
+                print(f"{k} = {v}")
 
             break
 

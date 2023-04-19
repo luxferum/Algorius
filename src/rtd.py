@@ -13,13 +13,13 @@ class RTD:
         """Calculate Summarizer"""
 
         # get real time data
-        frc = RTD(socket.get_raw_rtd("FRC"))
-        ddi = RTD(socket.get_raw_rtd("DDI"))
-        di = RTD(socket.get_raw_rtd("DI1"))
-        dol = RTD(socket.get_raw_rtd("DOLFUT"))
-        wdo = RTD(socket.get_raw_rtd("WDOFUT"))
-        ind = RTD(socket.get_raw_rtd("INDFUT"))
-        win = RTD(socket.get_raw_rtd("WINFUT"))
+        frc = RTD(socket.get_data_most_volume("FRC"))
+        ddi = RTD(socket.get_data_most_volume("DDI"))
+        di = RTD(socket.get_data_most_volume("DI1"))
+        dol = RTD(socket.get_data_most_volume("DOLFUT"))
+        wdo = RTD(socket.get_data_most_volume("WDOFUT"))
+        ind = RTD(socket.get_data_most_volume("INDFUT"))
+        win = RTD(socket.get_data_most_volume("WINFUT"))
 
         # calculate financial volume
         frc_volfin = frc.saldo_agr * 50_000 * (wdo.ultima / 1_000)
@@ -71,9 +71,9 @@ class RTD:
         """Calculate fair price"""
 
         # get real time data
-        frp0 = RTD(socket.get_raw_rtd("FRP0"))
-        dol = RTD(socket.get_raw_rtd("DOLFUT"))
-        di = RTD(socket.get_raw_rtd("DI1"))
+        frp0 = RTD(socket.get_data_most_volume("FRP0"))
+        dol = RTD(socket.get_data_most_volume("DOLFUT"))
+        di = RTD(socket.get_data_most_volume("DI1"))
 
         # first calculation
         spot = dol.ultima - frp0.ultima
@@ -90,10 +90,10 @@ class RTD:
         """Calculate fair price using ptax style"""
 
         # real time data
-        frc = RTD(socket.get_raw_rtd("FRC"))
-        frp0 = RTD(socket.get_raw_rtd("FRP0"))
-        dol = RTD(socket.get_raw_rtd("DOLFUT"))
-        di = RTD(socket.get_raw_rtd("DI1"))
+        frc = RTD(socket.get_data_most_volume("FRC"))
+        frp0 = RTD(socket.get_data_most_volume("FRP0"))
+        dol = RTD(socket.get_data_most_volume("DOLFUT"))
+        di = RTD(socket.get_data_most_volume("DI1"))
 
         # first calculation
         spot = dol.ultima - frp0.ultima
@@ -109,17 +109,11 @@ class RTD:
 
         return fair_price_ptax, spot, dol.ultima, di.ultima
 
-    def __init__(self, raw_data):
+    def __init__(self, data):
         """Create a RTD object with raw data"""
 
-        # create a raw list using raw data string
-        raw_data_list = raw_data.split("|")
-
-        # create a clean dictionary using raw data list
-        clean_data_dict = rtd_clean_dict(raw_data_list)
-
         # iterate over clean dictionary and create an attribute for each key
-        for k, v in clean_data_dict.items():
+        for k, v in data.items():
             setattr(self, k, v)
 
     def __str__(self):
