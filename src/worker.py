@@ -1,11 +1,5 @@
-from multiprocessing import Pool
-
 from rtd import RTD
-from trydsocket import get_asset_data
-
-
-def exec(asset_prefix):
-    return get_asset_data(asset_prefix)
+from trydsocket import get_tickers_data_pool
 
 
 class Worker:
@@ -37,7 +31,7 @@ class Worker:
     def run(self):
         """Get real time data and send signal to frontend"""
 
-        assets = [
+        tickers = [
             "FRC",
             "FRP0",
             "DOLFUT",
@@ -49,6 +43,8 @@ class Worker:
             "WDO",
         ]
 
-        with Pool(len(assets)) as pool:
-            print(pool)
-            r = pool.map(exec, assets)
+        # r = self.test_fair_prices_summarizer()
+        r = get_tickers_data_pool(["DOLFUT"])
+        print(r)
+
+        return r

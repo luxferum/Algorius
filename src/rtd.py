@@ -1,7 +1,7 @@
 import pandas as pd
 from numpy import exp
 
-from trydsocket import get_asset_data
+from trydsocket import get_tickers_data_pool
 
 
 class RTD:
@@ -12,13 +12,16 @@ class RTD:
         """Calculate Summarizer"""
 
         # get real time data
-        frc = RTD("FRC")
-        ddi = RTD("DDI")
-        di = RTD("DI1")
-        dol = RTD("DOLFUT")
-        wdo = RTD("WDOFUT")
-        ind = RTD("INDFUT")
-        win = RTD("WINFUT")
+        tickers_name = ["FRC", "DDI", "DI1", "DOLFUT", "WDOFUT", "INDFUT", "WINFUT"]
+        tickers = get_tickers_data_pool(tickers_name)
+        frc, ddi, di, dol, wdo, ind, win = tickers
+        frc = RTD(frc)
+        ddi = RTD(ddi)
+        di = RTD(di)
+        dol = RTD(dol)
+        wdo = RTD(wdo)
+        ind = RTD(ind)
+        win = RTD(win)
 
         # calculate financial volume
         frc_volfin = frc.saldo_agr * 50_000 * (wdo.ultima / 1_000)
@@ -31,7 +34,7 @@ class RTD:
         ind_volfin = ind.saldo_agr * ind.ultima
         win_volfin = win.saldo_agr * win.ultima * 0.20
 
-        # from profit: correlation between the asset and wdo/dol?
+        # from profit: correlation between the ticker and wdo/dol?
         frc_dol_corr = 0.084 + 0.031 + (-0.107)
         ddi_dol_corr = 0.363
         di_dol_corr = 0.464
@@ -70,9 +73,12 @@ class RTD:
         """Calculate fair price"""
 
         # get real time data
-        frp0 = RTD("FRP0")
-        dol = RTD("DOLFUT")
-        di = RTD("DI1")
+        tickers_name = ["FRP0", "DOLFUT", "DI1"]
+        tickers = get_tickers_data_pool(tickers_name)
+        frp0, dol, di = tickers
+        frp0 = RTD(frp0)
+        dol = RTD(dol)
+        di = RTD(di)
 
         # first calculation
         spot = dol.ultima - frp0.ultima
@@ -88,11 +94,14 @@ class RTD:
     def fair_price_ptax(cls):
         """Calculate fair price using ptax style"""
 
-        # real time data
-        frc = RTD("FRC")
-        frp0 = RTD("FRP0")
-        dol = RTD("DOLFUT")
-        di = RTD("DI1")
+        # get real time data
+        tickers_name = ["FRC", "FRP0", "DOLFUT", "DI1"]
+        tickers = get_tickers_data_pool(tickers_name)
+        frc, frp0, dol, di = tickers
+        frc = RTD(frc)
+        frp0 = RTD(frp0)
+        dol = RTD(dol)
+        di = RTD(di)
 
         # first calculation
         spot = dol.ultima - frp0.ultima
@@ -108,11 +117,9 @@ class RTD:
 
         return fair_price_ptax, spot, dol.ultima, di.ultima
 
-    def __init__(self, asset_prefix):
+    def __init__(self, ticker):
         """Create a RTD object with data"""
-
-        asset_data = get_asset_data(asset_prefix)
-        for k, v in asset_data.items():
+        for k, v in ticker.items():
             setattr(self, k, v)
 
     def __str__(self):
