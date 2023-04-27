@@ -14,14 +14,9 @@ class RTD:
         # get real time data
         tickers_name = ["FRC", "DDI", "DI1", "DOLFUT", "WDOFUT", "INDFUT", "WINFUT"]
         tickers = get_tickers_data_pool(tickers_name)
+        tickers = [RTD(ticker) for ticker in tickers]
+
         frc, ddi, di, dol, wdo, ind, win = tickers
-        frc = RTD(frc)
-        ddi = RTD(ddi)
-        di = RTD(di)
-        dol = RTD(dol)
-        wdo = RTD(wdo)
-        ind = RTD(ind)
-        win = RTD(win)
 
         # calculate financial volume
         frc_volfin = frc.saldo_agr * 50_000 * (wdo.ultima / 1_000)
@@ -57,16 +52,7 @@ class RTD:
             frc_calc + ddi_calc + di_calc + dol_calc + wdo_calc + ind_calc + win_calc
         )
 
-        return (
-            summarizer,
-            frc_calc,
-            ddi_calc,
-            di_calc,
-            dol_calc,
-            wdo_calc,
-            ind_calc,
-            win_calc,
-        )
+        return summarizer
 
     @classmethod
     def fair_price(cls, juros_eua=4.59):
@@ -75,10 +61,9 @@ class RTD:
         # get real time data
         tickers_name = ["FRP0", "DOLFUT", "DI1"]
         tickers = get_tickers_data_pool(tickers_name)
+        tickers = [RTD(ticker) for ticker in tickers]
+
         frp0, dol, di = tickers
-        frp0 = RTD(frp0)
-        dol = RTD(dol)
-        di = RTD(di)
 
         # first calculation
         spot = dol.ultima - frp0.ultima
@@ -97,11 +82,9 @@ class RTD:
         # get real time data
         tickers_name = ["FRC", "FRP0", "DOLFUT", "DI1"]
         tickers = get_tickers_data_pool(tickers_name)
+        tickers = [RTD(ticker) for ticker in tickers]
+
         frc, frp0, dol, di = tickers
-        frc = RTD(frc)
-        frp0 = RTD(frp0)
-        dol = RTD(dol)
-        di = RTD(di)
 
         # first calculation
         spot = dol.ultima - frp0.ultima
