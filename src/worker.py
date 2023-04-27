@@ -1,14 +1,20 @@
+from multiprocessing import Pool
+
 from rtd import RTD
-from trydsocket import TrydSocket
+from trydsocket import get_asset_data
+
+
+def exec(asset_prefix):
+    return get_asset_data(asset_prefix)
 
 
 class Worker:
     """Worker class that implements running tasks"""
 
-    def test_fair_prices_summarizer(self, socket):
-        fair, spot, future, _ = RTD.fair_price(socket)
-        fair_ptax, _, _, _ = RTD.fair_price_ptax(socket)
-        summarizer, frc, ddi, di, dol, wdo, ind, win = RTD.summarizer(socket)
+    def test_fair_prices_summarizer(self):
+        fair, spot, future, _ = RTD.fair_price()
+        fair_ptax, _, _, _ = RTD.fair_price_ptax()
+        summarizer, frc, ddi, di, dol, wdo, ind, win = RTD.summarizer()
 
         res_dict = {
             "fair": round(fair, 2),
@@ -30,8 +36,19 @@ class Worker:
 
     def run(self):
         """Get real time data and send signal to frontend"""
-        socket = TrydSocket()
 
-        while True:
-            self.test_fair_prices_summarizer(socket)
-            break
+        assets = [
+            "FRC",
+            "FRP0",
+            "DOLFUT",
+            "DI1",
+            "DDI",
+            "WDOFUT",
+            "INDFUT",
+            "WINFUT",
+            "WDO",
+        ]
+
+        with Pool(len(assets)) as pool:
+            print(pool)
+            r = pool.map(exec, assets)

@@ -1,22 +1,24 @@
 import pandas as pd
 from numpy import exp
 
+from trydsocket import get_asset_data
+
 
 class RTD:
     """RTD class is a real time data object with cleaned values from Tryd as attributes"""
 
     @classmethod
-    def summarizer(cls, socket):
+    def summarizer(cls):
         """Calculate Summarizer"""
 
         # get real time data
-        frc = RTD(socket.get_asset_data("FRC"))
-        ddi = RTD(socket.get_asset_data("DDI"))
-        di = RTD(socket.get_asset_data("DI1"))
-        dol = RTD(socket.get_asset_data("DOLFUT"))
-        wdo = RTD(socket.get_asset_data("WDOFUT"))
-        ind = RTD(socket.get_asset_data("INDFUT"))
-        win = RTD(socket.get_asset_data("WINFUT"))
+        frc = RTD("FRC")
+        ddi = RTD("DDI")
+        di = RTD("DI1")
+        dol = RTD("DOLFUT")
+        wdo = RTD("WDOFUT")
+        ind = RTD("INDFUT")
+        win = RTD("WINFUT")
 
         # calculate financial volume
         frc_volfin = frc.saldo_agr * 50_000 * (wdo.ultima / 1_000)
@@ -64,13 +66,13 @@ class RTD:
         )
 
     @classmethod
-    def fair_price(cls, socket, juros_eua=4.59):
+    def fair_price(cls, juros_eua=4.59):
         """Calculate fair price"""
 
         # get real time data
-        frp0 = RTD(socket.get_asset_data("FRP0"))
-        dol = RTD(socket.get_asset_data("DOLFUT"))
-        di = RTD(socket.get_asset_data("DI1"))
+        frp0 = RTD("FRP0")
+        dol = RTD("DOLFUT")
+        di = RTD("DI1")
 
         # first calculation
         spot = dol.ultima - frp0.ultima
@@ -83,14 +85,14 @@ class RTD:
         return fair_price, spot, dol.ultima, di.ultima
 
     @classmethod
-    def fair_price_ptax(cls, socket):
+    def fair_price_ptax(cls):
         """Calculate fair price using ptax style"""
 
         # real time data
-        frc = RTD(socket.get_asset_data("FRC"))
-        frp0 = RTD(socket.get_asset_data("FRP0"))
-        dol = RTD(socket.get_asset_data("DOLFUT"))
-        di = RTD(socket.get_asset_data("DI1"))
+        frc = RTD("FRC")
+        frp0 = RTD("FRP0")
+        dol = RTD("DOLFUT")
+        di = RTD("DI1")
 
         # first calculation
         spot = dol.ultima - frp0.ultima
@@ -106,9 +108,11 @@ class RTD:
 
         return fair_price_ptax, spot, dol.ultima, di.ultima
 
-    def __init__(self, data):
+    def __init__(self, asset_prefix):
         """Create a RTD object with data"""
-        for k, v in data.items():
+
+        asset_data = get_asset_data(asset_prefix)
+        for k, v in asset_data.items():
             setattr(self, k, v)
 
     def __str__(self):
