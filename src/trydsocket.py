@@ -5,26 +5,27 @@ from select import select
 
 from auxiliar import rtd_clean_dict
 
-month2letter = {
-    1: "G",
-    2: "H",
-    3: "J",
-    4: "K",
-    5: "M",
-    6: "N",
-    7: "Q",
-    8: "U",
-    9: "V",
-    10: "X",
-    11: "Z",
-    12: "F",
-}
-
 
 class TrydSocket:
     """TrydSocket class manage the connection with Tryd to get real time data"""
 
-    # different asset types
+    # tryd month to letter table
+    month2letter = {
+        1: "G",
+        2: "H",
+        3: "J",
+        4: "K",
+        5: "M",
+        6: "N",
+        7: "Q",
+        8: "U",
+        9: "V",
+        10: "X",
+        11: "Z",
+        12: "F",
+    }
+
+    # tryd asset types
     COTACAO = "COT$S|"
     AUTOMATIZADOR = "AUT$S|"
     LIVRO_DE_OFERTAS = "LVL2$S|"
@@ -35,85 +36,69 @@ class TrydSocket:
     def __init__(self, port=8080):
         """Create socket and connect to Tryd's server to get real time data"""
 
-        # create socket to get real time data
-        self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-        # connect socket to server using computer ip address and a given port
-        self.s.connect((socket.gethostbyname(socket.gethostname()), port))
+        ip = socket.gethostbyname(socket.gethostname())
+        self.socket.connect((ip, port))
 
     def get_data(self, asset_name, timeout=1):
         """Use socket to get real time data of a given asset"""
 
-        # send information to server to get the data from chosen asset delimited by #
-        self.s.sendall(str.encode(TrydSocket.COTACAO + asset_name + "#"))
+        asset_type_name_delimiter = str.encode(TrydSocket.COTACAO + asset_name + "#")
+        self.socket.sendall(asset_type_name_delimiter)
 
-        # use select to get the response using a timeout if not available
-        result, _, _ = select([self.s], [], [], timeout)
-
-        # if the response is not available return None
-        if result != []:
-            # print(f"{asset_name} OK")
-
-            # get the data as a string
-            buffer = self.s.recv(1024).decode()
-
-            # filter the real time data by: chosen asset and delimiter
-            data = re.search(f"(?<=COT!){asset_name}(.[^#]*)(?=#)", buffer)
-
-            """
-            VERIFICAR AQUI SE FOR NONE E TAL! SÓ RETORNA SE NÃO FOR NONE
-            AINDA TA ERRADO, PORQUE EU TIREI A RECURSÃO... TENHO QUE VERIFICAR
-            E O DADO QUE EU TO PEGANDO É DO MESMO ASSET_NAME QUE EU PEDI!!!!!
-            """
-            if data is None:
-                return self.get_data(asset_name)
-
-            # data is not None
-            raw_data = data.group(0)
-
-            # create a raw list using raw data string
-            raw_data_list = raw_data.split("|")
-
-            # create a clean dictionary using raw data list
-            clean_data_dict = rtd_clean_dict(raw_data_list)
-
-            return clean_data_dict
-
-        else:
+        socket_response, _, _ = select([self.socket], [], [], timeout)
+        if socket_response == []:
             # print(f"{asset_name} ERROR")
-
             return None
 
-    def get_data_most_volume(self, asset_prefix, timeout=1):
+        # print(f"{asset_name} OK")
+        data = self.socket.recv(1024).decode()
+
+        regex = f"(?<=COT!){asset_name}(.[^#]*)(?=#)"
+        data = re.search(regex, data)
+
+        # se o que eu estiver fazendo regex e não for o que eu quero... recursão
+        if data is None:
+            return self.get_data(asset_name)
+
+        data = data.group(0)
+        data_list = data.split("|")
+        data_dict_clean = rtd_clean_dict(data_list)
+
+        return data_dict_clean
+
+    def get_asset_data(self, asset_prefix):
         """Use socket to get real time data given an asset_prefix with current date codes"""
-        print(f"{asset_prefix}: ")
+        print(f"{asset_prefix} - Getting asset data... ")
 
-        # CASO ESPECIAL PARA DEPOIS WDO -> SE PEGAR O ATUAL, MAS VENCE HOJE PEGA O PROXIMO OU SEJA, USA MONTH + 1
-
-        # dolfut, wdofut, frp0, etc... don't have other asset names based on date codes
         if "FUT" in asset_prefix or "0" in asset_prefix:
             return self.get_data(asset_prefix)
 
-        asset_list = []
+        current_year = int(datetime.now().strftime("%y"))
+        current_month = int(datetime.now().strftime("%m"))
 
-        year = int(datetime.now().strftime("%y"))
-        month = int(datetime.now().strftime("%m"))
+        # CASO ESPECIAL PARA DEPOIS WDO -> SE PEGAR O ATUAL, MAS VENCE HOJE PEGA O PROXIMO OU SEJA, USA MONTH + 1
+        asset_data_list = []
+        while current_year < 25:
+            current_month_letter = self.month2letter[current_month]
+            asset_name = f"{asset_prefix}{current_month_letter}{current_year}"
 
-        while year < 25:
-            asset_name = asset_prefix + str(month2letter[month]) + str(year)
             asset_data = self.get_data(asset_name)
-
             if asset_data:
-                asset_list.append(asset_data)
+                asset_data_list.append(asset_data)
 
-            year = year + 1 if month == 12 else year
-            month = 1 if month == 12 else month + 1
+            current_year = current_year + 1 if current_month == 12 else current_year
+            current_month = 1 if current_month == 12 else current_month + 1
 
-        asset_list = sorted(asset_list, key=lambda asset: asset["volume"], reverse=True)
+        asset_data_list = sorted(
+            asset_data_list,
+            key=lambda asset: asset["contratos_em_aberto"],
+            reverse=True,
+        )
+        asset_data_most_open_contracts = asset_data_list[0]
 
-        # for d in asset_list:
-        #     print(d["ativo"], d["volume"])
-
-        print(asset_list[0]["ativo"], asset_list[0]["volume"])
-
-        return asset_list[0]
+        # for d in asset_data_list:
+        #     print(d["ativo"], d["contratos_em_aberto"])
+        print(f"{asset_prefix} - Done! ")
+        return asset_data_most_open_contracts
