@@ -1,7 +1,7 @@
 import pandas as pd
 from numpy import exp
 
-from trydsocket import get_tickers_data_pool
+from trydsocket import pool_get_tickers_data, tickers_dict
 
 
 class RTD:
@@ -12,8 +12,16 @@ class RTD:
         """Calculate Summarizer"""
 
         # get real time data
-        tickers_name = ["FRC", "DDI", "DI1", "DOLFUT", "WDOFUT", "INDFUT", "WINFUT"]
-        tickers = get_tickers_data_pool(tickers_name)
+        tickers_name = [
+            tickers_dict["FRC"],
+            tickers_dict["DDI"],
+            tickers_dict["DI1"],
+            "DOLFUT",
+            "WDOFUT",
+            "INDFUT",
+            "WINFUT",
+        ]
+        tickers = pool_get_tickers_data(tickers_name)
         tickers = [RTD(ticker) for ticker in tickers]
 
         frc, ddi, di, dol, wdo, ind, win = tickers
@@ -59,8 +67,8 @@ class RTD:
         """Calculate fair price"""
 
         # get real time data
-        tickers_name = ["FRP0", "DOLFUT", "DI1"]
-        tickers = get_tickers_data_pool(tickers_name)
+        tickers_name = ["FRP0", "DOLFUT", tickers_dict["DI1"]]
+        tickers = pool_get_tickers_data(tickers_name)
         tickers = [RTD(ticker) for ticker in tickers]
 
         frp0, dol, di = tickers
@@ -80,8 +88,8 @@ class RTD:
         """Calculate fair price using ptax style"""
 
         # get real time data
-        tickers_name = ["FRC", "FRP0", "DOLFUT", "DI1"]
-        tickers = get_tickers_data_pool(tickers_name)
+        tickers_name = [tickers_dict["FRC"], "FRP0", "DOLFUT", tickers_dict["DI1"]]
+        tickers = pool_get_tickers_data(tickers_name)
         tickers = [RTD(ticker) for ticker in tickers]
 
         frc, frp0, dol, di = tickers

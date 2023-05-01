@@ -34,25 +34,27 @@ INTERVALO_GRAFICO = "GRF$S|"
 PORT = 8080
 IP = socket.gethostbyname(socket.gethostname())
 
+tickers_dict = {}
 
-def get_tickers_data_pool(tickers):
+
+def pool_init_find_tickers_name(tickers=["FRC", "DI1", "DDI"]):
+    global tickers_dict
     with Pool(len(tickers)) as pool:
-        return pool.map(get_ticker_data, tickers)
+        ticker_list = pool.map(get_ticker_name_most_open_contracts, tickers)
+        for t in ticker_list:
+            tickers_dict[t[:3]] = t
 
 
-def get_ticker_data(ticker_prefix):
+def get_ticker_name_most_open_contracts(ticker_prefix):
     """Use socket to get tryd real time data with most 'contratos_em_aberto' of a given ticker as a dictionary with cleaned data"""
     print(f"{ticker_prefix} - Getting ticker data... ")
 
     current_year = int(datetime.now().strftime("%y"))
     current_month = int(datetime.now().strftime("%m"))
 
-    if "FUT" in ticker_prefix or "0" in ticker_prefix:
-        return get_data(ticker_prefix)
-
     if "WDO" in ticker_prefix:
         ticker_name = f"{ticker_prefix}{month2letter[current_month]}{current_year}"
-        ticker_data = get_data(ticker_name)
+        ticker_data = get_ticker_data(ticker_name)
 
         if ticker_data["dias_uteis_ate_vencimento"] != 0:
             return ticker_data
@@ -60,13 +62,13 @@ def get_ticker_data(ticker_prefix):
         current_year = current_year + 1 if current_month == 12 else current_year
         current_month = 1 if current_month == 12 else current_month + 1
         ticker_name = f"{ticker_prefix}{month2letter[current_month]}{current_year}"
-        return get_data(ticker_name)
+        return get_ticker_data(ticker_name)
 
     ticker_data_list = []
     limit_year = current_year + 5
     while current_year < limit_year:
         ticker_name = f"{ticker_prefix}{month2letter[current_month]}{current_year}"
-        ticker_data = get_data(ticker_name)
+        ticker_data = get_ticker_data(ticker_name)
 
         if ticker_data:
             ticker_data_list.append(ticker_data)
@@ -83,10 +85,15 @@ def get_ticker_data(ticker_prefix):
     # for d in ticker_data_list:
     #     print(d["ativo"], d["contratos_em_aberto"], end=" - ")
 
-    return ticker_data_list[0]
+    return ticker_data_list[0]["ticker"]
 
 
-def get_data(ticker_name, timeout=1):
+def pool_get_tickers_data(tickers):
+    with Pool(len(tickers)) as pool:
+        return pool.map(get_ticker_data, tickers)
+
+
+def get_ticker_data(ticker_name, timeout=1):
     """Use socket to get tryd real time data of a given ticker as a dictionary with cleaned data"""
     # print(f"\t{ticker_name}")
 
