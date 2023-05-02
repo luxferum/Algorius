@@ -1,18 +1,30 @@
-import time
+# def file_to_df(file="src/excel_teste_for_dataframe.xlsx", sep=None):
+#     """Function to read a given file and convert it to a pandas dataframe"""
 
-from worker import Worker
+#     _, file_extension = os.path.splitext(file)
 
-if __name__ == "__main__":
-    """This is used to test RTD functionalities"""
-    start = time.time()
+#     if file_extension in ".csv":
+#         df = pd.read_table(file, sep=sep)
+#     elif file_extension in ".xlsx":
+#         df = pd.read_excel(file)
+#     elif file_extension in ".json":
+#         df = pd.read_json(file)
+#     else:
+#         df = pd.read_table(file)
 
-    w1 = Worker()
-    r = w1.run()
+#     df.columns = [str(c).lower().strip() for c in df.columns]
 
-    end = time.time()
+#     # index_col = None
+#     # for c in df.columns:
+#     #     if "dat" in c:
+#     #         index_col = c
+#     #         break
 
-    print(f"Rodou worker em {round(end - start, 2)} seconds")
+#     # df.set_index(index_col, inplace=True)
 
+#     print(df)
+
+#     return df
 
 # class Worker(QObject):
 #     """Worker class that implements running tasks"""
